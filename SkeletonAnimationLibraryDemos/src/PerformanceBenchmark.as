@@ -9,13 +9,13 @@
 	import starling.core.Starling;
 	
     [SWF(width="800", height="600", frameRate="60", backgroundColor="#999999")]
-	public class PeformanceBenchmark extends flash.display.Sprite {
+	public class PerformanceBenchmark extends flash.display.Sprite {
 		
 		public static var changeHandler:Function;
 		
 		private var input:TextField;
 		
-		public function PeformanceBenchmark() {
+		public function PerformanceBenchmark() {
 			starlingInit();
 			addInputText();
 		}
