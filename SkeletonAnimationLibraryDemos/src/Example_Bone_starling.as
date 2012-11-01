@@ -137,7 +137,7 @@ class StarlingGame extends Sprite {
 		}
 		speedY = -20;
 		isJumping = true;
-		armature.animation.play("jump");
+		armature.animation.gotoAndPlay("jump");
 	}
 	
 	public function squat(_isDown:Boolean):void {
@@ -154,20 +154,20 @@ class StarlingGame extends Sprite {
 		}
 		if (isSquat) {
 			speedX = 0;
-			armature.animation.play("squat");
+			armature.animation.gotoAndPlay("squat");
 			return;
 		}
 		
 		if (moveDir == 0) {
 			speedX = 0;
-			armature.animation.play("stand");
+			armature.animation.gotoAndPlay("stand");
 		}else {
 			if (moveDir * face > 0) {
 				speedX = 8* face;
-				armature.animation.play("run");
+				armature.animation.gotoAndPlay("run");
 			}else {
 				speedX = -5 * face;
-				armature.animation.play("runBack");
+				armature.animation.gotoAndPlay("runBack");
 			}
 		}
 	}
@@ -175,7 +175,7 @@ class StarlingGame extends Sprite {
 	private function updateSpeed():void {
 		if (isJumping) {
 			if (speedY <= 0 && speedY + 1 > 0 ) {
-				armature.animation.play("fall");
+				armature.animation.gotoAndPlay("fall");
 			}
 			speedY += 1;
 		}

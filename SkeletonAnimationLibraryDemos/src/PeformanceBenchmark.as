@@ -110,7 +110,7 @@ class StarlingGame extends Sprite {
 				_armature.display.x = Math.random() * stage.width;
 				_armature.display.y = Math.random() * stage.height;
 				var _randomMovement:String = _armature.animation.movementList[int(Math.random() * _armature.animation.movementList.length)];
-				_armature.animation.play(_randomMovement);
+				_armature.animation.gotoAndPlay(_randomMovement);
 				addChild(_armature.display as Sprite);
 				armatures.push(_armature);
 			}
