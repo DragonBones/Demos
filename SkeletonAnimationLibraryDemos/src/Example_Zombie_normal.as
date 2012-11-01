@@ -39,7 +39,7 @@
 			_armature.display.y = mouseY;
 			
 			var _randomMovement:String = _armature.animation.movementList[int(Math.random() * _armature.animation.movementList.length)];
-			_armature.animation.play(_randomMovement);
+			_armature.animation.gotoAndPlay(_randomMovement);
 			addChild(_armature.display as Sprite);
 			armatures.push(_armature);
 		}

@@ -48,10 +48,10 @@
 		
 			armature.display.x = 200;
 			armature.display.y = 300;
-			armature.animation.play("anim_death");
-			//armature.animation.play("anim_eat");
-			//armature.animation.play("anim_walk");
-			//armature.animation.play("anim_idle");
+			armature.animation.gotoAndPlay("anim_death");
+			//armature.animation.gotoAndPlay("anim_eat");
+			//armature.animation.gotoAndPlay("anim_walk");
+			//armature.animation.gotoAndPlay("anim_idle");
 			addChild(armature.display as Sprite);
 			addEventListener(Event.ENTER_FRAME, onEnterFrameHandler);
 		}
@@ -83,10 +83,10 @@ class StarlingGame extends Sprite {
 		
 		armature.display.x = 600;
 		armature.display.y = 300;
-		armature.animation.play("anim_death");
-		//armature.animation.play("anim_eat");
-		//armature.animation.play("anim_walk");
-		//armature.animation.play("anim_idle");
+		armature.animation.gotoAndPlay("anim_death");
+		//armature.animation.gotoAndPlay("anim_eat");
+		//armature.animation.gotoAndPlay("anim_walk");
+		//armature.animation.gotoAndPlay("anim_idle");
 		addChild(armature.display as Sprite);
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 	}
