@@ -120,7 +120,7 @@ class StarlingGame extends Sprite {
 	private function textureCompleteHandler():void {
 		allArmatureNameList = factory.skeletonData.getSearchList();
 		armatures = [];
-		PeformanceBenchmark.changeHandler = changeNum;
+		PerformanceBenchmark.changeHandler = changeNum;
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 	}
 	
