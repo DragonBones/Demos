@@ -5,9 +5,9 @@
 	import starling.core.Starling;
 	
     [SWF(width="800", height="600", frameRate="30", backgroundColor="#999999")]
-	public class Example_Bone_starling extends flash.display.Sprite {
+	public class Example_Cyborg_starling extends flash.display.Sprite {
 		
-		public function Example_Bone_starling() {
+		public function Example_Cyborg_starling() {
 			starlingInit();
 		}
 		
@@ -46,6 +46,11 @@
 				case 40 :
 					StarlingGame.instance.squat(e.type == KeyboardEvent.KEY_DOWN);
 					break;
+				case 32 :
+					if (e.type == KeyboardEvent.KEY_UP) {
+						StarlingGame.instance.changeWeapon();
+					}
+					break;
 			}
 		}
 		
@@ -64,6 +69,7 @@
 }
 
 import flash.geom.Point;
+
 import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
 import starling.events.TouchEvent;
@@ -72,8 +78,10 @@ import dragonBones.Armature;
 import dragonBones.Bone;
 import dragonBones.factorys.StarlingFactory;
 
+import dragonBones.events.Event;
+
 class StarlingGame extends Sprite {
-	[Embed(source = "../assets/Bone.swf", mimeType = "application/octet-stream")]
+	[Embed(source = "../assets/Cyborg_output.swf", mimeType = "application/octet-stream")]
 	public static const ResourcesData:Class;
 		
 	public static var instance:StarlingGame;
@@ -90,11 +98,12 @@ class StarlingGame extends Sprite {
 	}
 	
 	private function textureCompleteHandler():void {
-		armature = factory.buildArmature("RobotBiped");
+		armature = factory.buildArmature("cyborg");
 		armatureClip = armature.display as Sprite;
 		armatureClip.x = 400;
 		armatureClip.y = 500;
 		addChild(armatureClip);
+		changeWeapon();
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 	}
 	
@@ -119,6 +128,8 @@ class StarlingGame extends Sprite {
 	private var isSquat:Boolean;
 	private var moveDir:int;
 	private var face:int;
+	
+	private var weaponID:int = -1;
 	
 	private var speedX:Number = 0;
 	private var speedY:Number = 0;
@@ -146,6 +157,19 @@ class StarlingGame extends Sprite {
 		}
 		isSquat = _isDown;
 		updateMovement();
+	}
+	
+	public function changeWeapon():void {
+		weaponID ++;
+		if (weaponID >= 4) {
+			weaponID -= 4;
+		}
+		var _armR:Bone = armature.getBone("armOutside");
+		var _armL:Bone = armature.getBone("armInside");
+		var _movementName:String = "weapon" + (weaponID + 1);
+		
+		_armR.childArmature.animation.gotoAndPlay(_movementName);
+		_armL.childArmature.animation.gotoAndPlay(_movementName);
 	}
 	
 	private function updateMovement():void {
@@ -193,9 +217,20 @@ class StarlingGame extends Sprite {
 				armatureClip.y = 500;
 				isJumping = false;
 				speedY = 0;
-				
-				updateMovement();
+				speedX = 0;
+				armature.animation.gotoAndPlay("fallEnd");
+				armature.addEventListener(dragonBones.events.Event.MOVEMENT_CHANGE, armatureMovementChangeHandler);
 			}
+		}
+	}
+	
+	private function armatureMovementChangeHandler(e:dragonBones.events.Event):void 
+	{
+		switch(e.data) {
+			case "stand":
+				armature.removeEventListener(dragonBones.events.Event.MOVEMENT_CHANGE, armatureMovementChangeHandler);
+				updateMovement();
+				break;
 		}
 	}
 	
@@ -216,7 +251,7 @@ class StarlingGame extends Sprite {
 			}
 		}
 		
-		var _body:Bone = armature.getBone("crotch");
+		var _body:Bone = armature.getBone("body");
 		_body.node.rotation = _r * 0.25;
 		
 		var _chest:Bone = armature.getBone("chest");
@@ -229,8 +264,8 @@ class StarlingGame extends Sprite {
 			_head.node.rotation = _r * 0.4;
 		}
 		
-		var _armR:Bone = armature.getBone("upperarmR");
-		var _armL:Bone = armature.getBone("upperarmL");
+		var _armR:Bone = armature.getBone("armOutside");
+		var _armL:Bone = armature.getBone("armInside");
 		_armR.node.rotation = _r * 0.5;
 		if (_r > 0) {
 			_armL.node.rotation = _r * 0.8;
