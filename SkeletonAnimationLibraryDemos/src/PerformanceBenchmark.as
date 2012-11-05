@@ -104,11 +104,13 @@ class StarlingGame extends Sprite {
 		}
 		else
 		{
+			var stageWidth:int = stage.stageWidth;
+			var stageHeight:int = stage.stageHeight;
 			for (i = armatures.length; i < num; i++)
 			{
 				_armature = factory.buildArmature("Zombie_yeti");
-				_armature.display.x = Math.random() * stage.width;
-				_armature.display.y = Math.random() * stage.height;
+				_armature.display.x = Math.random() * stageWidth;
+				_armature.display.y = Math.random() * stageHeight;
 				var _randomMovement:String = _armature.animation.movementList[int(Math.random() * _armature.animation.movementList.length)];
 				_armature.animation.gotoAndPlay(_randomMovement);
 				addChild(_armature.display as Sprite);
