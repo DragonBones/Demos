@@ -21,7 +21,7 @@ import starling.text.TextField;
 
 
 class StarlingGame extends Sprite {
-	[Embed(source = "../assets/Knight_output.png", mimeType = "application/octet-stream")]
+	[Embed(source = "../assets/DragonWithClothes.png", mimeType = "application/octet-stream")]
 	private static const ResourcesData:Class;
 	
 	private var factory:StarlingFactory;
@@ -46,9 +46,10 @@ class StarlingGame extends Sprite {
 	
 	private function addObject():void
 	{
-		var _armature:Armature = factory.buildArmature("knight");
+		var _armature:Armature = factory.buildArmature("Dragon");
+		_armature.display.scaleX = _armature.display.scaleY = 0.3;
 		_armature.display.x = Math.random() * (stageWidth - PADDING);
-			_armature.display.y = Math.random() * (stageHeight - PADDING);
+		_armature.display.y = Math.random() * (stageHeight - PADDING);
 		var _randomMovement:String = _armature.animation.movementList[int(Math.random() * _armature.animation.movementList.length)];
 		_armature.animation.gotoAndPlay(_randomMovement);
 		addChild(_armature.display as Sprite);
