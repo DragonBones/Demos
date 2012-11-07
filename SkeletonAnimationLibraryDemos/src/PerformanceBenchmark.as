@@ -73,7 +73,7 @@ import dragonBones.Armature;
 import dragonBones.factorys.StarlingFactory;
 
 class StarlingGame extends Sprite {
-	[Embed(source = "../assets/Zombie.swf", mimeType = "application/octet-stream")]
+	[Embed(source = "../assets/Knight_output.png", mimeType = "application/octet-stream")]
 	private static const ResourcesData:Class;
 	
 	private var factory:StarlingFactory;
@@ -108,7 +108,7 @@ class StarlingGame extends Sprite {
 			var stageHeight:int = stage.stageHeight;
 			for (i = armatures.length; i < num; i++)
 			{
-				_armature = factory.buildArmature("Zombie_yeti");
+				_armature = factory.buildArmature("knight");
 				_armature.display.x = Math.random() * stageWidth;
 				_armature.display.y = Math.random() * stageHeight;
 				var _randomMovement:String = _armature.animation.movementList[int(Math.random() * _armature.animation.movementList.length)];
