@@ -79,6 +79,7 @@ import dragonBones.Bone;
 import dragonBones.factorys.StarlingFactory;
 
 import dragonBones.events.Event;
+import starling.text.TextField;
 
 class StarlingGame extends Sprite {
 	[Embed(source = "../assets/Cyborg_output.swf", mimeType = "application/octet-stream")]
@@ -89,6 +90,7 @@ class StarlingGame extends Sprite {
 	private var factory:StarlingFactory;
 	private var armature:Armature;
 	private var armatureClip:Sprite;
+	private var textField:TextField;
 	
 	public function StarlingGame() {
 		instance = this;
@@ -105,6 +107,11 @@ class StarlingGame extends Sprite {
 		addChild(armatureClip);
 		changeWeapon();
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
+		
+		textField=new TextField(700,30,"Press W/A/S/D to move. Press space to switch weapens. Move mouse to aim.","Verdana",16,0,true)
+		textField.x=60;
+		textField.y=5;
+		addChild(textField);
 	}
 	
 	private function onMouseMoveHandler(_e:TouchEvent):void {

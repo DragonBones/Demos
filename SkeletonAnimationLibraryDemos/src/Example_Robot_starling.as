@@ -43,6 +43,7 @@ import dragonBones.objects.TextureData;
 import dragonBones.factorys.StarlingFactory;
 
 import dragonBones.events.Event;
+import starling.text.TextField;
 
 class StarlingGame extends Sprite {
 	[Embed(source = "../assets/Robot_output.swf", mimeType = "application/octet-stream")]
@@ -52,6 +53,7 @@ class StarlingGame extends Sprite {
 	
 	private var factory:StarlingFactory;
 	private var armature:Armature;
+	private var textField:TextField;
 	
 	public function StarlingGame() {
 		instance = this;
@@ -69,6 +71,11 @@ class StarlingGame extends Sprite {
 		addChild(_display);
 		armature.animation.gotoAndPlay("stop");
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
+		
+		textField=new TextField(700,30,"Click mouse to switch robot's postures. Scroll mouse wheel to change speed.","Verdana",16,0,true)
+		textField.x=60;
+		textField.y=5;
+		addChild(textField);
 	}
 	
 	public function changeMovement():void 
