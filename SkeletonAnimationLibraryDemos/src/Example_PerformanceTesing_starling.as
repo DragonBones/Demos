@@ -59,6 +59,7 @@
 			e.stopPropagation();
 			if (e.charCode == Keyboard.ENTER && changeHandler != null)
 			{
+				stage.focus = null;
 				if (int(input.text) < 0)
 					input.text = "0";
 				changeHandler(int(input.text));
@@ -93,11 +94,12 @@ class StarlingGame extends Sprite {
 	
 	private var elapsedTime:Number = 0;
 	private var elapsedFrame:int = 0;
-	private var failCount:int = 0;
 	
 	private var stageWidth:int;
 	private var stageHeight:int;
 	
+	private static var isFailed:Boolean = false;
+	private static var failCount:int = 0;
 	private static var isTesting:Boolean = false;
 	
 	public function StarlingGame() {
@@ -114,7 +116,7 @@ class StarlingGame extends Sprite {
 		Example_PerformanceTesing_starling.changeHandler = changeNum;
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		
-		instruction_txt = new TextField(500,60,"Press Space to start auto performance testing.\nOr input a number and press Enter to test performance","Verdana",16,0,true)
+		instruction_txt = new TextField(500,60,"Press Space to start/pause auto performance testing.\nOr input a number and press Enter to test performance","Verdana",16,0,true)
 		instruction_txt.x=60;
 		instruction_txt.y=0;
 		instruction_txt.hAlign = "left";
@@ -162,17 +164,8 @@ class StarlingGame extends Sprite {
 	public static function switchTesting():void
 	{
 		isTesting = !isTesting;
-	}
-	
-	private function clearAllObjects():void
-	{
-		var len:int = armatures.length;
-		for (var i:int = 0; i < len; i++)
-		{
-			armatures[i].dispose();
-			removeChild(armatures[i].display as Sprite);
-		}
-		armatures.length = 0;
+		isFailed = false;
+		failCount = 0;
 	}
 	
 	private function addObject():void
@@ -187,6 +180,23 @@ class StarlingGame extends Sprite {
 		armatures.push(_armature);
 	}
 	
+	private function removeLastObject():void
+	{
+		armatures[armatures.length-1].dispose();
+		removeChild(armatures[armatures.length-1].display as Sprite);
+		armatures.length--;
+	}
+	
+	private function clearAllObjects():void
+	{
+		var len:int = armatures.length;
+		for (var i:int = 0; i < len; i++)
+		{
+			armatures[i].dispose();
+			removeChild(armatures[i].display as Sprite);
+		}
+		armatures.length = 0;
+	}
 	
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void 
 	{
@@ -204,13 +214,20 @@ class StarlingGame extends Sprite {
 			{
 				if (Math.ceil(fps) > 59)
 				{
-					failCount = 0;
 					addObject();
+					isFailed = false;
 				}
 				else
 				{
-					failCount++;
-					if (failCount == 15)
+					removeLastObject();
+					
+					if(!isFailed)
+					{
+						failCount++;
+					}
+					isFailed = true;
+					
+					if (failCount == 5)
 						benchmarkComplete();
 				}
 			}
