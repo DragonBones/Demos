@@ -69,6 +69,7 @@
 }
 
 import flash.geom.Point;
+import flash.events.Event;
 import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
 import starling.events.Touch;
@@ -84,7 +85,7 @@ class StarlingGame extends Sprite {
 	private static const ResourcesData:Class;
 	
 	private var factory:StarlingFactory;
-	private var allArmatureNameList:Array;
+	private var allArmatureNameList:Vector.<String>;
 	private var armatures:Array;
 	private var instruction_txt:TextField;
 	private var mResultText:TextField;
@@ -104,14 +105,15 @@ class StarlingGame extends Sprite {
 	
 	public function StarlingGame() {
 		factory = new StarlingFactory();
-		factory.fromRawData(new ResourcesData(), textureCompleteHandler);
+		factory.parseData(new ResourcesData());
+		factory.addEventListener(Event.COMPLETE, textureCompleteHandler);
 	}
 	
-	private function textureCompleteHandler():void {
+	private function textureCompleteHandler(e:Event):void {
 		stageWidth = stage.stageWidth;
 		stageHeight = stage.stageHeight;
 		
-		allArmatureNameList = factory.skeletonData.getSearchList();
+		allArmatureNameList = factory.skeletonData.animationList;
 		armatures = [];
 		Example_PerformanceTesing_starling.changeHandler = changeNum;
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
