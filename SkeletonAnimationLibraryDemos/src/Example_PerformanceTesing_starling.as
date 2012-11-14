@@ -101,7 +101,7 @@ class StarlingGame extends Sprite {
 	
 	private static var isFailed:Boolean = false;
 	private static var failCount:int = 0;
-	private static var isTesting:Boolean = false;
+	private static var isTesting:Boolean = true;
 	
 	public function StarlingGame() {
 		factory = new StarlingFactory();
@@ -118,7 +118,7 @@ class StarlingGame extends Sprite {
 		Example_PerformanceTesing_starling.changeHandler = changeNum;
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		
-		instruction_txt = new TextField(500,60,"Press Space to start/pause auto performance testing.\nOr input a number and press Enter to test performance","Verdana",16,0,true)
+		instruction_txt = new TextField(500,60,"Press SPACE to start/pause auto performance testing.\nOr input a number and press Enter to test performance","Verdana",16,0,true)
 		instruction_txt.x=60;
 		instruction_txt.y=0;
 		instruction_txt.hAlign = "left";
@@ -184,6 +184,10 @@ class StarlingGame extends Sprite {
 	
 	private function removeLastObject():void
 	{
+		if(armatures.length == 0)
+		{
+			return;
+		}
 		armatures[armatures.length-1].dispose();
 		removeChild(armatures[armatures.length-1].display as Sprite);
 		armatures.length--;
