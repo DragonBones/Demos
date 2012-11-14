@@ -24,4 +24,4 @@ Following steps show you how to use LibraryDemos:
 6. Test Move and have fun.  
 7. Don't forget to change wmode to direct to see best performance before publishing.  
 
-**All things to be downlowded you can find [here](http://dragonbones.github.com/download.html)**
+**All things you need to downlowd can be found [here](http://dragonbones.github.com/download.html)**
