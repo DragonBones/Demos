@@ -2,7 +2,7 @@ SkeletonAnimationDemos
 ======================
 http://dragonbones.github.com/ 
 
-In this project you will find lots of DragonBones demos which have been seperated into two categories, DesignPanelDemos and LibraryDemos.
+In this project you can find lots of DragonBones' demos which have been separated into two categories, DesignPanelDemos and LibraryDemos.
 
 **DesignPanelDemos** is for designers. It contains character design with animations which can be imported by DragonBones design panel.  
 Following steps show you how to use DesignPanelDemos:  
@@ -11,7 +11,7 @@ Following steps show you how to use DesignPanelDemos:
 3. Open a fla file.  
 4. Open menu Window->Other Panel->SkeletonAnimationDesignPanel.  
 5. Click Import button to import all elements from library.  
-6. Edit and review charactors.  
+6. Edit and review characters.  
 7. Export it as png/swf for developers.  
 
 **LibraryDemos** is for developers. It load assets exported from design panel, put charactors on stage and control them.  
@@ -24,4 +24,6 @@ Following steps show you how to use LibraryDemos:
 6. Test Move and have fun.  
 7. Don't forget to change wmode to direct to see best performance before publishing.  
 
-**All things you need to downlowd can be found [here](http://dragonbones.github.com/download.html)**
+**All things you need to download can be found [here](http://dragonbones.github.com/download.html)**  
+
+Copyright 2012 the DragonBones Team
