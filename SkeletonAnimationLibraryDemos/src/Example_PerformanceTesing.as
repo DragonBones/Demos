@@ -10,13 +10,13 @@
 	import flash.text.TextFormat;
 	
     [SWF(width="800", height="600", frameRate="60", backgroundColor="#999999")]
-	public class Example_PerformanceTesing_starling extends flash.display.Sprite {
+	public class Example_PerformanceTesing extends flash.display.Sprite {
 		
 		public static var changeHandler:Function;
 		
 		private var input:TextField;
 		
-		public function Example_PerformanceTesing_starling() {
+		public function Example_PerformanceTesing() {
 			starlingInit();
 			addInputText();
 		}
@@ -115,7 +115,7 @@ class StarlingGame extends Sprite {
 		
 		allArmatureNameList = factory.skeletonData.animationList;
 		armatures = [];
-		Example_PerformanceTesing_starling.changeHandler = changeNum;
+		Example_PerformanceTesing.changeHandler = changeNum;
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		
 		instruction_txt = new TextField(600,60,"Press SPACE to pause/resume auto testing.\nInput a number and press ENTER to test manually.","Verdana",16,0,true)
@@ -172,13 +172,13 @@ class StarlingGame extends Sprite {
 	
 	private function addObject():void
 	{
-		var count = armatures.length;
-		var columnNum = 8;
-		var paddingWidth = 100;
-		var paddingHeight = 10;
-		var paddingLeft = 40;
-		var paddingTop = 230;
-		var Dx = 0;
+		var count:int = armatures.length;
+		var columnNum:int = 8;
+		var paddingWidth:int = 100;
+		var paddingHeight:int = 10;
+		var paddingLeft:int = 40;
+		var paddingTop:int = 230;
+		var Dx:int = 0;
 		
 		mResultText.text = "";
 		var _armature:Armature = factory.buildArmature("Dragon");
@@ -218,7 +218,7 @@ class StarlingGame extends Sprite {
 		armatures.length = 0;
 	}
 	
-	private function onEnterFrameHandler(_e:EnterFrameEvent):void 
+	private function onEnterFrameHandler(_e:EnterFrameEvent):void
 	{
 		for each(var _armature:Armature in armatures) {
 			_armature.update();
