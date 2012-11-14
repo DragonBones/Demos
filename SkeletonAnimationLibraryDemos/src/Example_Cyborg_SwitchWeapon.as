@@ -110,7 +110,7 @@ class StarlingGame extends Sprite {
 		changeWeapon();
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		
-		textField = new TextField(700, 30, "Press W/A/S/D to move. Press space to switch weapens. Move mouse to aim.", "Verdana", 16, 0, true)
+		textField = new TextField(700, 30, "Press W/A/S/D to move. Press SPACE to switch weapens. Move mouse to aim.", "Verdana", 16, 0, true)
 		textField.x = 60;
 		textField.y = 5;
 		addChild(textField);
