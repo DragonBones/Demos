@@ -90,7 +90,7 @@ class StarlingGame extends Sprite {
 	private var instruction_txt:TextField;
 	private var mResultText:TextField;
 	
-	private const WAIT_FRAME:int = 10;
+	private const WAIT_FRAME:int = 20;
 	private const PADDING:int = 60;
 	
 	private var elapsedTime:Number = 0;
@@ -101,7 +101,7 @@ class StarlingGame extends Sprite {
 	
 	private static var isFailed:Boolean = false;
 	private static var failCount:int = 0;
-	private static var isTesting:Boolean = false;
+	private static var isTesting:Boolean = true;
 	
 	public function StarlingGame() {
 		factory = new StarlingFactory();
@@ -118,7 +118,7 @@ class StarlingGame extends Sprite {
 		Example_PerformanceTesing_starling.changeHandler = changeNum;
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		
-		instruction_txt = new TextField(500,60,"Press Space to start/pause auto performance testing.\nOr input a number and press Enter to test performance","Verdana",16,0,true)
+		instruction_txt = new TextField(600,60,"Press SPACE to pause/resume auto testing.\nInput a number and press ENTER to test manually.","Verdana",16,0,true)
 		instruction_txt.x=60;
 		instruction_txt.y=0;
 		instruction_txt.hAlign = "left";
@@ -172,11 +172,25 @@ class StarlingGame extends Sprite {
 	
 	private function addObject():void
 	{
+		var count = armatures.length;
+		var columnNum = 8;
+		var paddingWidth = 100;
+		var paddingHeight = 10;
+		var paddingLeft = 40;
+		var paddingTop = 230;
+		var Dx = 0;
+		
 		mResultText.text = "";
 		var _armature:Armature = factory.buildArmature("Dragon");
 		_armature.display.scaleX = _armature.display.scaleY = 0.5;
-		_armature.display.x = Math.random() * (stageWidth - PADDING) + 20;
-		_armature.display.y = Math.random() * (stageHeight - PADDING - 150) + 220;
+		
+		count / columnNum
+		_armature.display.x = (count % columnNum)*paddingWidth + paddingLeft + ((int)(count/columnNum))*Dx;
+		_armature.display.y = ((int)(count/columnNum))*paddingHeight + paddingTop;
+		
+		//_armature.display.x = ((int)(count/columnNum))*paddingWidth + paddingLeft + ((int)(count/columnNum))*Dx;
+		//_armature.display.y = (count % columnNum)*paddingHeight + paddingTop;
+		
 		_armature.animation.gotoAndPlay("walk");
 		addChild(_armature.display as Sprite);
 		armatures.push(_armature);
@@ -184,6 +198,10 @@ class StarlingGame extends Sprite {
 	
 	private function removeLastObject():void
 	{
+		if(armatures.length == 0)
+		{
+			return;
+		}
 		armatures[armatures.length-1].dispose();
 		removeChild(armatures[armatures.length-1].display as Sprite);
 		armatures.length--;

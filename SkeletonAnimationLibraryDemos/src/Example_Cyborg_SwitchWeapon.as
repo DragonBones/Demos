@@ -5,9 +5,9 @@
 	import starling.core.Starling;
 
     [SWF(width="800", height="600", frameRate="30", backgroundColor="#999999")]
-	public class Example_Cyborg_starling extends flash.display.Sprite {
+	public class Example_Cyborg_SwitchWeapon extends flash.display.Sprite {
 
-		public function Example_Cyborg_starling() {
+		public function Example_Cyborg_SwitchWeapon() {
 			starlingInit();
 		}
 
@@ -110,7 +110,7 @@ class StarlingGame extends Sprite {
 		changeWeapon();
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		
-		textField = new TextField(700, 30, "Press W/A/S/D to move. Press space to switch weapens. Move mouse to aim.", "Verdana", 16, 0, true)
+		textField = new TextField(700, 30, "Press W/A/S/D to move. Press SPACE to switch weapens. Move mouse to aim.", "Verdana", 16, 0, true)
 		textField.x = 60;
 		textField.y = 5;
 		addChild(textField);
