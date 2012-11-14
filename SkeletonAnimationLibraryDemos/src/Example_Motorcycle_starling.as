@@ -55,6 +55,7 @@
 
 import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
+import starling.text.TextField;
 
 import dragonBones.Armature;
 import dragonBones.factorys.StarlingFactory;
@@ -69,6 +70,7 @@ class StarlingGame extends Sprite {
 	private var factory:StarlingFactory;
 	private var armature:Armature;
 	private var armatureClip:Sprite;
+	private var textField:TextField;
 
 	public function StarlingGame() {
 		instance = this;
@@ -86,6 +88,11 @@ class StarlingGame extends Sprite {
 		addChild(armatureClip);
 		updateMovement();
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
+		
+		textField = new TextField(700, 30, "Press A/D to lean forward/backward.", "Verdana", 16, 0, true)
+		textField.x = 60;
+		textField.y = 5;
+		addChild(textField);
 	}
 
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {
