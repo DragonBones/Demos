@@ -5,9 +5,9 @@
 	import starling.core.Starling;
 
     [SWF(width="800", height="600", frameRate="30", backgroundColor="#999999")]
-	public class Example_Robot_starling extends flash.display.Sprite {
+	public class Example_Robot_ChangeSpeed extends flash.display.Sprite {
 
-		public function Example_Robot_starling() {
+		public function Example_Robot_ChangeSpeed() {
 			starlingInit();
 			stage.addEventListener(MouseEvent.CLICK, mouseHandler);
 			stage.addEventListener(MouseEvent.MOUSE_WHEEL, mouseHandler);
