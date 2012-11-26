@@ -14,7 +14,7 @@
 
 	import starling.core.Starling;
 
-    [SWF(width="800", height="600", frameRate="30", backgroundColor="#999999")]
+    [SWF(width="800", height="600", frameRate="30", backgroundColor="#cccccc")]
 	public class Example_DisplayListAndStarling extends flash.display.Sprite {
 		[Embed(source = "../assets/Knight_output.png", mimeType = "application/octet-stream")]
 		private static const KnightData:Class;
