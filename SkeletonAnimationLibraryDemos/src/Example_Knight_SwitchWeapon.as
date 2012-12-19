@@ -4,7 +4,7 @@
 
 	import starling.core.Starling;
 
-    [SWF(width="800", height="600", frameRate="30", backgroundColor="#999999")]
+    [SWF(width="800", height="600", frameRate="30", backgroundColor="#cccccc")]
 	public class Example_Knight_SwitchWeapon extends flash.display.Sprite {
 
 		public function Example_Knight_SwitchWeapon() {
@@ -91,7 +91,7 @@ class StarlingGame extends Sprite {
 
 	private var factory:StarlingFactory;
 	private var armature:Armature;
-	private var armatureClip:Sprite;
+	private var armatureDisplay:Sprite;
 
 	public function StarlingGame() {
 		instance = this;
@@ -103,10 +103,10 @@ class StarlingGame extends Sprite {
 
 	private function textureCompleteHandler(e:Event):void {
 		armature = factory.buildArmature("knight");
-		armatureClip = armature.display as Sprite;
-		armatureClip.x = 400;
-		armatureClip.y = 400;
-		addChild(armatureClip);
+		armatureDisplay = armature.display as Sprite;
+		armatureDisplay.x = 400;
+		armatureDisplay.y = 400;
+		addChild(armatureDisplay);
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		updateMovement();
 	}
@@ -191,15 +191,15 @@ class StarlingGame extends Sprite {
 	private var resultPoint:Point = new Point();
 	private function createArrow():void {
 
-		var _arrowDisplay:Image = StarlingFactory.getTextureDisplay(factory.textureAtlasData, "knightFolder/arrow");
+		var _arrowDisplay:Image = factory.getTextureDisplay("knightFolder/arrow") as Image;
 		var _bow:Bone = armature.getBone("armOutside").childArmature.getBone("bow");
 		_bow.display.localToGlobal(localPoint, resultPoint);
 
 		var _r:Number;
-		if (armatureClip.scaleX > 0) {
-			_r = armatureClip.rotation + _bow.display.rotation;
+		if (armatureDisplay.scaleX > 0) {
+			_r = armatureDisplay.rotation + _bow.global.rotation;
 		}else {
-			_r = armatureClip.rotation - _bow.display.rotation + Math.PI;
+			_r = armatureDisplay.rotation - _bow.global.rotation + Math.PI;
 		}
 
 		_arrowDisplay.x = resultPoint.x;
@@ -242,7 +242,7 @@ class StarlingGame extends Sprite {
 		}else {
 			speedX = moveDir * 6;
 			armature.animation.gotoAndPlay("run");
-			armatureClip.scaleX = moveDir;
+			armatureDisplay.scaleX = moveDir;
 		}
 	}
 
@@ -252,22 +252,22 @@ class StarlingGame extends Sprite {
 		}
 
 		if (speedX != 0) {
-			armatureClip.x += speedX;
-			if (armatureClip.x < 0) {
-				armatureClip.x = 0;
-			}else if (armatureClip.x > 800) {
-				armatureClip.x = 800;
+			armatureDisplay.x += speedX;
+			if (armatureDisplay.x < 0) {
+				armatureDisplay.x = 0;
+			}else if (armatureDisplay.x > 800) {
+				armatureDisplay.x = 800;
 			}
 		}
 
 		if (speedY != 0) {
-			armatureClip.rotation = speedY * 0.02 * armatureClip.scaleX;
-			armatureClip.y += speedY;
-			if (armatureClip.y > 400) {
-				armatureClip.y = 400;
+			armatureDisplay.rotation = speedY * 0.02 * armatureDisplay.scaleX;
+			armatureDisplay.y += speedY;
+			if (armatureDisplay.y > 400) {
+				armatureDisplay.y = 400;
 				isJumping = false;
 				speedY = 0;
-				armatureClip.rotation = 0;
+				armatureDisplay.rotation = 0;
 				updateMovement();
 			}
 		}

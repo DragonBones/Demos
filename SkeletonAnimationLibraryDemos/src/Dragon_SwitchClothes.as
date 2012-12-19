@@ -95,15 +95,15 @@
 		}
 
 		private function changeClothes():void {
-			//循环更换贴图
+			//Switch textures
 			textureIndex++;
 			if (textureIndex >= textures.length) {
 				textureIndex = textureIndex - textures.length;
 			}
-			//从骨骼面板导出的textureData中获取Image实例，也可以单独从其他图片文件中构造Image
+			//Get image instance from texture data.
 			var _textureName:String = textures[textureIndex];
-			var _image:Image = StarlingFactory.getTextureDisplay(factory.textureAtlasData,_textureName);
-			//用image替换bone.display完成换装（注意bone.display的回收）
+			var _image:Image = factory.getTextureDisplay(_textureName) as Image;
+			//Replace bone.display by the new texture. Don't forget to dispose.
 			var _bone:Bone = armature.getBone("clothes");
 			_bone.display.dispose();
 			_bone.display = _image;
@@ -156,7 +156,7 @@
 			if (isJumping) {
 				return;
 			}
-			speedY = -25;
+			speedY = -17;
 			isJumping = true;
 			armature.animation.gotoAndPlay("jump");
 		}
