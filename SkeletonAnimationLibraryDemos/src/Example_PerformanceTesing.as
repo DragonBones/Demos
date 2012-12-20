@@ -9,7 +9,7 @@
 	import starling.core.Starling;
 	import flash.text.TextFormat;
 	
-    [SWF(width="800", height="600", frameRate="60", backgroundColor="#999999")]
+    [SWF(width="800", height="600", frameRate="60", backgroundColor="#cccccc")]
 	public class Example_PerformanceTesing extends flash.display.Sprite {
 		
 		public static var changeHandler:Function;
@@ -85,7 +85,6 @@ class StarlingGame extends Sprite {
 	private static const ResourcesData:Class;
 	
 	private var factory:StarlingFactory;
-	private var allArmatureNameList:Vector.<String>;
 	private var armatures:Array;
 	private var instruction_txt:TextField;
 	private var mResultText:TextField;
@@ -113,7 +112,6 @@ class StarlingGame extends Sprite {
 		stageWidth = stage.stageWidth;
 		stageHeight = stage.stageHeight;
 		
-		allArmatureNameList = factory.skeletonData.animationList;
 		armatures = [];
 		Example_PerformanceTesing.changeHandler = changeNum;
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
@@ -173,23 +171,19 @@ class StarlingGame extends Sprite {
 	private function addObject():void
 	{
 		var count:int = armatures.length;
-		var columnNum:int = 8;
-		var paddingWidth:int = 100;
-		var paddingHeight:int = 10;
-		var paddingLeft:int = 40;
-		var paddingTop:int = 230;
-		var Dx:int = 0;
+		var columnNum:int = 15;
+		var paddingWidth:int = 50;
+		var paddingHeight:int = 20;
+		var paddingLeft:int = 25;
+		var paddingTop:int = 125;
+		var Dx:int = 25;
 		
 		mResultText.text = "";
 		var _armature:Armature = factory.buildArmature("Dragon");
-		_armature.display.scaleX = _armature.display.scaleY = 0.5;
+		_armature.display.scaleX = _armature.display.scaleY = 0.25;
 		
-		count / columnNum
-		_armature.display.x = (count % columnNum)*paddingWidth + paddingLeft + ((int)(count/columnNum))*Dx;
+		_armature.display.x = (count % columnNum)*paddingWidth + paddingLeft + ((int)(count/columnNum)%2)*Dx;
 		_armature.display.y = ((int)(count/columnNum))*paddingHeight + paddingTop;
-		
-		//_armature.display.x = ((int)(count/columnNum))*paddingWidth + paddingLeft + ((int)(count/columnNum))*Dx;
-		//_armature.display.y = (count % columnNum)*paddingHeight + paddingTop;
 		
 		_armature.animation.gotoAndPlay("walk");
 		addChild(_armature.display as Sprite);
