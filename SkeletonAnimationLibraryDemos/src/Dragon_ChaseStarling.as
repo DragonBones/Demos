@@ -2,6 +2,7 @@
 {
 	import dragonBones.Armature;
 	import dragonBones.Bone;
+	import dragonBones.animation.WorldClock;
 	import dragonBones.factorys.StarlingFactory;
 	
 	import flash.geom.Point;
@@ -53,6 +54,7 @@
 			armatureClip.x = 400;
 			armatureClip.y = 550;
 			addChild(armatureClip);
+			WorldClock.clock.add(armature);
 			updateBehavior(0)
 			addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 			stage.addEventListener(TouchEvent.TOUCH, onMouseMoveHandler);
@@ -72,7 +74,7 @@
 			checkDist();
 			updateMove();
 			updateBones();
-			armature.update();		
+			WorldClock.update();		
 		}
 		
 		private function checkDist():void

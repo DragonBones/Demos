@@ -2,8 +2,9 @@
 	import flash.display.Sprite;
 	import flash.events.Event;
 
-	import dragonBones.factorys.BaseFactory;
 	import dragonBones.Armature;
+	import dragonBones.animation.WorldClock;
+	import dragonBones.factorys.BaseFactory;
 
 	import starling.core.Starling;
 
@@ -43,13 +44,9 @@
 			cyborg.display.y = 200;
 			cyborg.animation.gotoAndPlay("run");
 			addChild(cyborg.display as Sprite);
-
-			addEventListener(Event.ENTER_FRAME, onEnterFrameHandler);
-		}
-
-		private function onEnterFrameHandler(_e:Event):void {
-			knight.update();
-			cyborg.update();
+			
+			WorldClock.clock.add(knight);
+			WorldClock.clock.add(cyborg);
 		}
 
 		private function starlingInit():void {
@@ -66,6 +63,7 @@ import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
 
 import dragonBones.Armature;
+import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
 
 class StarlingGame extends Sprite {
@@ -95,12 +93,14 @@ class StarlingGame extends Sprite {
 		cyborg.display.y = 400;
 		cyborg.animation.gotoAndPlay("run");
 		addChild(cyborg.display as Sprite);
+		
+		WorldClock.clock.add(knight);
+		WorldClock.clock.add(cyborg);
 
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 	}
 
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {
-		knight.update();
-		cyborg.update();
+		WorldClock.update();
 	}
 }

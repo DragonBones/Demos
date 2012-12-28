@@ -77,6 +77,7 @@ import starling.events.EnterFrameEvent;
 
 import dragonBones.Armature;
 import dragonBones.Bone;
+import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
 
 import dragonBones.events.AnimationEvent;
@@ -107,13 +108,14 @@ class StarlingGame extends Sprite {
 		armatureDisplay.x = 400;
 		armatureDisplay.y = 400;
 		addChild(armatureDisplay);
+		WorldClock.clock.add(armature);
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		updateMovement();
 	}
 
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {
 		updateSpeed();
-		armature.update();
+		WorldClock.update();
 		updateArrows();
 	}
 

@@ -58,6 +58,7 @@ import starling.events.EnterFrameEvent;
 import starling.text.TextField;
 
 import dragonBones.Armature;
+import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
 import flash.events.Event;
 
@@ -86,6 +87,7 @@ class StarlingGame extends Sprite {
 		armatureClip.x = 400;
 		armatureClip.y = 400;
 		addChild(armatureClip);
+		WorldClock.clock.add(armature);
 		updateMovement();
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		
@@ -97,7 +99,7 @@ class StarlingGame extends Sprite {
 
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {
 		updateSpeed();
-		armature.update();
+		WorldClock.update();
 	}
 
 	private var moveDir:int;

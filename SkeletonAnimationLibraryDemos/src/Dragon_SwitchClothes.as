@@ -1,6 +1,7 @@
 ﻿package {
 	import dragonBones.Armature;
 	import dragonBones.Bone;
+	import dragonBones.animation.WorldClock;
 	import dragonBones.factorys.StarlingFactory;
 
 	import flash.ui.Keyboard;
@@ -43,6 +44,7 @@
 			armatureClip.x = 400;
 			armatureClip.y = 550;
 			addChild(armatureClip);
+			WorldClock.clock.add(armature);
 			updateBehavior();
 			addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 
@@ -111,7 +113,7 @@
 
 		private function onEnterFrameHandler(_e:EnterFrameEvent):void {
 			updateMove();
-			armature.update();
+			WorldClock.update();
 		}
 
 		private function updateBehavior():void {

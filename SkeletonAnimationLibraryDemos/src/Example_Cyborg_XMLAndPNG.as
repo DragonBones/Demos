@@ -78,6 +78,7 @@ import starling.textures.Texture;
 
 import dragonBones.Armature;
 import dragonBones.Bone;
+import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
 import dragonBones.objects.XMLDataParser;
 
@@ -123,6 +124,7 @@ class StarlingGame extends Sprite {
 		armatureClip.x = 400;
 		armatureClip.y = 500;
 		addChild(armatureClip);
+		WorldClock.clock.add(armature);
 		changeWeapon();
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		
@@ -144,7 +146,7 @@ class StarlingGame extends Sprite {
 		}
 		updateSpeed();
 		updateWeapon();
-		armature.update();
+		WorldClock.update();
 	}
 
 	private var mouseX:Number = 0;
