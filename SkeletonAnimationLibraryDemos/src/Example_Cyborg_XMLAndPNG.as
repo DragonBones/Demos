@@ -114,7 +114,7 @@ class StarlingGame extends Sprite {
 		
 		//
 		var textureAtlas:StarlingTextureAtlas = new StarlingTextureAtlas(
-			Texture.fromBitmapData(new TextureData().bitmapData), 
+			Texture.fromBitmapData(new TextureData().bitmapData, true, false, 0.5), 
 			XML(new TextureXMLData())
 		);
 		factory.addTextureAtlas(textureAtlas);
