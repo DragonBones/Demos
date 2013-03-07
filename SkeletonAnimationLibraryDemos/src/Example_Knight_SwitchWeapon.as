@@ -1,10 +1,9 @@
 ﻿package  {
 	import flash.display.Sprite;
-	import flash.events.KeyboardEvent;
 
 	import starling.core.Starling;
 
-    [SWF(width="800", height="600", frameRate="30", backgroundColor="#cccccc")]
+    [SWF(width="800", height="600", frameRate="60", backgroundColor="#cccccc")]
 	public class Example_Knight_SwitchWeapon extends flash.display.Sprite {
 
 		public function Example_Knight_SwitchWeapon() {
@@ -16,64 +15,17 @@
 			//_starling.antiAliasing = 1;
 			_starling.showStats = true;
 			_starling.start();
-
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyEventHandler);
-			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyEventHandler);
-		}
-
-		private var left:Boolean;
-		private var right:Boolean;
-
-		private function onKeyEventHandler(e:KeyboardEvent):void {
-			switch (e.keyCode) {
-				case 37 :
-				case 65 :
-					left = e.type == KeyboardEvent.KEY_DOWN;
-					updateMove(-1);
-					break;
-				case 39 :
-				case 68 :
-					right = e.type == KeyboardEvent.KEY_DOWN;
-					updateMove(1);
-					break;
-				case 38 :
-				case 87 :
-					if (e.type == KeyboardEvent.KEY_DOWN) {
-						StarlingGame.instance.jump();
-					}
-					break;
-				case 83 :
-				case 40 :
-					if (e.type == KeyboardEvent.KEY_UP) {
-						StarlingGame.instance.changeWeapon();
-					}
-					break;
-				case 32 :
-					if (e.type == KeyboardEvent.KEY_UP) {
-						StarlingGame.instance.attack();
-					}
-					break;
-			}
-		}
-
-		private function updateMove(_dir:int):void {
-			if (left && right) {
-				StarlingGame.instance.move(_dir);
-			}else if (left){
-				StarlingGame.instance.move(-1);
-			}else if (right){
-				StarlingGame.instance.move(1);
-			}else {
-				StarlingGame.instance.move(0);
-			}
 		}
 	}
 }
 
 import flash.geom.Point;
+import flash.events.Event;
+
 import starling.display.Image;
 import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
+import starling.events.KeyboardEvent;
 
 import dragonBones.Armature;
 import dragonBones.Bone;
@@ -82,21 +34,18 @@ import dragonBones.factorys.StarlingFactory;
 
 import dragonBones.events.AnimationEvent;
 import dragonBones.events.FrameEvent;
-import flash.events.Event;
 
 class StarlingGame extends Sprite {
-	[Embed(source = "../assets/Knight_output.png", mimeType = "application/octet-stream")]
+	[Embed(source = "../assets/Knight_output.swf", mimeType = "application/octet-stream")]
 	public static const ResourcesData:Class;
-
-	public static var instance:StarlingGame;
 
 	private var factory:StarlingFactory;
 	private var armature:Armature;
 	private var armatureDisplay:Sprite;
+	
+	private var arm:Bone;
 
 	public function StarlingGame() {
-		instance = this;
-
 		factory = new StarlingFactory();
 		factory.parseData(new ResourcesData());
 		factory.addEventListener(Event.COMPLETE, textureCompleteHandler);
@@ -108,24 +57,77 @@ class StarlingGame extends Sprite {
 		armatureDisplay.x = 400;
 		armatureDisplay.y = 400;
 		addChild(armatureDisplay);
+		
 		WorldClock.clock.add(armature);
-		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		updateMovement();
+		
+		arm = armature.getBone("armOutside");
+		arm.childArmature.addEventListener(AnimationEvent.MOVEMENT_CHANGE, armMovementHandler);
+		arm.childArmature.addEventListener(AnimationEvent.COMPLETE, armMovementHandler);
+		arm.childArmature.addEventListener(FrameEvent.MOVEMENT_FRAME_EVENT, armFrameEventHandler);
+		
+		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
+
+		stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyEventHandler);
+		stage.addEventListener(KeyboardEvent.KEY_UP, onKeyEventHandler);
 	}
 
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {
 		updateSpeed();
-		WorldClock.update();
+		WorldClock.clock.advanceTime(-1);
 		updateArrows();
 	}
 
+	private function onKeyEventHandler(e:KeyboardEvent):void {
+		switch (e.keyCode) {
+			case 37 :
+			case 65 :
+				left = e.type == KeyboardEvent.KEY_DOWN;
+				move(-1);
+				break;
+			case 39 :
+			case 68 :
+				right = e.type == KeyboardEvent.KEY_DOWN;
+				move(1);
+				break;
+			case 38 :
+			case 87 :
+				if (e.type == KeyboardEvent.KEY_DOWN) {
+					jump();
+				}
+				break;
+			case 83 :
+			case 40 :
+				if (e.type == KeyboardEvent.KEY_UP) {
+					changeWeapon();
+				}
+				break;
+			case 32 :
+				if (e.type == KeyboardEvent.KEY_UP) {
+					attack();
+				}
+				break;
+		}
+	}
+
 	private var isJumping:Boolean;
+	private var left:Boolean;
+	private var right:Boolean;
 	private var moveDir:int;
 
 	private var speedX:Number = 0;
 	private var speedY:Number = 0;
 
 	public function move(_dir:int):void {
+		if (left && right) {
+		}else if (left){
+			_dir = -1;
+		}else if (right){
+			_dir = 1;
+		}else {
+			_dir = 0;
+		}
+	
 		if (moveDir == _dir) {
 			return;
 		}
@@ -137,7 +139,7 @@ class StarlingGame extends Sprite {
 		if (isJumping) {
 			return;
 		}
-		speedY = -20;
+		speedY = -15;
 		isJumping = true;
 		armature.animation.gotoAndPlay("jump");
 	}
@@ -153,39 +155,62 @@ class StarlingGame extends Sprite {
 		var _weaponName:String = weaponNames[weaponID];
 		var _movementName:String = "ready_" + _weaponName;
 
-		var _arm:Bone = armature.getBone("armOutside");
-		_arm.childArmature.animation.gotoAndPlay(_movementName);
+		arm.childArmature.animation.gotoAndPlay(_movementName);
 	}
 
 
 	private var isAttacking:Boolean;
+	private var isComboAttack:Boolean;
+	private var hitCount:uint = 1;
 	public function attack():void {
 		if (isAttacking) {
 			return;
 		}
 		isAttacking = true;
 		var _weaponName:String = weaponNames[weaponID];
-		var _movementName:String = "attack_" + _weaponName;
+		var _movementName:String = "attack_" + _weaponName + "_" + hitCount;
 
-		var _arm:Bone = armature.getBone("armOutside");
-		_arm.childArmature.animation.gotoAndPlay(_movementName);
-		_arm.childArmature.addEventListener(AnimationEvent.MOVEMENT_CHANGE, childArmatureMovementChangeHandler);
-		if (_weaponName == "bow") {
-			_arm.childArmature.addEventListener(FrameEvent.MOVEMENT_FRAME_EVENT, childArmatureMovementEventFrameHandler);
+		arm.childArmature.animation.gotoAndPlay(_movementName);
+	}
+	
+	private function armMovementHandler(e:AnimationEvent):void 
+	{
+		switch(e.type)
+		{
+			case AnimationEvent.MOVEMENT_CHANGE:
+				isComboAttack = false;
+				break;
+			case AnimationEvent.COMPLETE:
+				if(isComboAttack)
+				{
+					var _weaponName:String = weaponNames[weaponID];
+					var _movementName:String = "ready_" + _weaponName;
+					arm.childArmature.animation.gotoAndPlay(_movementName);
+				}
+				else
+				{
+					isAttacking = false;
+					hitCount = 1;
+					isComboAttack = false;
+				}
+				break;
 		}
 	}
 
-	private function childArmatureMovementChangeHandler(e:AnimationEvent):void 
+	private function armFrameEventHandler(e:FrameEvent):void 
 	{
-		e.target.removeEventListener(AnimationEvent.MOVEMENT_CHANGE, childArmatureMovementChangeHandler);
-		isAttacking = false;
-	}
-
-	private function childArmatureMovementEventFrameHandler(e:FrameEvent):void 
-	{
-		e.target.removeEventListener(FrameEvent.MOVEMENT_FRAME_EVENT, childArmatureMovementEventFrameHandler);
-		trace("event:" + e.frameLabel);
-		createArrow();
+		switch(e.frameLabel)
+		{
+			case "fire":
+				createArrow();
+				trace("frameEvent:" + e.frameLabel);
+				break;
+			case "ready":
+				isAttacking = false;
+				isComboAttack = true;
+				hitCount ++;
+				break;
+		}
 	}
 
 	private var arrows:Array = [];
@@ -193,8 +218,8 @@ class StarlingGame extends Sprite {
 	private var resultPoint:Point = new Point();
 	private function createArrow():void {
 
-		var _arrowDisplay:Image = factory.getTextureDisplay("knightFolder/arrow") as Image;
-		var _bow:Bone = armature.getBone("armOutside").childArmature.getBone("bow");
+		var _arrowDisplay:Image = factory.getTextureDisplay("knightFolder/arrow_1") as Image;
+		var _bow:Bone = arm.childArmature.getBone("bow");
 		_bow.display.localToGlobal(localPoint, resultPoint);
 
 		var _r:Number;
@@ -208,8 +233,8 @@ class StarlingGame extends Sprite {
 		_arrowDisplay.y = resultPoint.y;
 		_arrowDisplay.rotation = _r;
 
-		var _vx:Number = Math.cos(_r) * 40;
-		var _vy:Number = Math.sin(_r) * 40;
+		var _vx:Number = Math.cos(_r) * 36;
+		var _vy:Number = Math.sin(_r) * 36;
 		var _arrow:Object = { display:_arrowDisplay, vx:_vx, vy:_vy };
 		arrows.push(_arrow);
 		addChild(_arrowDisplay);
@@ -242,7 +267,7 @@ class StarlingGame extends Sprite {
 			speedX = 0;
 			armature.animation.gotoAndPlay("stand");
 		}else {
-			speedX = moveDir * 6;
+			speedX = moveDir * 4;
 			armature.animation.gotoAndPlay("run");
 			armatureDisplay.scaleX = moveDir;
 		}
@@ -250,7 +275,7 @@ class StarlingGame extends Sprite {
 
 	private function updateSpeed():void {
 		if (isJumping) {
-			speedY += 1;
+			speedY += 0.6;
 		}
 
 		if (speedX != 0) {

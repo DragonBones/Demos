@@ -98,14 +98,10 @@ class StarlingGame extends Sprite {
 	}
 
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {
-		updateSpeed();
-		WorldClock.update();
+		WorldClock.clock.advanceTime(-1);
 	}
 
 	private var moveDir:int;
-
-	private var speedX:Number = 0;
-
 	public function move(_dir:int):void {
 		if (moveDir == _dir) {
 			return;
@@ -116,25 +112,12 @@ class StarlingGame extends Sprite {
 
 	private function updateMovement():void {
 		if (moveDir == 0) {
-			speedX = 0;
 			armature.animation.gotoAndPlay("stay");
 		}else {
-			speedX = moveDir * 20;
 			if (moveDir > 0) {
 				armature.animation.gotoAndPlay("right");
 			}else {
 				armature.animation.gotoAndPlay("left");
-			}
-		}
-	}
-
-	private function updateSpeed():void {
-		if (speedX != 0) {
-			//armatureClip.x += speedX;
-			if (armatureClip.x < 0) {
-				armatureClip.x = 0;
-			}else if (armatureClip.x > 800) {
-				armatureClip.x = 800;
 			}
 		}
 	}

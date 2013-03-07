@@ -74,7 +74,7 @@
 			checkDist();
 			updateMove();
 			updateBones();
-			WorldClock.update();		
+			WorldClock.clock.advanceTime(-1);
 		}
 		
 		private function checkDist():void

@@ -101,6 +101,6 @@ class StarlingGame extends Sprite {
 	}
 
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {
-		WorldClock.update();
+		WorldClock.clock.advanceTime(-1);
 	}
 }

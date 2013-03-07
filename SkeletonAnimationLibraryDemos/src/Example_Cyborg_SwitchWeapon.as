@@ -130,7 +130,7 @@ class StarlingGame extends Sprite {
 		}
 		updateSpeed();
 		updateWeapon();
-		WorldClock.update();
+		WorldClock.clock.advanceTime(-1);
 	}
 
 	private var mouseX:Number = 0;

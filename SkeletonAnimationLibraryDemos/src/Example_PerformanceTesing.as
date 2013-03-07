@@ -78,6 +78,7 @@ import starling.events.TouchEvent;
 import starling.text.TextField;
 
 import dragonBones.Armature;
+import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
 
 class StarlingGame extends Sprite {
@@ -145,6 +146,7 @@ class StarlingGame extends Sprite {
 		{
 			for (i = armatures.length - 1; i >= num; i--)
 			{
+				WorldClock.clock.remove(armatures[i]);
 				armatures[i].dispose();
 				removeChild(armatures[i].display as Sprite);
 			}
@@ -188,6 +190,8 @@ class StarlingGame extends Sprite {
 		_armature.animation.gotoAndPlay("walk");
 		addChild(_armature.display as Sprite);
 		armatures.push(_armature);
+		WorldClock.clock.add(_armature);
+		
 	}
 	
 	private function removeLastObject():void
@@ -196,6 +200,7 @@ class StarlingGame extends Sprite {
 		{
 			return;
 		}
+		WorldClock.clock.remove(armatures[armatures.length-1]);
 		armatures[armatures.length-1].dispose();
 		removeChild(armatures[armatures.length-1].display as Sprite);
 		armatures.length--;
@@ -206,6 +211,7 @@ class StarlingGame extends Sprite {
 		var len:int = armatures.length;
 		for (var i:int = 0; i < len; i++)
 		{
+			WorldClock.clock.remove(armatures[i]);
 			armatures[i].dispose();
 			removeChild(armatures[i].display as Sprite);
 		}
@@ -214,9 +220,7 @@ class StarlingGame extends Sprite {
 	
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void
 	{
-		for each(var _armature:Armature in armatures) {
-			_armature.update();
-		}
+		WorldClock.clock.advanceTime(-1);
 		
 		elapsedTime += _e.passedTime;
 		elapsedFrame++;

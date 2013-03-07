@@ -113,7 +113,7 @@
 
 		private function onEnterFrameHandler(_e:EnterFrameEvent):void {
 			updateMove();
-			WorldClock.update();
+			WorldClock.clock.advanceTime(-1);
 		}
 
 		private function updateBehavior():void {
