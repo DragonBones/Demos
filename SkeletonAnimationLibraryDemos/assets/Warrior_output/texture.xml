@@ -1,0 +1,19 @@
+<TextureAtlas name="Warrior" width="512" height="512">
+ <SubTexture name="warriorFolder/outerarm_upper" width="89" height="137" x="135" y="194"/>
+ <SubTexture name="warriorFolder/outerarm_lower" width="76" height="101" x="226" y="194"/>
+ <SubTexture name="warriorFolder/outerarm_hand" width="55" height="56" x="441" y="55"/>
+ <SubTexture name="warriorFolder/lowerbody" width="133" height="157" x="306" y="0"/>
+ <SubTexture name="warriorFolder/outerleg_foot" width="108" height="75" x="50" y="338"/>
+ <SubTexture name="warriorFolder/outerleg_lower" width="83" height="156" x="50" y="180"/>
+ <SubTexture name="warriorFolder/outerleg_upper" width="136" height="178" x="50" y="0"/>
+ <SubTexture name="warriorFolder/head" width="79" height="101" x="322" y="322"/>
+ <SubTexture name="warriorFolder/upperbody" width="115" height="161" x="306" y="159"/>
+ <SubTexture name="warriorFolder/neck" width="48" height="56" x="441" y="113"/>
+ <SubTexture name="warriorFolder/innerleg_foot" width="108" height="72" x="50" y="415"/>
+ <SubTexture name="warriorFolder/innerleg_lower" width="78" height="163" x="423" y="171"/>
+ <SubTexture name="warriorFolder/innerleg_upper" width="116" height="192" x="188" y="0"/>
+ <SubTexture name="warriorFolder/innerweapon2" width="48" height="417" x="0" y="0"/>
+ <SubTexture name="warriorFolder/innerarm_upper" width="94" height="117" x="226" y="322"/>
+ <SubTexture name="warriorFolder/innerarm_lower" width="100" height="71" x="403" y="336"/>
+ <SubTexture name="warriorFolder/innerarm_hand" width="59" height="53" x="441" y="0"/>
+</TextureAtlas>

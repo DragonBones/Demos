@@ -1,4 +1,4 @@
-package  {
+﻿package  {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 
@@ -28,6 +28,7 @@ package  {
 		}
 	}
 }
+import flash.events.Event;
 
 import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
@@ -35,7 +36,7 @@ import starling.events.EnterFrameEvent;
 import dragonBones.Armature;
 import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
-import flash.events.Event;
+import dragonBones.objects.SkeletonData;
 
 class StarlingGame extends Sprite {
 	[Embed(source = "../assets/Zombie_output.png", mimeType = "application/octet-stream")]
@@ -58,10 +59,16 @@ class StarlingGame extends Sprite {
 	}
 
 	private function textureCompleteHandler(e:Event):void {
-		armature11 = factory.buildArmature("Zombie_gargantuar");
-		armature21 = factory.buildArmature("Zombie_Jackson", "Zombie_gargantuar");
-		armature22 = factory.buildArmature("Zombie_Jackson");
-		armature12 = factory.buildArmature("Zombie_gargantuar", "Zombie_Jackson");
+		var skeletonData:SkeletonData = factory.getSkeletonData("Zombie");
+		var armatureNames:Vector.<String> = skeletonData.armatureNames;
+		
+		var armatureName1:String = armatureNames.splice(int(Math.random() * armatureNames.length), 1)[0];
+		var armatureName2:String = armatureNames.splice(int(Math.random() * armatureNames.length), 1)[0];
+		
+		armature11 = factory.buildArmature(armatureName1);
+		armature21 = factory.buildArmature(armatureName2, armatureName1);
+		armature22 = factory.buildArmature(armatureName2);
+		armature12 = factory.buildArmature(armatureName1, armatureName2);
 		
 		var _display:Sprite;
 		_display = armature11.display as Sprite;
@@ -111,6 +118,6 @@ class StarlingGame extends Sprite {
 	}
 
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {
-		WorldClock.update();
+		WorldClock.clock.advanceTime(-1);
 	}
 }
