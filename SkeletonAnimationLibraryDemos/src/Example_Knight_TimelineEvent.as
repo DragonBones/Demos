@@ -4,9 +4,9 @@
 	import starling.core.Starling;
 
     [SWF(width="800", height="600", frameRate="60", backgroundColor="#cccccc")]
-	public class Example_Knight_SwitchWeapon extends flash.display.Sprite {
+	public class Example_Knight_TimelineEvent extends flash.display.Sprite {
 
-		public function Example_Knight_SwitchWeapon() {
+		public function Example_Knight_TimelineEvent() {
 			starlingInit();
 		}
 
@@ -26,6 +26,11 @@ import starling.display.Image;
 import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
 import starling.events.KeyboardEvent;
+import starling.events.TouchEvent;
+import starling.events.Touch;
+import starling.events.TouchPhase;
+
+import starling.text.TextField;
 
 import dragonBones.Armature;
 import dragonBones.Bone;
@@ -44,6 +49,8 @@ class StarlingGame extends Sprite {
 	private var armatureDisplay:Sprite;
 	
 	private var arm:Bone;
+	
+	private var textField:TextField;
 
 	public function StarlingGame() {
 		factory = new StarlingFactory();
@@ -70,6 +77,12 @@ class StarlingGame extends Sprite {
 
 		stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyEventHandler);
 		stage.addEventListener(KeyboardEvent.KEY_UP, onKeyEventHandler);
+		stage.addEventListener(TouchEvent.TOUCH, onTouch);
+		
+		textField = new TextField(700, 30, "Press W/A/D to move. Press SPACE to switch weapens. Click mouse to attack.", "Verdana", 16, 0, true)
+		textField.x = 60;
+		textField.y = 5;
+		addChild(textField);
 	}
 
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {
@@ -96,17 +109,23 @@ class StarlingGame extends Sprite {
 					jump();
 				}
 				break;
-			case 83 :
-			case 40 :
+			case 32 :
 				if (e.type == KeyboardEvent.KEY_UP) {
 					changeWeapon();
 				}
 				break;
-			case 32 :
-				if (e.type == KeyboardEvent.KEY_UP) {
-					attack();
-				}
-				break;
+		}
+	}
+	
+	private function onTouch(event:TouchEvent):void
+	{
+		var touch:Touch = event.getTouch(stage);
+		if(touch)
+		{
+			if(touch.phase == TouchPhase.BEGAN)
+			{
+				attack();
+			}
 		}
 	}
 
