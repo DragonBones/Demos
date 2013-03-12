@@ -1,19 +1,19 @@
 <TextureAtlas name="Cyborg" width="128" height="128">
- <SubTexture name="CyborgFolder/weapon4" pX="28" pY="13" width="101" height="23" x="0" y="0"/>
- <SubTexture name="CyborgFolder/weapon3" pX="23" pY="0" width="92" height="22" x="0" y="25"/>
- <SubTexture name="CyborgFolder/weapon2" pX="20" pY="14" width="91" height="20" x="0" y="49"/>
- <SubTexture name="CyborgFolder/RightArm" pX="5" pY="4" width="10" height="19" x="16" y="89"/>
- <SubTexture name="CyborgFolder/RightHand" pX="3" pY="0" width="7" height="9" x="119" y="11"/>
- <SubTexture name="CyborgFolder/RightShoulder" pX="7" pY="5" width="14" height="19" x="72" y="71"/>
- <SubTexture name="CyborgFolder/weapon1" pX="27" pY="14" width="70" height="16" x="0" y="71"/>
- <SubTexture name="CyborgFolder/RightThigh" pX="7" pY="5" width="14" height="28" x="109" y="64"/>
- <SubTexture name="CyborgFolder/Head" pX="20" pY="18" width="32" height="18" x="94" y="44"/>
- <SubTexture name="CyborgFolder/Chest" pX="6" pY="7" width="18" height="9" x="40" y="89"/>
- <SubTexture name="CyborgFolder/Hip" pX="2" pY="2" width="4" height="4" x="119" y="22"/>
- <SubTexture name="CyborgFolder/Trunk" pX="3" pY="14" width="10" height="16" x="60" y="89"/>
- <SubTexture name="CyborgFolder/Leg" pX="7" pY="6" width="14" height="42" x="103" y="0"/>
- <SubTexture name="CyborgFolder/LeftThigh" pX="7" pY="5" width="14" height="28" x="93" y="64"/>
- <SubTexture name="CyborgFolder/LeftShoulder" pX="7" pY="5" width="14" height="19" x="0" y="89"/>
- <SubTexture name="CyborgFolder/LeftArm" pX="5" pY="4" width="10" height="19" x="28" y="89"/>
- <SubTexture name="CyborgFolder/LeftHand" pX="3" pY="0" width="7" height="9" x="119" y="0"/>
+ <SubTexture name="CyborgFolder/LeftShoulder" width="14" height="19" x="0" y="89"/>
+ <SubTexture name="CyborgFolder/LeftArm" width="10" height="19" x="28" y="89"/>
+ <SubTexture name="CyborgFolder/LeftHand" width="7" height="9" x="119" y="11"/>
+ <SubTexture name="CyborgFolder/RightArm" width="10" height="19" x="16" y="89"/>
+ <SubTexture name="CyborgFolder/RightHand" width="7" height="9" x="119" y="0"/>
+ <SubTexture name="CyborgFolder/RightShoulder" width="14" height="19" x="72" y="71"/>
+ <SubTexture name="CyborgFolder/weapon4" width="101" height="23" x="0" y="0"/>
+ <SubTexture name="CyborgFolder/weapon3" width="92" height="22" x="0" y="25"/>
+ <SubTexture name="CyborgFolder/weapon2" width="91" height="20" x="0" y="49"/>
+ <SubTexture name="CyborgFolder/weapon1" width="70" height="16" x="0" y="71"/>
+ <SubTexture name="CyborgFolder/RightThigh" width="14" height="28" x="93" y="64"/>
+ <SubTexture name="CyborgFolder/Head" width="32" height="18" x="94" y="44"/>
+ <SubTexture name="CyborgFolder/Chest" width="18" height="9" x="40" y="89"/>
+ <SubTexture name="CyborgFolder/Hip" width="4" height="4" x="119" y="22"/>
+ <SubTexture name="CyborgFolder/Trunk" width="10" height="16" x="60" y="89"/>
+ <SubTexture name="CyborgFolder/Leg" width="14" height="42" x="103" y="0"/>
+ <SubTexture name="CyborgFolder/LeftThigh" width="14" height="28" x="109" y="64"/>
 </TextureAtlas>

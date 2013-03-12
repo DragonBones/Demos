@@ -1,0 +1,591 @@
+<skeleton name="Warrior" frameRate="24" version="2.0">
+ <armatures>
+  <armature name="warrior">
+   <b name="innerarm_hand" parent="innerarm_lower" x="-82.95" y="-12.7" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="37" pY="15" z="0">
+    <d name="warriorFolder/innerarm_hand" pX="0" pY="0"/>
+   </b>
+   <b name="innerarm_lower" parent="innerarm_upper" x="-38.5" y="-60.4" kX="-24.05" kY="-24.05" cX="1" cY="1" pX="65" pY="16" z="1">
+    <d name="warriorFolder/innerarm_lower" pX="0" pY="0"/>
+   </b>
+   <b name="innerarm_upper" parent="upperbody" x="-20.65" y="-118.75" kX="-29.82" kY="-29.83" cX="1" cY="1" pX="58" pY="31" z="2">
+    <d name="warriorFolder/innerarm_upper" pX="0" pY="0"/>
+   </b>
+   <b name="innerweapon" parent="innerarm_hand" x="-96.1" y="-1.9" kX="-64.7" kY="-64.7" cX="1" cY="1" pX="21" pY="51" z="3">
+    <d name="warriorFolder/innerweapon" pX="0" pY="0"/>
+   </b>
+   <b name="innerleg_upper" parent="lowerbody" x="-2.25" y="-7.6" kX="12.01" kY="12.01" cX="1" cY="1" pX="42" pY="20" z="4">
+    <d name="warriorFolder/innerleg_upper" pX="0" pY="0"/>
+   </b>
+   <b name="innerleg_lower" parent="innerleg_upper" x="-21.3" y="122.15" kX="6.27" kY="4.76" cX="1" cY="1" pX="34" pY="24" z="5">
+    <d name="warriorFolder/innerleg_lower" pX="0" pY="0"/>
+   </b>
+   <b name="innerleg_foot" parent="innerleg_lower" x="-22.9" y="199.15" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="6">
+    <d name="warriorFolder/innerleg_foot" pX="0" pY="0"/>
+   </b>
+   <b name="head" parent="upperbody" x="0" y="-143" kX="0" kY="0" cX="1" cY="1" pX="56" pY="88" z="7">
+    <d name="warriorFolder/head" pX="0" pY="0"/>
+   </b>
+   <b name="upperbody" parent="lowerbody" x="-16.25" y="-55.45" kX="0" kY="0" cX="1" cY="1" pX="45" pY="108" z="8">
+    <d name="warriorFolder/upperbody" pX="0" pY="0"/>
+   </b>
+   <b name="outerleg_upper" parent="lowerbody" x="-10.85" y="2.15" kX="-53.41" kY="-53.41" cX="1" cY="1" pX="82" pY="25" z="9">
+    <d name="warriorFolder/outerleg_upper" pX="0" pY="0"/>
+   </b>
+   <b name="outerleg_lower" parent="outerleg_upper" x="31.3" y="123.3" kX="0" kY="0" cX="1" cY="1" pX="37" pY="24" z="10">
+    <d name="warriorFolder/outerleg_lower" pX="0" pY="0"/>
+   </b>
+   <b name="outerleg_foot" parent="outerleg_lower" x="47.35" y="201.55" kX="0" kY="0" cX="1" cY="1" pX="63" pY="8" z="11">
+    <d name="warriorFolder/outerleg_foot" pX="0" pY="0"/>
+   </b>
+   <b name="lowerbody" x="-0.65" y="4.95" kX="0" kY="0" cX="1" cY="1" pX="57" pY="94" z="12">
+    <d name="warriorFolder/lowerbody" pX="0" pY="0"/>
+   </b>
+   <b name="outerarm_hand" parent="outerarm_lower" x="33.75" y="15.65" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="32" pY="10" z="13">
+    <d name="warriorFolder/outerarm_hand" pX="0" pY="0"/>
+   </b>
+   <b name="outerarm_lower" parent="outerarm_upper" x="42.95" y="-51.1" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="38" pY="12" z="14">
+    <d name="warriorFolder/outerarm_lower" pX="0" pY="0"/>
+   </b>
+   <b name="outerarm_upper" parent="upperbody" x="7.55" y="-128.6" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="30" pY="21" z="15">
+    <d name="warriorFolder/outerarm_upper" pX="0" pY="0"/>
+   </b>
+  </armature>
+ </armatures>
+ <animations>
+  <animation name="warrior">
+   <mov name="ready" dr="6" to="6" drTW="48" lp="1" twE="NaN">
+    <b name="innerarm_hand" sc="1" dl="0">
+     <f x="-82.95" y="-12.7" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" dr="3"/>
+     <f x="-79.75" y="-24.15" kX="-6.01" kY="-6.01" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" dr="3"/>
+    </b>
+    <b name="innerarm_lower" sc="1" dl="0">
+     <f x="-38.5" y="-60.4" kX="-24.05" kY="-24.05" cX="1" cY="1" pX="65" pY="16" z="1" dI="0" dr="3"/>
+     <f x="-34.55" y="-71.2" kX="-23.05" kY="-23.05" cX="1" cY="1" pX="65" pY="16" z="1" dI="0" dr="3"/>
+    </b>
+    <b name="innerarm_upper" sc="1" dl="-0.75">
+     <f x="-20.65" y="-118.75" kX="-29.82" kY="-29.83" cX="1" cY="1" pX="58" pY="31" z="2" dI="0" dr="3"/>
+     <f x="-11.35" y="-127.95" kX="-24.04" kY="-24.04" cX="1" cY="1" pX="58" pY="30" z="2" dI="0" dr="3"/>
+    </b>
+    <b name="innerweapon" sc="1" dl="0">
+     <f x="-96.1" y="-1.9" kX="-64.7" kY="-64.7" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" dr="3"/>
+     <f x="-95.7" y="-16.85" kX="-58.67" kY="-58.67" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_upper" sc="1" dl="0">
+     <f x="-2.25" y="-7.6" kX="12.01" kY="12.01" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" dr="3"/>
+     <f x="0.1" y="-7.55" kX="7.76" kY="7.76" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_lower" sc="1" dl="0">
+     <f x="-21.3" y="122.15" kX="6.27" kY="4.76" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" dr="3"/>
+     <f x="-13.85" y="122.2" kX="12.52" kY="11.01" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_foot" sc="1" dl="0">
+     <f x="-22.9" y="199.15" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" dr="3"/>
+     <f x="-23.1" y="199.2" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" dr="3"/>
+    </b>
+    <b name="head" sc="1" dl="0">
+     <f x="0" y="-143" kX="0" kY="0" cX="1" cY="1" pX="56" pY="88" z="7" dI="0" dr="3"/>
+     <f x="5" y="-144" kX="0.01" kY="0.01" cX="1" cY="1" pX="55" pY="92" z="7" dI="0" dr="3"/>
+    </b>
+    <b name="upperbody" sc="1" dl="0">
+     <f x="-16.25" y="-55.45" kX="0" kY="0" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" dr="3"/>
+     <f x="-14.05" y="-59.8" kX="2.77" kY="2.76" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_upper" sc="1" dl="0">
+     <f x="-10.85" y="2.15" kX="-53.41" kY="-53.41" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" dr="3"/>
+     <f x="-8.65" y="2.1" kX="-56.68" kY="-56.67" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_lower" sc="1" dl="0">
+     <f x="31.3" y="123.3" kX="0" kY="0" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" dr="3"/>
+     <f x="35.5" y="123.1" kX="3.02" kY="3.02" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_foot" sc="1" dl="0">
+     <f x="47.35" y="201.55" kX="0" kY="0" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" dr="3"/>
+     <f x="47.75" y="201.55" kX="0" kY="0" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" dr="3"/>
+    </b>
+    <b name="lowerbody" sc="1" dl="0">
+     <f x="-0.65" y="4.95" kX="0" kY="0" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" dr="3"/>
+     <f x="1.55" y="0.95" kX="0" kY="0" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_hand" sc="1" dl="0">
+     <f x="33.75" y="15.65" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="3"/>
+     <f x="39.7" y="12.9" kX="-16.77" kY="-16.77" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_lower" sc="1" dl="0">
+     <f x="42.95" y="-51.1" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="3"/>
+     <f x="46.6" y="-54" kX="-16.77" kY="-16.77" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_upper" sc="1" dl="-0.8">
+     <f x="7.55" y="-128.6" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="3"/>
+     <f x="16.4" y="-133.9" kX="-11.01" kY="-11.01" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="3"/>
+    </b>
+   </mov>
+   <mov name="readyWeapon" dr="6" to="6" drTW="48" lp="1" twE="NaN">
+    <b name="innerarm_hand" sc="1" dl="0">
+     <f x="-89.7" y="-14.85" kX="-62.69" kY="-62.69" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" dr="3"/>
+     <f x="-81.45" y="-20.85" kX="-62.69" kY="-62.69" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" dr="3"/>
+    </b>
+    <b name="innerarm_lower" sc="1" dl="0">
+     <f x="-49.05" y="-64.65" kX="-26.8" kY="-26.8" cX="1" cY="1" pX="65" pY="16" z="1" dI="0" dr="3"/>
+     <f x="-40.9" y="-70.7" kX="-26.8" kY="-26.8" cX="1" cY="1" pX="65" pY="16" z="1" dI="0" dr="3"/>
+    </b>
+    <b name="innerarm_upper" sc="1" dl="0">
+     <f x="-20.7" y="-118.75" kX="-17.53" kY="-17.53" cX="1" cY="1" pX="58" pY="30" z="2" dI="0" dr="3"/>
+     <f x="-12.4" y="-124.75" kX="-17.53" kY="-17.53" cX="1" cY="1" pX="58" pY="30" z="2" dI="0" dr="3"/>
+    </b>
+    <b name="innerweapon" sc="1" dl="0">
+     <f x="-92.75" y="1" kX="58.92" kY="58.92" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" dr="3"/>
+     <f x="-84.6" y="-4.95" kX="58.92" kY="58.92" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_upper" sc="1" dl="0">
+     <f x="-2.25" y="-7.6" kX="12.01" kY="12.01" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" dr="3"/>
+     <f x="0.1" y="-7.55" kX="7.76" kY="7.76" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_lower" sc="1" dl="0">
+     <f x="-21.3" y="122.15" kX="6.27" kY="4.76" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" dr="3"/>
+     <f x="-13.85" y="122.2" kX="12.52" kY="11.01" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_foot" sc="1" dl="0">
+     <f x="-22.9" y="199.15" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" dr="3"/>
+     <f x="-23.1" y="199.2" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" dr="3"/>
+    </b>
+    <b name="head" sc="1" dl="0">
+     <f x="0" y="-140" kX="0" kY="0" cX="1" cY="1" pX="56" pY="91" z="7" dI="0" dr="3"/>
+     <f x="6" y="-146" kX="0.01" kY="0.01" cX="1" cY="1" pX="55" pY="89" z="7" dI="0" dr="3"/>
+    </b>
+    <b name="upperbody" sc="1" dl="0">
+     <f x="-16.25" y="-55.45" kX="0" kY="0" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" dr="3"/>
+     <f x="-14.05" y="-59.8" kX="2.77" kY="2.76" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_upper" sc="1" dl="0">
+     <f x="-10.85" y="2.15" kX="-53.41" kY="-53.41" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" dr="3"/>
+     <f x="-8.65" y="2.1" kX="-56.68" kY="-56.67" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_lower" sc="1" dl="0">
+     <f x="31.3" y="123.3" kX="0" kY="0" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" dr="3"/>
+     <f x="35.5" y="123.1" kX="3.02" kY="3.02" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_foot" sc="1" dl="0">
+     <f x="47.35" y="201.55" kX="0" kY="0" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" dr="3"/>
+     <f x="47.75" y="201.55" kX="0" kY="0" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" dr="3"/>
+    </b>
+    <b name="lowerbody" sc="1" dl="0">
+     <f x="-0.65" y="4.95" kX="0" kY="0" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" dr="3"/>
+     <f x="1.55" y="0.95" kX="0" kY="0" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_hand" sc="1" dl="0">
+     <f x="33.75" y="15.65" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="3"/>
+     <f x="39.7" y="12.9" kX="-16.77" kY="-16.77" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_lower" sc="1" dl="0">
+     <f x="42.95" y="-51.1" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="3"/>
+     <f x="46.6" y="-54" kX="-16.77" kY="-16.77" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_upper" sc="1" dl="-0.2">
+     <f x="7.55" y="-128.6" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="3"/>
+     <f x="16.4" y="-133.9" kX="-11.01" kY="-11.01" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="3"/>
+    </b>
+   </mov>
+   <mov name="squat" dr="3" to="6" drTW="3" lp="0" twE="NaN">
+    <b name="innerarm_hand" sc="1" dl="0">
+     <f x="-119.75" y="27.95" kX="57.43" kY="57.43" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" dr="3"/>
+    </b>
+    <b name="innerarm_lower" sc="1" dl="0">
+     <f x="-65.35" y="55.9" kX="52.41" kY="52.41" cX="1" cY="1" pX="66" pY="16" z="1" dI="0" dr="3"/>
+    </b>
+    <b name="innerarm_upper" sc="1" dl="0">
+     <f x="-16.05" y="42.65" kX="33.82" kY="33.82" cX="1" cY="1" pX="58" pY="31" z="2" dI="0" dr="3"/>
+    </b>
+    <b name="innerweapon" sc="1" dl="0">
+     <f x="-132.2" y="10.85" kX="17.79" kY="17.79" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_upper" sc="1" dl="0">
+     <f x="-1.6" y="167.2" kX="127.84" kY="127.84" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_lower" sc="1" dl="0">
+     <f x="-92.65" y="127.6" kX="-2.26" kY="-3.76" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_foot" sc="1" dl="0">
+     <f x="-83.1" y="199.5" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" dr="3"/>
+    </b>
+    <b name="head" sc="1" dl="0">
+     <f x="-4" y="10" kX="-14.99" kY="-14.99" cX="1" cY="1" pX="56" pY="86" z="7" dI="0" dr="3"/>
+    </b>
+    <b name="upperbody" sc="1" dl="0">
+     <f x="20.3" y="92.25" kX="-27.05" kY="-27.05" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_upper" sc="1" dl="0">
+     <f x="9.05" y="122.2" kX="-11.52" kY="-11.52" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_lower" sc="1" dl="0">
+     <f x="-6.8" y="216.8" kX="-81.48" kY="-81.48" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_foot" sc="1" dl="0">
+     <f x="69.95" y="212.6" kX="-119.82" kY="-119.83" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" dr="3"/>
+    </b>
+    <b name="lowerbody" sc="1" dl="0">
+     <f x="11.05" y="139.2" kX="14.78" kY="14.78" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_hand" sc="1" dl="0">
+     <f x="104.15" y="120.95" kX="-31.82" kY="-31.81" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_lower" sc="1" dl="0">
+     <f x="76.65" y="59.4" kX="-46.87" kY="-46.88" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_upper" sc="1" dl="0">
+     <f x="8.5" y="24.5" kX="-56.16" kY="-56.16" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="3"/>
+    </b>
+   </mov>
+   <mov name="run" dr="6" to="6" drTW="19" lp="1" twE="NaN">
+    <b name="innerarm_hand" sc="1" dl="0">
+     <f x="-116.2" y="-102.6" kX="-6.76" kY="-6.76" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" dr="3"/>
+     <f x="-79" y="-45.3" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" dr="3"/>
+    </b>
+    <b name="innerarm_lower" sc="1" dl="0">
+     <f x="-65.55" y="-143.75" kX="-15.78" kY="-15.78" cX="1" cY="1" pX="65" pY="16" z="1" dI="0" dr="3"/>
+     <f x="-34.4" y="-93.2" kX="-24.05" kY="-24.05" cX="1" cY="1" pX="65" pY="16" z="1" dI="0" dr="3"/>
+    </b>
+    <b name="innerarm_upper" sc="1" dl="-0.05">
+     <f x="-113.4" y="-174.95" kX="-87.24" kY="-87.25" cX="1" cY="1" pX="58" pY="30" z="2" dI="0" dr="3"/>
+     <f x="-86.15" y="-117.65" kX="-95.26" kY="-95.26" cX="1" cY="1" pX="58" pY="31" z="2" dI="0" dr="3"/>
+    </b>
+    <b name="innerweapon" sc="1" dl="0">
+     <f x="-130.8" y="-94.8" kX="-99.27" kY="-99.27" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" dr="3"/>
+     <f x="-91.95" y="-35.6" kX="-100.52" kY="-100.52" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_upper" sc="1" dl="0">
+     <f x="-12.7" y="-51.4" kX="-76.97" kY="-76.97" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" dr="3"/>
+     <f x="-12.65" y="10.5" kX="81.99" kY="81.99" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_lower" sc="1" dl="-0.1">
+     <f x="101.95" y="-29.7" kX="-64.45" kY="-66.2" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" dr="3"/>
+     <f x="-120.7" y="48" kX="-49.4" kY="-51.15" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_foot" sc="1" dl="0">
+     <f x="171.15" y="0.55" kX="-114.29" kY="-115.81" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" dr="3"/>
+     <f x="-47.15" y="103.1" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" dr="3"/>
+    </b>
+    <b name="head" sc="0.5" dl="-0.1">
+     <f x="-82.95" y="-190" kX="-12.7" kY="-12.7" cX="1" cY="1" pX="55" pY="86" z="7" dI="0" dr="3"/>
+     <f x="-95" y="-110.05" kX="-7.02" kY="-7.02" cX="1" cY="1" pX="52" pY="86" z="7" dI="0" dr="3"/>
+    </b>
+    <b name="upperbody" sc="0.5" dl="0">
+     <f x="-46.8" y="-114.3" kX="-35.58" kY="-35.58" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" dr="3"/>
+     <f x="-46.35" y="-50.2" kX="-45" kY="-45" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_upper" sc="1" dl="0">
+     <f x="-22.1" y="-50.45" kX="38.35" kY="38.34" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" dr="3"/>
+     <f x="-16.35" y="3.45" kX="-108.53" kY="-108.54" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_lower" sc="1" dl="-0.1">
+     <f x="-127.2" y="-4.65" kX="-46.14" kY="-46.14" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" dr="3"/>
+     <f x="106.85" y="34.6" kX="-61.19" kY="-61.19" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_foot" sc="1" dl="0">
+     <f x="-52.3" y="38.95" kX="0.26" kY="0.26" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" dr="3"/>
+     <f x="170.55" y="59.85" kX="-112.04" kY="-112.04" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" dr="3"/>
+    </b>
+    <b name="lowerbody" sc="0.5" dl="0">
+     <f x="-0.8" y="-65.35" kX="-21.03" kY="-21.03" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" dr="3"/>
+     <f x="-1.15" y="-3.25" kX="-29.82" kY="-29.83" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_hand" sc="1" dl="0">
+     <f x="86.65" y="-135.55" kX="-84.99" kY="-84.99" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="3"/>
+     <f x="34.65" y="-34.45" kX="-84.99" kY="-84.99" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_lower" sc="1" dl="0">
+     <f x="28.65" y="-165.4" kX="-84.99" kY="-84.99" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="3"/>
+     <f x="-13.95" y="-76.65" kX="-69.96" kY="-69.96" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_upper" sc="1" dl="-0.05">
+     <f x="-55.35" y="-190" kX="-66.2" kY="-66.2" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="3"/>
+     <f x="-93.9" y="-112.75" kX="-58.68" kY="-58.68" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="3"/>
+    </b>
+   </mov>
+   <mov name="jump" dr="3" to="6" drTW="3" lp="0" twE="NaN">
+    <b name="innerarm_hand" sc="1" dl="0">
+     <f x="-60.7" y="-55.2" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" dr="3"/>
+    </b>
+    <b name="innerarm_lower" sc="1" dl="0">
+     <f x="-16.35" y="-103.05" kX="-24.05" kY="-24.05" cX="1" cY="1" pX="65" pY="16" z="1" dI="0" dr="3"/>
+    </b>
+    <b name="innerarm_upper" sc="1" dl="0">
+     <f x="-68" y="-127.5" kX="-95.26" kY="-95.26" cX="1" cY="1" pX="58" pY="31" z="2" dI="0" dr="3"/>
+    </b>
+    <b name="innerweapon" sc="1" dl="0">
+     <f x="-73.85" y="-45.4" kX="-100.52" kY="-100.52" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_upper" sc="1" dl="0">
+     <f x="13.2" y="-7.55" kX="-17.27" kY="-17.27" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_lower" sc="1" dl="0">
+     <f x="65.5" y="111.4" kX="-22.3" kY="-24.05" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_foot" sc="1" dl="0">
+     <f x="101.4" y="187.2" kX="-59.94" kY="-61.69" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" dr="3"/>
+    </b>
+    <b name="head" sc="1" dl="0">
+     <f x="-48" y="-140" kX="-7.02" kY="-7.02" cX="1" cY="1" pX="56" pY="87" z="7" dI="0" dr="3"/>
+    </b>
+    <b name="upperbody" sc="1" dl="0">
+     <f x="-31.25" y="-58.4" kX="-22.54" kY="-22.54" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_upper" sc="1" dl="0">
+     <f x="-8.55" y="14.15" kX="38.59" kY="38.59" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_lower" sc="1" dl="0">
+     <f x="-111.2" y="64.95" kX="-46.14" kY="-46.14" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_foot" sc="1" dl="0">
+     <f x="-47.5" y="105.25" kX="-67.2" kY="-67.2" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" dr="3"/>
+    </b>
+    <b name="lowerbody" sc="1" dl="0">
+     <f x="-1.1" y="-3.25" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_hand" sc="1" dl="0">
+     <f x="99.55" y="-51.45" kX="-84.99" kY="-84.99" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_lower" sc="1" dl="0">
+     <f x="56.1" y="-94.5" kX="-69.96" kY="-69.96" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_upper" sc="1" dl="0">
+     <f x="-23.7" y="-130.45" kX="-58.68" kY="-58.68" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="3"/>
+    </b>
+   </mov>
+   <mov name="fall" dr="3" to="6" drTW="3" lp="0" twE="NaN">
+    <b name="innerarm_hand" sc="1" dl="0">
+     <f x="-48.75" y="-65.2" kX="-14.78" kY="-14.78" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" dr="3"/>
+    </b>
+    <b name="innerarm_lower" sc="1" dl="0">
+     <f x="-4.4" y="-113.05" kX="-24.05" kY="-24.05" cX="1" cY="1" pX="65" pY="16" z="1" dI="0" dr="3"/>
+    </b>
+    <b name="innerarm_upper" sc="1" dl="0">
+     <f x="-56.05" y="-137.4" kX="-95.26" kY="-95.26" cX="1" cY="1" pX="58" pY="30" z="2" dI="0" dr="3"/>
+    </b>
+    <b name="innerweapon" sc="1" dl="0">
+     <f x="-61.8" y="-55.5" kX="-100.52" kY="-100.52" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_upper" sc="1" dl="0">
+     <f x="-10.15" y="3.55" kX="57.68" kY="57.68" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_lower" sc="1" dl="0">
+     <f x="-94.75" y="84.8" kX="-37.35" kY="-39.1" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" dr="3"/>
+    </b>
+    <b name="innerleg_foot" sc="1" dl="0">
+     <f x="-37.15" y="149.15" kX="-67.21" kY="-68.96" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" dr="3"/>
+    </b>
+    <b name="head" sc="1" dl="0">
+     <f x="-36" y="-153" kX="-7.02" kY="-7.02" cX="1" cY="1" pX="56" pY="85" z="7" dI="0" dr="3"/>
+    </b>
+    <b name="upperbody" sc="1" dl="0">
+     <f x="-19.15" y="-68.4" kX="-22.54" kY="-22.54" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_upper" sc="1" dl="0">
+     <f x="-0.1" y="0" kX="-23.3" kY="-23.3" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_lower" sc="1" dl="0">
+     <f x="-13.2" y="126.3" kX="-1.02" kY="-1.01" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" dr="3"/>
+    </b>
+    <b name="outerleg_foot" sc="1" dl="0">
+     <f x="3.7" y="201.5" kX="-22.04" kY="-22.04" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" dr="3"/>
+    </b>
+    <b name="lowerbody" sc="1" dl="0">
+     <f x="-0.75" y="-3.1" kX="-5.01" kY="-5" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_hand" sc="1" dl="0">
+     <f x="111.65" y="-61.45" kX="-84.99" kY="-84.99" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_lower" sc="1" dl="0">
+     <f x="68.15" y="-104.35" kX="-69.96" kY="-69.96" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="3"/>
+    </b>
+    <b name="outerarm_upper" sc="1" dl="0">
+     <f x="-11.65" y="-140.45" kX="-58.68" kY="-58.68" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="3"/>
+    </b>
+   </mov>
+   <mov name="attack" dr="21" to="6" drTW="21" lp="0" twE="NaN">
+    <b name="innerarm_hand" sc="1" dl="0">
+     <f x="-108.95" y="-209.2" kX="89.27" kY="89.27" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" dr="2"/>
+     <f x="-108.95" y="-209.2" kX="89.27" kY="89.27" cX="1" cY="1" pX="37" pY="15" z="10" dI="0" twE="0" dr="8"/>
+     <f x="-43" y="-9.55" kX="-153.18" kY="-153.18" cX="1" cY="1" pX="37" pY="15" z="10" dI="0" dr="11"/>
+    </b>
+    <b name="innerarm_lower" sc="1" dl="0">
+     <f x="-66.3" y="-159.85" kX="72.22" kY="72.22" cX="1" cY="1" pX="65" pY="16" z="1" dI="0" dr="2"/>
+     <f x="-66.3" y="-159.85" kX="72.22" kY="72.22" cX="1" cY="1" pX="65" pY="16" z="11" dI="0" twE="0" dr="8"/>
+     <f x="-90.05" y="-59.6" kX="-110.22" kY="-110.23" cX="1" cY="1" pX="65" pY="16" z="11" dI="0" dr="11"/>
+    </b>
+    <b name="innerarm_upper" sc="1" dl="0">
+     <f x="-11.9" y="-131.55" kX="71.23" kY="71.23" cX="1" cY="1" pX="58" pY="30" z="2" dI="0" dr="2"/>
+     <f x="-11.9" y="-131.55" kX="71.23" kY="71.23" cX="1" cY="1" pX="58" pY="30" z="0" dI="0" twE="0" dr="8"/>
+     <f x="-53.75" y="-118.25" kX="-21.22" kY="-21.22" cX="1" cY="1" pX="58" pY="30" z="0" dI="0" dr="11"/>
+    </b>
+    <b name="innerweapon" sc="1" dl="0">
+     <f x="-114.75" y="-225.65" kX="-135.94" kY="-135.94" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" dr="2"/>
+     <f x="-114.75" y="-225.65" kX="-135.94" kY="-135.94" cX="1" cY="1" pX="21" pY="51" z="12" dI="0" twE="0" dr="8"/>
+     <f x="-30.05" y="-11" kX="-30.38" kY="-30.38" cX="1" cY="1" pX="22" pY="51" z="12" dI="0" dr="11"/>
+    </b>
+    <b name="innerleg_upper" sc="1" dl="0">
+     <f x="0.1" y="-7.55" kX="-12.94" kY="-12.94" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" dr="2"/>
+     <f x="0.1" y="-7.55" kX="-12.94" kY="-12.94" cX="1" cY="1" pX="42" pY="20" z="1" dI="0" twE="0" dr="8"/>
+     <f x="0.1" y="-7.55" kX="-27.94" kY="-27.94" cX="1" cY="1" pX="42" pY="20" z="1" dI="0" dr="11"/>
+    </b>
+    <b name="innerleg_lower" sc="1" dl="0">
+     <f x="27.15" y="117.05" kX="-9.19" kY="-10.7" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" dr="2"/>
+     <f x="27.15" y="117.05" kX="-9.19" kY="-10.7" cX="1" cY="1" pX="34" pY="24" z="2" dI="0" twE="0" dr="8"/>
+     <f x="79.5" y="100.4" kX="-39.19" kY="-40.69" cX="1" cY="1" pX="34" pY="24" z="2" dI="0" dr="11"/>
+    </b>
+    <b name="innerleg_foot" sc="1" dl="0">
+     <f x="50.9" y="199.2" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" dr="2"/>
+     <f x="50.9" y="199.2" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="3" dI="0" twE="0" dr="8"/>
+     <f x="141.15" y="159.75" kX="-15" kY="-16.51" cX="1" cY="1" pX="64" pY="12" z="3" dI="0" dr="11"/>
+    </b>
+    <b name="head" sc="1" dl="0">
+     <f x="7" y="-146" kX="0.01" kY="0.01" cX="1" cY="1" pX="57" pY="90" z="7" dI="0" dr="2"/>
+     <f x="7" y="-147" kX="0.01" kY="0.01" cX="1" cY="1" pX="57" pY="89" z="4" dI="0" twE="0" dr="8"/>
+     <f x="-36.1" y="-140" kX="-17.43" kY="-17.43" cX="1" cY="1" pX="58" pY="91" z="4" dI="0" dr="11"/>
+    </b>
+    <b name="upperbody" sc="1" dl="0">
+     <f x="-14.05" y="-59.8" kX="2.77" kY="2.76" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" dr="2"/>
+     <f x="-14.05" y="-59.8" kX="2.77" kY="2.76" cX="1" cY="1" pX="45" pY="108" z="5" dI="0" twE="0" dr="8"/>
+     <f x="-31.6" y="-52.35" kX="-14.68" kY="-14.68" cX="1" cY="1" pX="45" pY="108" z="5" dI="0" dr="11"/>
+    </b>
+    <b name="outerleg_upper" sc="1" dl="0">
+     <f x="-8.6" y="2.1" kX="-6.67" kY="-6.66" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" dr="2"/>
+     <f x="-8.6" y="2.1" kX="-6.67" kY="-6.66" cX="1" cY="1" pX="82" pY="25" z="6" dI="0" twE="0" dr="8"/>
+     <f x="-8.6" y="2.1" kX="14.05" kY="14.05" cX="1" cY="1" pX="82" pY="25" z="6" dI="0" dr="11"/>
+    </b>
+    <b name="outerleg_lower" sc="1" dl="0">
+     <f x="-60.85" y="117.45" kX="24.32" kY="24.32" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" dr="2"/>
+     <f x="-60.85" y="117.45" kX="24.32" kY="24.32" cX="1" cY="1" pX="37" pY="24" z="7" dI="0" twE="0" dr="8"/>
+     <f x="-79.85" y="93.55" kX="-20.68" kY="-20.68" cX="1" cY="1" pX="37" pY="24" z="7" dI="0" dr="11"/>
+    </b>
+    <b name="outerleg_foot" sc="1" dl="0">
+     <f x="-77.9" y="194.95" kX="6.3" kY="6.3" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" dr="2"/>
+     <f x="-77.9" y="194.95" kX="6.3" kY="6.3" cX="1" cY="1" pX="63" pY="8" z="8" dI="0" twE="0" dr="8"/>
+     <f x="-26.75" y="166.8" kX="6.3" kY="6.3" cX="1" cY="1" pX="63" pY="8" z="8" dI="0" dr="11"/>
+    </b>
+    <b name="lowerbody" sc="1" dl="0">
+     <f x="1.55" y="0.95" kX="0" kY="0" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" dr="2"/>
+     <f x="1.55" y="0.95" kX="0" kY="0" cX="1" cY="1" pX="57" pY="94" z="9" dI="0" twE="0" dr="8"/>
+     <f x="1.55" y="0.95" kX="-17.45" kY="-17.45" cX="1" cY="1" pX="57" pY="94" z="9" dI="0" dr="11"/>
+    </b>
+    <b name="outerarm_hand" sc="1" dl="0">
+     <f x="39.7" y="12.9" kX="-16.77" kY="-16.77" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="2"/>
+     <f x="39.7" y="12.9" kX="-16.77" kY="-16.77" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" twE="0" dr="8"/>
+     <f x="64.95" y="-45.6" kX="-16.77" kY="-16.77" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="11"/>
+    </b>
+    <b name="outerarm_lower" sc="1" dl="0">
+     <f x="46.6" y="-54" kX="-16.77" kY="-16.77" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="2"/>
+     <f x="46.6" y="-54" kX="-16.77" kY="-16.77" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" twE="0" dr="8"/>
+     <f x="48.9" y="-107.95" kX="-34.22" kY="-34.22" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="11"/>
+    </b>
+    <b name="outerarm_upper" sc="1" dl="0">
+     <f x="16.4" y="-133.9" kX="-11.01" kY="-11.01" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="2"/>
+     <f x="16.4" y="-133.9" kX="-11.01" kY="-11.01" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" twE="0" dr="8"/>
+     <f x="-24.75" y="-132.2" kX="-73.46" kY="-73.46" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="11"/>
+    </b>
+    <f st="0" dr="6"/>
+    <f st="6" dr="14" evt="hitTarget"/>
+    <f st="20" dr="1" mov="ready"/>
+   </mov>
+   <mov name="hit" dr="4" to="6" drTW="4" lp="0" twE="NaN">
+    <b name="innerarm_hand" sc="1" dl="0">
+     <f x="-16.35" y="-47.25" kX="3.45" kY="3.46" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="-16.35" y="-47.25" kX="3.45" kY="3.46" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" dr="2"/>
+    </b>
+    <b name="innerarm_lower" sc="1" dl="0">
+     <f x="40.85" y="-78.65" kX="-5.81" kY="-5.82" cX="1" cY="1" pX="66" pY="16" z="1" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="40.85" y="-78.65" kX="-5.81" kY="-5.82" cX="1" cY="1" pX="66" pY="16" z="1" dI="0" dr="2"/>
+    </b>
+    <b name="innerarm_upper" sc="1" dl="0">
+     <f x="76.05" y="-128.5" kX="-11.59" kY="-11.59" cX="1" cY="1" pX="58" pY="31" z="2" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="76.05" y="-128.5" kX="-11.59" kY="-11.59" cX="1" cY="1" pX="58" pY="31" z="2" dI="0" dr="2"/>
+    </b>
+    <b name="innerweapon" sc="1" dl="0">
+     <f x="-32.2" y="-41.1" kX="-22.24" kY="-22.25" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" twE="0" dr="2"/>
+     <f x="-32.2" y="-41.1" kX="-22.24" kY="-22.25" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" dr="2"/>
+    </b>
+    <b name="innerleg_upper" sc="1" dl="0">
+     <f x="54.75" y="-17.3" kX="12.01" kY="12.01" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="54.75" y="-17.3" kX="12.01" kY="12.01" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+    </b>
+    <b name="innerleg_lower" sc="1" dl="0">
+     <f x="35.7" y="112.45" kX="6.27" kY="4.76" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="35.7" y="112.45" kX="6.27" kY="4.76" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" dr="2"/>
+    </b>
+    <b name="innerleg_foot" sc="1" dl="0">
+     <f x="34.1" y="189.45" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="34.1" y="189.45" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" dr="2"/>
+    </b>
+    <b name="head" sc="1" dl="0">
+     <f x="103" y="-135" kX="63.24" kY="63.24" cX="1" cY="1" pX="56" pY="83" z="7" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="103" y="-135" kX="63.24" kY="63.24" cX="1" cY="1" pX="56" pY="83" z="7" dI="0" dr="2"/>
+    </b>
+    <b name="upperbody" sc="1" dl="0">
+     <f x="60.4" y="-67" kX="18.24" kY="18.24" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="60.4" y="-67" kX="18.24" kY="18.24" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" dr="2"/>
+    </b>
+    <b name="outerleg_upper" sc="1" dl="0">
+     <f x="53.1" y="-14.15" kX="-17.92" kY="-17.91" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="53.1" y="-14.15" kX="-17.92" kY="-17.91" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" dr="2"/>
+    </b>
+    <b name="outerleg_lower" sc="1" dl="0">
+     <f x="17.1" y="108.9" kX="35.5" kY="35.5" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="17.1" y="108.9" kX="35.5" kY="35.5" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" dr="2"/>
+    </b>
+    <b name="outerleg_foot" sc="1" dl="0">
+     <f x="-15.3" y="181.95" kX="5.5" kY="5.5" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="-15.3" y="181.95" kX="5.5" kY="5.5" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" dr="2"/>
+    </b>
+    <b name="lowerbody" sc="1" dl="0">
+     <f x="56.35" y="-4.75" kX="18.24" kY="18.24" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="56.35" y="-4.75" kX="18.24" kY="18.24" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" dr="2"/>
+    </b>
+    <b name="outerarm_hand" sc="1" dl="0">
+     <f x="15.15" y="-0.3" kX="15.22" kY="15.22" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="15.15" y="-0.3" kX="15.22" kY="15.22" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="2"/>
+    </b>
+    <b name="outerarm_lower" sc="1" dl="0">
+     <f x="71.7" y="-51" kX="33.45" kY="33.46" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="71.7" y="-51" kX="33.45" kY="33.46" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="2"/>
+    </b>
+    <b name="outerarm_upper" sc="1" dl="0">
+     <f x="105.9" y="-129.05" kX="33.45" kY="33.46" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="105.9" y="-129.05" kX="33.45" kY="33.46" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="2"/>
+    </b>
+    <f st="0" dr="3"/>
+    <f st="3" dr="1" mov="ready"/>
+   </mov>
+  </animation>
+ </animations>
+</skeleton>

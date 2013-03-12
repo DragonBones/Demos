@@ -10,8 +10,8 @@
 	{
 		public function Example_Dragon_DemoEntry()
 		{
-			var _starling:Starling = new Starling(Dragon_SwitchClothes, stage);
-			//var _starling:Starling = new Starling(Dragon_ChaseStarling, stage);
+			//var _starling:Starling = new Starling(Dragon_SwitchClothes, stage);
+			var _starling:Starling = new Starling(Dragon_ChaseStarling, stage);
 			
 			//_starling.antiAliasing = 1;
 			_starling.showStats = true;

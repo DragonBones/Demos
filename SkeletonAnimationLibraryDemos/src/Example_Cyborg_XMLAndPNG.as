@@ -69,19 +69,22 @@
 }
 
 import flash.geom.Point;
-import flash.events.Event;
 
 import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
 import starling.events.TouchEvent;
 import starling.text.TextField;
+import starling.textures.Texture;
 
 import dragonBones.Armature;
 import dragonBones.Bone;
+import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
 import dragonBones.objects.XMLDataParser;
 
 import dragonBones.events.AnimationEvent;
+import dragonBones.objects.SkeletonData;
+import dragonBones.textures.StarlingTextureAtlas;
 
 class StarlingGame extends Sprite {
 	[Embed(source = "../assets/Cyborg_output/skeleton.xml", mimeType = "application/octet-stream")]
@@ -90,7 +93,7 @@ class StarlingGame extends Sprite {
 	[Embed(source = "../assets/Cyborg_output/texture.xml", mimeType = "application/octet-stream")]
 	public static const TextureXMLData:Class;
 	
-	[Embed(source = "../assets/Cyborg_output/texture.png", mimeType = "application/octet-stream")]
+	[Embed(source = "../assets/Cyborg_output/texture.png")]
 	public static const TextureData:Class;
 
 	public static var instance:StarlingGame;
@@ -105,17 +108,23 @@ class StarlingGame extends Sprite {
 		
 		factory = new StarlingFactory();
 		
-		factory.addEventListener(Event.COMPLETE, textureCompleteHandler);
-		factory.skeletonData = XMLDataParser.parseSkeletonData(XML(new SkeletonXMLData()));
-		factory.textureAtlasData = XMLDataParser.parseTextureAtlasData(XML(new TextureXMLData()), new TextureData());
-	}
-
-	private function textureCompleteHandler(e:Event):void {
+		//
+		var skeletonData:SkeletonData = XMLDataParser.parseSkeletonData(XML(new SkeletonXMLData()));
+		factory.addSkeletonData(skeletonData);
+		
+		//
+		var textureAtlas:StarlingTextureAtlas = new StarlingTextureAtlas(
+			Texture.fromBitmapData(new TextureData().bitmapData), 
+			XML(new TextureXMLData())
+		);
+		factory.addTextureAtlas(textureAtlas);
+		
 		armature = factory.buildArmature("cyborg");
 		armatureClip = armature.display as Sprite;
 		armatureClip.x = 400;
 		armatureClip.y = 500;
 		addChild(armatureClip);
+		WorldClock.clock.add(armature);
 		changeWeapon();
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		
@@ -137,7 +146,7 @@ class StarlingGame extends Sprite {
 		}
 		updateSpeed();
 		updateWeapon();
-		armature.update();
+		WorldClock.clock.advanceTime(-1);
 	}
 
 	private var mouseX:Number = 0;

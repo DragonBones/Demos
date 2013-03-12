@@ -26,6 +26,7 @@
 		}
 
 		private function starlingInit():void {
+			Starling.handleLostContext = true;
 			var _starling:Starling = new Starling(StarlingGame, stage);
 			//_starling.antiAliasing = 1;
 			_starling.showStats = true;
@@ -39,6 +40,7 @@ import starling.events.EnterFrameEvent;
 import starling.text.TextField;
 
 import dragonBones.Armature;
+import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
 import flash.events.Event;
 
@@ -68,6 +70,7 @@ class StarlingGame extends Sprite {
 		_display.y = 300;
 		addChild(_display);
 		armature.animation.gotoAndPlay("stop");
+		WorldClock.clock.add(armature);
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		
 		textField = new TextField(700, 30, "Click mouse to switch robot's postures. Scroll mouse wheel to change speed.", "Verdana", 16, 0, true);
@@ -98,6 +101,6 @@ class StarlingGame extends Sprite {
 	}
 
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {
-		armature.update();
+		WorldClock.clock.advanceTime(-1);
 	}
 }

@@ -78,6 +78,7 @@ import starling.events.TouchEvent;
 import starling.text.TextField;
 
 import dragonBones.Armature;
+import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
 
 class StarlingGame extends Sprite {
@@ -85,12 +86,11 @@ class StarlingGame extends Sprite {
 	private static const ResourcesData:Class;
 	
 	private var factory:StarlingFactory;
-	private var allArmatureNameList:Vector.<String>;
 	private var armatures:Array;
 	private var instruction_txt:TextField;
 	private var mResultText:TextField;
 	
-	private const WAIT_FRAME:int = 20;
+	private const WAIT_FRAME:int = 10;
 	private const PADDING:int = 60;
 	
 	private var elapsedTime:Number = 0;
@@ -113,7 +113,6 @@ class StarlingGame extends Sprite {
 		stageWidth = stage.stageWidth;
 		stageHeight = stage.stageHeight;
 		
-		allArmatureNameList = factory.skeletonData.animationList;
 		armatures = [];
 		Example_PerformanceTesing.changeHandler = changeNum;
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
@@ -125,7 +124,7 @@ class StarlingGame extends Sprite {
 		instruction_txt.vAlign = "top";
 		addChild(instruction_txt);
 		
-		mResultText = new TextField(200, 100, "");
+		mResultText = new TextField(300, 100, "");
 		mResultText.fontSize = 20;
 		mResultText.color = 0xffff0000;
 		mResultText.x = stageWidth/2 - mResultText.width / 2;
@@ -147,6 +146,7 @@ class StarlingGame extends Sprite {
 		{
 			for (i = armatures.length - 1; i >= num; i--)
 			{
+				WorldClock.clock.remove(armatures[i]);
 				armatures[i].dispose();
 				removeChild(armatures[i].display as Sprite);
 			}
@@ -190,6 +190,8 @@ class StarlingGame extends Sprite {
 		_armature.animation.gotoAndPlay("walk");
 		addChild(_armature.display as Sprite);
 		armatures.push(_armature);
+		WorldClock.clock.add(_armature);
+		
 	}
 	
 	private function removeLastObject():void
@@ -198,6 +200,7 @@ class StarlingGame extends Sprite {
 		{
 			return;
 		}
+		WorldClock.clock.remove(armatures[armatures.length-1]);
 		armatures[armatures.length-1].dispose();
 		removeChild(armatures[armatures.length-1].display as Sprite);
 		armatures.length--;
@@ -208,6 +211,7 @@ class StarlingGame extends Sprite {
 		var len:int = armatures.length;
 		for (var i:int = 0; i < len; i++)
 		{
+			WorldClock.clock.remove(armatures[i]);
 			armatures[i].dispose();
 			removeChild(armatures[i].display as Sprite);
 		}
@@ -216,9 +220,7 @@ class StarlingGame extends Sprite {
 	
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void
 	{
-		for each(var _armature:Armature in armatures) {
-			_armature.update();
-		}
+		WorldClock.clock.advanceTime(-1);
 		
 		elapsedTime += _e.passedTime;
 		elapsedFrame++;
@@ -243,7 +245,7 @@ class StarlingGame extends Sprite {
 					}
 					isFailed = true;
 					
-					if (failCount == 5)
+					if (failCount == 10)
 						benchmarkComplete();
 				}
 			}
@@ -254,7 +256,7 @@ class StarlingGame extends Sprite {
 	private function benchmarkComplete():void
 	{
 		isTesting = false;
-		var desc:String = "Result: " + armatures.length + " objects with 60fps";
+		var desc:String = "Result: " + armatures.length + " armatures contains " +  String(armatures.length * 18) +  " bones with 60fps";
 		clearAllObjects();
 		
 		mResultText.text = desc;

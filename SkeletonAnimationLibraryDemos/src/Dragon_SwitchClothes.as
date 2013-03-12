@@ -1,6 +1,7 @@
 ﻿package {
 	import dragonBones.Armature;
 	import dragonBones.Bone;
+	import dragonBones.animation.WorldClock;
 	import dragonBones.factorys.StarlingFactory;
 
 	import flash.ui.Keyboard;
@@ -43,6 +44,7 @@
 			armatureClip.x = 400;
 			armatureClip.y = 550;
 			addChild(armatureClip);
+			WorldClock.clock.add(armature);
 			updateBehavior();
 			addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 
@@ -102,7 +104,7 @@
 			}
 			//Get image instance from texture data.
 			var _textureName:String = textures[textureIndex];
-			var _image:Image = StarlingFactory.getTextureDisplay(factory.textureAtlasData,_textureName);
+			var _image:Image = factory.getTextureDisplay(_textureName) as Image;
 			//Replace bone.display by the new texture. Don't forget to dispose.
 			var _bone:Bone = armature.getBone("clothes");
 			_bone.display.dispose();
@@ -111,7 +113,7 @@
 
 		private function onEnterFrameHandler(_e:EnterFrameEvent):void {
 			updateMove();
-			armature.update();
+			WorldClock.clock.advanceTime(-1);
 		}
 
 		private function updateBehavior():void {
