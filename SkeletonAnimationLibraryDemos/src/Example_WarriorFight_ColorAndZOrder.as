@@ -4,9 +4,9 @@
 	import starling.core.Starling;
 
     [SWF(width="800", height="600", frameRate="60", backgroundColor="#cccccc")]
-	public class Example_WarriorFight extends flash.display.Sprite {
+	public class Example_WarriorFight_ColorAndZOrder extends flash.display.Sprite {
 
-		public function Example_WarriorFight() {
+		public function Example_WarriorFight_ColorAndZOrder() {
 			starlingInit();
 		}
 
@@ -25,6 +25,7 @@ import flash.events.Event;
 import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
 import starling.textures.Texture;
+import starling.text.TextField;
 
 import dragonBones.Armature;
 import dragonBones.animation.WorldClock;
@@ -49,7 +50,8 @@ class StarlingGame extends Sprite {
 	
 	private var armature1:Armature;
 	private var armature2:Armature;
-
+	private var textField:TextField;
+	
 	public function StarlingGame() {
 		factory = new StarlingFactory();
 		
@@ -78,18 +80,23 @@ class StarlingGame extends Sprite {
 		_display = armature1.display as Sprite;
 		_display.scaleX = -1;
 		_display.x = 200;
-		_display.y = 300;
+		_display.y = 350;
 		addChild(_display);
 		
 		_display = armature2.display as Sprite;
 		_display.x = 600;
-		_display.y = 300;
+		_display.y = 350;
 		addChild(_display);
 		
 		WorldClock.clock.add(armature1);
 		WorldClock.clock.add(armature2);
 		
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
+		/*
+		textField = new TextField(700, 30, "Two arriors attack each other. Watch the sword's display Z-Order.", "Verdana", 16, 0, true);
+		textField.x = 75;
+		textField.y = 5;
+		addChild(textField);*/
 	}
 
 	private function animationEventHandler(e:AnimationEvent):void 

@@ -486,89 +486,105 @@
     <f st="6" dr="14" evt="hitTarget"/>
     <f st="20" dr="1" mov="ready"/>
    </mov>
-   <mov name="hit" dr="8" to="6" drTW="8" lp="0" twE="NaN">
+   <mov name="hit" dr="4" to="6" drTW="4" lp="0" twE="NaN">
     <b name="innerarm_hand" sc="1" dl="0">
-     <f x="-16.35" y="-47.25" kX="3.45" kY="3.46" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="-16.35" y="-47.25" kX="3.45" kY="3.46" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="-16.35" y="-47.25" kX="3.45" kY="3.46" cX="1" cY="1" pX="37" pY="15" z="0" dI="0" dr="2"/>
     </b>
     <b name="innerarm_lower" sc="1" dl="0">
-     <f x="40.85" y="-78.65" kX="-5.81" kY="-5.82" cX="1" cY="1" pX="66" pY="16" z="1" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="40.85" y="-78.65" kX="-5.81" kY="-5.82" cX="1" cY="1" pX="66" pY="16" z="1" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="40.85" y="-78.65" kX="-5.81" kY="-5.82" cX="1" cY="1" pX="66" pY="16" z="1" dI="0" dr="2"/>
     </b>
     <b name="innerarm_upper" sc="1" dl="0">
-     <f x="76.05" y="-128.5" kX="-11.59" kY="-11.59" cX="1" cY="1" pX="58" pY="31" z="2" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="76.05" y="-128.5" kX="-11.59" kY="-11.59" cX="1" cY="1" pX="58" pY="31" z="2" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="76.05" y="-128.5" kX="-11.59" kY="-11.59" cX="1" cY="1" pX="58" pY="31" z="2" dI="0" dr="2"/>
     </b>
     <b name="innerweapon" sc="1" dl="0">
-     <f x="-32.2" y="-41.1" kX="-22.24" kY="-22.25" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
-     </f>
+     <f x="-32.2" y="-41.1" kX="-22.24" kY="-22.25" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" twE="0" dr="2"/>
+     <f x="-32.2" y="-41.1" kX="-22.24" kY="-22.25" cX="1" cY="1" pX="21" pY="51" z="3" dI="0" dr="2"/>
     </b>
     <b name="innerleg_upper" sc="1" dl="0">
-     <f x="54.75" y="-17.3" kX="12.01" kY="12.01" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="54.75" y="-17.3" kX="12.01" kY="12.01" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     </f>
+     <f x="54.75" y="-17.3" kX="12.01" kY="12.01" cX="1" cY="1" pX="42" pY="20" z="4" dI="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
     </b>
     <b name="innerleg_lower" sc="1" dl="0">
-     <f x="35.7" y="112.45" kX="6.27" kY="4.76" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="35.7" y="112.45" kX="6.27" kY="4.76" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="35.7" y="112.45" kX="6.27" kY="4.76" cX="1" cY="1" pX="34" pY="24" z="5" dI="0" dr="2"/>
     </b>
     <b name="innerleg_foot" sc="1" dl="0">
-     <f x="34.1" y="189.45" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="34.1" y="189.45" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="34.1" y="189.45" kX="0" kY="-1.51" cX="1" cY="1" pX="64" pY="12" z="6" dI="0" dr="2"/>
     </b>
     <b name="head" sc="1" dl="0">
-     <f x="103" y="-135" kX="63.24" kY="63.24" cX="1" cY="1" pX="56" pY="83" z="7" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="103" y="-135" kX="63.24" kY="63.24" cX="1" cY="1" pX="56" pY="83" z="7" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="103" y="-135" kX="63.24" kY="63.24" cX="1" cY="1" pX="56" pY="83" z="7" dI="0" dr="2"/>
     </b>
     <b name="upperbody" sc="1" dl="0">
-     <f x="60.4" y="-67" kX="18.24" kY="18.24" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="60.4" y="-67" kX="18.24" kY="18.24" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="60.4" y="-67" kX="18.24" kY="18.24" cX="1" cY="1" pX="45" pY="108" z="8" dI="0" dr="2"/>
     </b>
     <b name="outerleg_upper" sc="1" dl="0">
-     <f x="53.1" y="-14.15" kX="-17.92" kY="-17.91" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="53.1" y="-14.15" kX="-17.92" kY="-17.91" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="53.1" y="-14.15" kX="-17.92" kY="-17.91" cX="1" cY="1" pX="82" pY="25" z="9" dI="0" dr="2"/>
     </b>
     <b name="outerleg_lower" sc="1" dl="0">
-     <f x="17.1" y="108.9" kX="35.5" kY="35.5" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="17.1" y="108.9" kX="35.5" kY="35.5" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="17.1" y="108.9" kX="35.5" kY="35.5" cX="1" cY="1" pX="37" pY="24" z="10" dI="0" dr="2"/>
     </b>
     <b name="outerleg_foot" sc="1" dl="0">
-     <f x="-15.3" y="181.95" kX="5.5" kY="5.5" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="-15.3" y="181.95" kX="5.5" kY="5.5" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="-15.3" y="181.95" kX="5.5" kY="5.5" cX="1" cY="1" pX="63" pY="8" z="11" dI="0" dr="2"/>
     </b>
     <b name="lowerbody" sc="1" dl="0">
-     <f x="56.35" y="-4.75" kX="18.24" kY="18.24" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="56.35" y="-4.75" kX="18.24" kY="18.24" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="56.35" y="-4.75" kX="18.24" kY="18.24" cX="1" cY="1" pX="57" pY="94" z="12" dI="0" dr="2"/>
     </b>
     <b name="outerarm_hand" sc="1" dl="0">
-     <f x="15.15" y="-0.3" kX="15.22" kY="15.22" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="15.15" y="-0.3" kX="15.22" kY="15.22" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="15.15" y="-0.3" kX="15.22" kY="15.22" cX="1" cY="1" pX="32" pY="10" z="13" dI="0" dr="2"/>
     </b>
     <b name="outerarm_lower" sc="1" dl="0">
-     <f x="71.7" y="-51" kX="33.45" kY="33.46" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="71.7" y="-51" kX="33.45" kY="33.46" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="71.7" y="-51" kX="33.45" kY="33.46" cX="1" cY="1" pX="38" pY="12" z="14" dI="0" dr="2"/>
     </b>
     <b name="outerarm_upper" sc="1" dl="0">
-     <f x="105.9" y="-129.05" kX="33.45" kY="33.46" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="8">
-      <colorTransform a="0" r="255" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
+     <f x="105.9" y="-129.05" kX="33.45" kY="33.46" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" twE="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="100" rM="100" gM="0" bM="0"/>
      </f>
+     <f x="105.9" y="-129.05" kX="33.45" kY="33.46" cX="1" cY="1" pX="30" pY="21" z="15" dI="0" dr="2"/>
     </b>
-    <f st="0" dr="7"/>
-    <f st="7" dr="1" mov="ready"/>
+    <f st="0" dr="3"/>
+    <f st="3" dr="1" mov="ready"/>
    </mov>
   </animation>
  </animations>

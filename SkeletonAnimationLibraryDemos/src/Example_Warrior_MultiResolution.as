@@ -45,6 +45,7 @@ import starling.events.EnterFrameEvent;
 import starling.events.TouchEvent;
 import starling.textures.Texture;
 import starling.textures.TextureAtlas;
+import starling.text.TextField;
 
 import dragonBones.Armature;
 import dragonBones.animation.WorldClock;
@@ -77,6 +78,7 @@ class StarlingGame extends Sprite {
 	private var factory:StarlingFactory;
 	private var armatures:Vector.<Armature>;
 	private var currentMovementIndex:int = 0;
+	private var textField:TextField;
 	
 	public function StarlingGame() {
 		instance = this;
@@ -148,6 +150,11 @@ class StarlingGame extends Sprite {
 		changeMovement();
 		
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
+		
+		textField = new TextField(700, 30, "Multi-Resolution support. Click mouse to switch animation", "Verdana", 16, 0, true);
+		textField.x = 75;
+		textField.y = 5;
+		addChild(textField);
 	}
 
 	public function changeMovement():void 
