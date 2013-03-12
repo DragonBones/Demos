@@ -87,8 +87,8 @@ class StarlingGame extends Sprite {
 		armatureClip.x = 400;
 		armatureClip.y = 400;
 		addChild(armatureClip);
-		WorldClock.clock.add(armature);
 		updateMovement();
+		WorldClock.clock.add(armature);
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		
 		textField = new TextField(700, 30, "Press A/D to lean forward/backward.", "Verdana", 16, 0, true)

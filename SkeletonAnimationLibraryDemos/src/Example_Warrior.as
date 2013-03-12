@@ -52,16 +52,16 @@ class StarlingGame extends Sprite {
 	[Embed(source = "../assets/Warrior_output/texture.xml", mimeType = "application/octet-stream")]
 	public static const WarriorTextureXMLData:Class;
 	
-	[Embed(source = "../assets/Warrior_output/texture_sd@0.3.xml", mimeType = "application/octet-stream")]
+	[Embed(source = "../assets/Warrior_output/texture@0.3x.xml", mimeType = "application/octet-stream")]
 	public static const WarriorTextureXMLSD2Data:Class;
 	
 	[Embed(source = "../assets/Warrior_output/texture.png")]
 	public static const WarriorTextureHDData:Class;
 	
-	[Embed(source = "../assets/Warrior_output/texture_sd@0.5x.png")]
+	[Embed(source = "../assets/Warrior_output/texture@0.5x.png")]
 	public static const WarriorTextureSD1Data:Class;
 	
-	[Embed(source = "../assets/Warrior_output/texture_sd@0.3x.png")]
+	[Embed(source = "../assets/Warrior_output/texture@0.3x.png")]
 	public static const WarriorTextureSD2Data:Class;
 
 	public static var instance:StarlingGame;

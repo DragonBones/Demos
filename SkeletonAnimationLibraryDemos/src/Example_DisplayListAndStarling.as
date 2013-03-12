@@ -10,7 +10,7 @@
 
     [SWF(width="800", height="600", frameRate="30", backgroundColor="#cccccc")]
 	public class Example_DisplayListAndStarling extends flash.display.Sprite {
-		[Embed(source = "../assets/Knight_output.png", mimeType = "application/octet-stream")]
+		[Embed(source = "../assets/Knight_output.swf", mimeType = "application/octet-stream")]
 		public static const KnightData:Class;
 
 		[Embed(source = "../assets/Cyborg_output.swf", mimeType = "application/octet-stream")]
