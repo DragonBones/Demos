@@ -1,13 +1,19 @@
 ﻿package  {
+	import flash.display.Stage;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 
 	import starling.core.Starling;
 
     [SWF(width="800", height="600", frameRate="60", backgroundColor="#cccccc")]
-	public class Example_Warrior extends flash.display.Sprite {
-
-		public function Example_Warrior() {
+	public class Example_Warrior_MultiResolution extends flash.display.Sprite 
+	{
+		[Embed(source = "../assets/Warrior_output/texture.png")]
+		public static const WarriorTextureHDData:Class;
+	
+		public var myStage:Stage;
+		public function Example_Warrior_MultiResolution()
+		{
 			starlingInit();
 			stage.addEventListener(MouseEvent.CLICK, mouseHandler);
 		}
@@ -21,8 +27,10 @@
 			}
 		}
 
-		private function starlingInit():void {
-			var _starling:Starling = new Starling(StarlingGame, stage);
+		private function starlingInit():void 
+		{
+			myStage = (stage!= null)? stage : this.parent.stage;
+			var _starling:Starling = new Starling(StarlingGame, myStage);
 			//_starling.antiAliasing = 1;
 			_starling.showStats = true;
 			_starling.start();
@@ -68,7 +76,8 @@ class StarlingGame extends Sprite {
 
 	private var factory:StarlingFactory;
 	private var armatures:Vector.<Armature>;
-
+	private var currentMovementIndex:int = 0;
+	
 	public function StarlingGame() {
 		instance = this;
 		
@@ -80,7 +89,6 @@ class StarlingGame extends Sprite {
 		var skeletonData:SkeletonData = XMLDataParser.parseSkeletonData(XML(new WarriorSkeletonXMLData()));
 		factory.addSkeletonData(skeletonData, "warrior");
 		
-		//StarlingTextureAtlas 继承自 TextureAtlas
 		var textureAtlas:TextureAtlas;
 		
 		//HD
@@ -115,7 +123,7 @@ class StarlingGame extends Sprite {
 		var armature:Armature;
 		
 		armature = factory.buildArmature("warrior", null, "warrior", "warriorSD2");
-		armature.display.x = 200;
+		armature.display.x = 100;
 		armature.display.y = 300;
 		armature.display.scaleX = armature.display.scaleY = 0.3;
 		addChild(armature.display as Sprite);
@@ -123,7 +131,7 @@ class StarlingGame extends Sprite {
 		armatures.push(armature);
 		
 		armature = factory.buildArmature("warrior", null, "warrior", "warriorSD1");
-		armature.display.x = 320;
+		armature.display.x = 270;
 		armature.display.y = 300;
 		armature.display.scaleX = armature.display.scaleY = 0.5;
 		addChild(armature.display as Sprite);
@@ -145,14 +153,11 @@ class StarlingGame extends Sprite {
 	public function changeMovement():void 
 	{
 		var armature:Armature = armatures[0];
-		do{
-			var _movement:String = armature.animation.movementList[int(Math.random() * armature.animation.movementList.length)];
-		}while (_movement == armature.animation.movementID);
-		
-		for each(armature in armatures)
-		{
+		var _movement:String = armature.animation.movementList[currentMovementIndex % armature.animation.movementList.length];
+		for each(armature in armatures){
 			armature.animation.gotoAndPlay(_movement);
 		}
+		currentMovementIndex++;
 	}
 
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {

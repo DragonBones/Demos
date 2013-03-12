@@ -90,7 +90,7 @@ class StarlingGame extends Sprite {
 	private var instruction_txt:TextField;
 	private var mResultText:TextField;
 	
-	private const WAIT_FRAME:int = 20;
+	private const WAIT_FRAME:int = 10;
 	private const PADDING:int = 60;
 	
 	private var elapsedTime:Number = 0;
@@ -124,7 +124,7 @@ class StarlingGame extends Sprite {
 		instruction_txt.vAlign = "top";
 		addChild(instruction_txt);
 		
-		mResultText = new TextField(200, 100, "");
+		mResultText = new TextField(300, 100, "");
 		mResultText.fontSize = 20;
 		mResultText.color = 0xffff0000;
 		mResultText.x = stageWidth/2 - mResultText.width / 2;
@@ -245,7 +245,7 @@ class StarlingGame extends Sprite {
 					}
 					isFailed = true;
 					
-					if (failCount == 5)
+					if (failCount == 10)
 						benchmarkComplete();
 				}
 			}
@@ -256,7 +256,7 @@ class StarlingGame extends Sprite {
 	private function benchmarkComplete():void
 	{
 		isTesting = false;
-		var desc:String = "Result: " + armatures.length + " objects with 60fps";
+		var desc:String = "Result: " + armatures.length + " armatures contains " +  String(armatures.length * 18) +  " bones with 60fps";
 		clearAllObjects();
 		
 		mResultText.text = desc;
