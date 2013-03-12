@@ -26,4 +26,4 @@ Following steps show you how to use LibraryDemos:
 
 **All things you need to download can be found [here](http://dragonbones.github.com/download.html)**  
 
-Copyright 2012 the DragonBones Team
+Copyright 2012-2013 the DragonBones Team
