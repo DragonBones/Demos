@@ -119,9 +119,14 @@ class StarlingGame extends Sprite {
 	}
 
 	private function onMouseMoveHandler(_e:TouchEvent):void {
-		var _p:Point = _e.getTouch(stage).getLocation(stage);
-		mouseX = _p.x;
-		mouseY = _p.y;
+		try
+		{
+			var _p:Point = _e.getTouch(stage).getLocation(stage);
+			mouseX = _p.x;
+			mouseY = _p.y;
+		}
+		catch(e:Error)
+		{}
 	}
 
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {
