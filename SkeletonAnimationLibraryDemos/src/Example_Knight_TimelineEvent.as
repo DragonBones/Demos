@@ -24,6 +24,8 @@
 import flash.geom.Point;
 import flash.events.Event;
 
+import starling.core.Starling;
+import starling.textures.Texture;
 import starling.display.Image;
 import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
@@ -34,10 +36,14 @@ import starling.events.TouchPhase;
 
 import starling.text.TextField;
 
+import starling.extensions.PDParticleSystem;
+
 import dragonBones.Armature;
 import dragonBones.Bone;
 import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
+
+import dragonBones.display.StarlingDisplayBridge;
 
 import dragonBones.events.AnimationEvent;
 import dragonBones.events.FrameEvent;
@@ -46,6 +52,12 @@ class StarlingGame extends Sprite
 {
 	[Embed(source = "../assets/Knight_output.swf", mimeType = "application/octet-stream")]
 	public static const ResourcesData:Class;
+	
+	[Embed(source = "../assets/particles/particle.pex", mimeType = "application/octet-stream")]
+	private static const ParticleCFG:Class;
+ 
+	[Embed(source = "../assets/particles/texture.png")]
+	private static const ParticleImage:Class;
 
 	private var _factory:StarlingFactory;
 	private var _armature:Armature;
@@ -78,6 +90,8 @@ class StarlingGame extends Sprite
 		_arm.childArmature.addEventListener(AnimationEvent.COMPLETE, armMovementHandler);
 		_arm.childArmature.addEventListener(FrameEvent.MOVEMENT_FRAME_EVENT, armFrameEventHandler);
 		
+		initParticles();
+		
 		this.addEventListener(EnterFrameEvent.ENTER_FRAME, enterFrameHandler);
 
 		stage.addEventListener(KeyboardEvent.KEY_DOWN, keyEventHandler);
@@ -89,6 +103,24 @@ class StarlingGame extends Sprite
 		_textField.x = 60;
 		_textField.y = 5;
 		this.addChild(_textField);
+	}
+	
+	private function initParticles():void
+	{
+		var exhaust:PDParticleSystem = new PDParticleSystem(new XML(new ParticleCFG()), Texture.fromBitmap(new ParticleImage()));
+		
+		
+		var particleBone:Bone = new Bone(new StarlingDisplayBridge());
+		particleBone.display = exhaust;
+		var horseHead:Bone = _armature.getBone("horseHead");
+		
+		var horseEye:Bone = horseHead.childArmature.getBone("eye");
+		exhaust.emitterX = horseEye.global.x;
+		exhaust.emitterY = horseEye.global.y;
+		
+		horseHead.addChild(particleBone);
+		exhaust.start();
+		Starling.juggler.add(exhaust);
 	}
 
 	private function enterFrameHandler(e:EnterFrameEvent):void 
@@ -155,7 +187,7 @@ class StarlingGame extends Sprite
 	private var _speedX:Number = 0;
 	private var _speedY:Number = 0;
 
-	public function move(dir:int):void 
+	private function move(dir:int):void 
 	{
 		if (_isLeftDown && _isRightDown) 
 		{
@@ -181,7 +213,7 @@ class StarlingGame extends Sprite
 		updateMovement();
 	}
 
-	public function jump():void 
+	private function jump():void 
 	{
 		if (_isJumping) 
 		{
@@ -198,7 +230,7 @@ class StarlingGame extends Sprite
 	private const BOW:String = "bow";
 	private const WEAPON_NAMES:Array = [SWORD, PIKE, AXE, BOW];
 	private var _weaponID:int = 0;
-	public function changeWeapon():void 
+	private function changeWeapon():void 
 	{
 		_weaponID ++;
 		if (_weaponID >= 4) 
@@ -250,7 +282,7 @@ class StarlingGame extends Sprite
 	private var _isAttacking:Boolean;
 	private var _isComboAttack:Boolean;
 	private var _hitCount:uint = 1;
-	public function attack():void 
+	private function attack():void 
 	{
 		if (_isAttacking) 
 		{
