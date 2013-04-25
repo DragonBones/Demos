@@ -247,8 +247,8 @@ class StarlingGame extends Sprite {
 
 	private function updateWeapon():void {
 		face = mouseX > armatureClip.x?1: -1;
-		if (armatureClip.scaleX != face) {
-			armatureClip.scaleX = face;
+		if (armatureClip.scaleX * face < 0) {
+			armatureClip.scaleX *= -1;
 			updateMovement();
 		}
 
