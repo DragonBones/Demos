@@ -118,6 +118,8 @@ class StarlingGame extends Sprite
 		exhaust.emitterX = horseEye.global.x;
 		exhaust.emitterY = horseEye.global.y;
 		
+		particleBone.origin.z = horseHead.origin.z + 0.01;
+		
 		horseHead.addChild(particleBone);
 		exhaust.start();
 		Starling.juggler.add(exhaust);
