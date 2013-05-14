@@ -264,15 +264,22 @@ class StarlingGame extends Sprite
 			case PIKE:
 			case AXE:
 				var weapon:Bone = _arm.childArmature.getBone("weapon");
+				
+				weapon.display.dispose();
 				weapon.display = _factory.getTextureDisplay("knightFolder/" + weaponName + "_" + (weaponLevel + 1)) as Image;
 				break;
 			case BOW:
 				var bow:Bone = _arm.childArmature.getBone("bow");
+				
 				var bowBA:Bone = bow.childArmature.getBone("ba");
 				var bowBB:Bone = bow.childArmature.getBone("bb");
 				var bowArrow:Bone = bow.childArmature.getBone("arrow");
 				var bowArrowB:Bone = bow.childArmature.getBone("arrowBackup");
 				
+				bowBA.display.dispose();
+				bowBB.display.dispose();
+				bowArrow.display.dispose();
+				bowArrowB.display.dispose();
 				bowBA.display = _factory.getTextureDisplay("knightFolder/" + weaponName + "_" + (weaponLevel + 1)) as Image;
 				bowBB.display = _factory.getTextureDisplay("knightFolder/" + weaponName + "_" + (weaponLevel + 1)) as Image;
 				bowArrow.display = _factory.getTextureDisplay("knightFolder/arrow_" + (weaponLevel + 1)) as Image;
