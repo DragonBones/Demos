@@ -110,7 +110,6 @@ class StarlingGame extends Sprite {
 		}
 	}
 	
-	
 	private function createUI():void
 	{
 		var _slidersDic:Dictionary = new Dictionary();
@@ -121,10 +120,10 @@ class StarlingGame extends Sprite {
 		for each(var _bone:Bone in _bones)
 		{
 			var _slider:Slider = new Slider();
-			_slider.minimum = 0;
+			_slider.minimum = 0.5;
 			_slider.maximum = 2;
 			_slider.step = 0.1;
-			_slider.value = 0;
+			_slider.value = 1;
 			_slider.liveDragging = true;
 			_slider.addEventListener(starling.events.Event.CHANGE, sliderChangeHandler);
 			_slider.x = 20;

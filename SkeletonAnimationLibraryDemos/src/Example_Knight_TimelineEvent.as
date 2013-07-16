@@ -40,6 +40,7 @@ import starling.extensions.PDParticleSystem;
 
 import dragonBones.Armature;
 import dragonBones.Bone;
+import dragonBones.Slot;
 import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
 
@@ -107,20 +108,19 @@ class StarlingGame extends Sprite
 	
 	private function initParticles():void
 	{
-		var exhaust:PDParticleSystem = new PDParticleSystem(new XML(new ParticleCFG()), Texture.fromBitmap(new ParticleImage()));
-		
-		
-		var particleBone:Bone = new Bone(new StarlingDisplayBridge());
-		particleBone.display = exhaust;
 		var horseHead:Bone = _armature.getBone("horseHead");
-		
 		var horseEye:Bone = horseHead.childArmature.getBone("eye");
-		exhaust.emitterX = horseEye.global.x;
-		exhaust.emitterY = horseEye.global.y;
 		
-		particleBone.origin.z = horseHead.origin.z + 0.01;
+		var exhaust:PDParticleSystem = new PDParticleSystem(new XML(new ParticleCFG()), Texture.fromBitmap(new ParticleImage()));
+		var particle:Slot = new Slot(new StarlingDisplayBridge());
+		particle.fixedRotation = true;
+		particle.display = exhaust;
+		particle.origin.x = horseEye.global.x;
+		particle.origin.y = horseEye.global.y;
 		
-		horseHead.addChild(particleBone);
+		particle.zOrder = 100;
+		
+		horseHead.addChild(particle);
 		exhaust.start();
 		Starling.juggler.add(exhaust);
 	}

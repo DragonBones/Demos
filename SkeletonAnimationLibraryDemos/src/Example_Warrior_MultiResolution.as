@@ -1,6 +1,8 @@
 ﻿package  {
 	import flash.display.Stage;
 	import flash.display.Sprite;
+	import flash.geom.Rectangle;
+	
 	import flash.events.MouseEvent;
 
 	import starling.core.Starling;
@@ -26,8 +28,7 @@
 
 		private function starlingInit():void 
 		{
-			myStage = (stage!= null)? stage : this.parent.stage;
-			var _starling:Starling = new Starling(StarlingGame, myStage);
+			var _starling:Starling = new Starling(StarlingGame, stage);
 			//_starling.antiAliasing = 1;
 			_starling.showStats = true;
 			_starling.start();
@@ -117,7 +118,8 @@ class StarlingGame extends Sprite {
 		//标准贴图，由面板导出时设置scale为1输出，textureXML与texture对应
 		textureAtlas = new StarlingTextureAtlas(
 			Texture.fromBitmapData(new WarriorTextureSDData().bitmapData, false, false, 1), 
-			XML(new WarriorTextureSDXMLData())
+			XML(new WarriorTextureSDXMLData()), 
+			false
 		);
 		factory.addTextureAtlas(textureAtlas, "warriorSD");
 		
@@ -126,30 +128,31 @@ class StarlingGame extends Sprite {
 		//缩放为0.5的贴图，由1x的texture缩放直接缩放得到，使用1x的textureXML
 		textureAtlas = new StarlingTextureAtlas(
 			Texture.fromBitmapData(new WarriorTextureSD1Data().bitmapData, false, false, 0.5), 
-			XML(new WarriorTextureSDXMLData())
+			XML(new WarriorTextureSDXMLData()), 
+			false
 		);
 		factory.addTextureAtlas(textureAtlas, "warriorSD1");
 		
 		//contentScaleFactor == 0.3
 		//SD2 0.3x(use different textureXML 0.3x)
 		//缩放为0.3的贴图，由面板导出时设置scale为0.3输出，textureXML与texture对应
-		/*
-		textureAtlas = new StarlingTextureAtlas(
+		
+		/*textureAtlas = new StarlingTextureAtlas(
 			Texture.fromBitmapData(new WarriorTextureSD2Data().bitmapData, false, false, 0.3), 
 			XML(new WarriorTextureSD2XMLData()),
 			true
-		);
-		*/
+		);*/
 		textureAtlas = new TextureAtlas(
 			Texture.fromBitmapData(new WarriorTextureSD2Data().bitmapData, false, false, 0.3), 
 			XML(new WarriorTextureSD2XMLData())
 		);
+		
 		factory.addTextureAtlas(textureAtlas, "warriorSD2");
 		
 		//
 		var armature:Armature;
 		
-		armature = factory.buildArmature("warrior", null, "warrior", "warriorHD");
+		armature = factory.buildArmature("warrior", null, null, "warrior", "warriorHD");
 		armature.display.x = 150;
 		armature.display.y = 300;
 		//armature.display.scaleX = armature.display.scaleY = 0.3;
@@ -157,7 +160,7 @@ class StarlingGame extends Sprite {
 		WorldClock.clock.add(armature);
 		armatures.push(armature);
 		
-		armature = factory.buildArmature("warrior", null, "warrior", "warriorSD");
+		armature = factory.buildArmature("warrior", null, null, "warrior", "warriorSD");
 		armature.display.x = 300;
 		armature.display.y = 300;
 		//armature.display.scaleX = armature.display.scaleY = 0.3;
@@ -165,7 +168,7 @@ class StarlingGame extends Sprite {
 		WorldClock.clock.add(armature);
 		armatures.push(armature);
 		
-		armature = factory.buildArmature("warrior", null, "warrior", "warriorSD1");
+		armature = factory.buildArmature("warrior", null, null, "warrior", "warriorSD1");
 		armature.display.x = 450;
 		armature.display.y = 300;
 		//armature.display.scaleX = armature.display.scaleY = 0.5;
@@ -173,7 +176,7 @@ class StarlingGame extends Sprite {
 		WorldClock.clock.add(armature);
 		armatures.push(armature);
 		
-		armature = factory.buildArmature("warrior", null, "warrior", "warriorSD2");
+		armature = factory.buildArmature("warrior", null, null, "warrior", "warriorSD2");
 		armature.display.x = 600;
 		armature.display.y = 300;
 		addChild(armature.display as Sprite);
