@@ -97,6 +97,8 @@ class StarlingGame extends Sprite {
 		textField.x = 75;
 		textField.y = 5;
 		addChild(textField);*/
+		
+		this.alpha = 0.999999;
 	}
 
 	private function animationEventHandler(e:AnimationEvent):void 
