@@ -22,7 +22,6 @@
 }
 
 import flash.geom.Point;
-import flash.events.Event;
 
 import starling.core.Starling;
 import starling.textures.Texture;
@@ -33,6 +32,7 @@ import starling.events.KeyboardEvent;
 import starling.events.TouchEvent;
 import starling.events.Touch;
 import starling.events.TouchPhase;
+import starling.events.Event;
 
 import starling.text.TextField;
 
@@ -43,6 +43,9 @@ import dragonBones.Bone;
 import dragonBones.Slot;
 import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
+import dragonBones.objects.DataParser;
+import dragonBones.objects.SkeletonData;
+import dragonBones.textures.StarlingTextureAtlas;
 
 import dragonBones.display.StarlingDisplayBridge;
 
@@ -51,8 +54,14 @@ import dragonBones.events.FrameEvent;
 
 class StarlingGame extends Sprite 
 {
-	[Embed(source = "../assets/Knight_output.swf", mimeType = "application/octet-stream")]
-	public static const ResourcesData:Class;
+	[Embed(source = "../assets/Knight/skeleton.json", mimeType = "application/octet-stream")]
+	public static const SkeletonJSONData:Class;
+	
+	[Embed(source = "../assets/Knight/texture.png")]
+	public static const TextureData:Class;
+	
+	[Embed(source = "../assets/Knight/texture.json", mimeType = "application/octet-stream")]
+	public static const TextureJSONData:Class;
 	
 	[Embed(source = "../assets/particles/particle.pex", mimeType = "application/octet-stream")]
 	private static const ParticleCFG:Class;
@@ -71,11 +80,20 @@ class StarlingGame extends Sprite
 	public function StarlingGame() 
 	{
 		_factory = new StarlingFactory();
-		_factory.parseData(new ResourcesData());
-		_factory.addEventListener(Event.COMPLETE, textureCompleteHandler);
+		
+		var skeletonData:SkeletonData = DataParser.parseData(JSON.parse(new SkeletonJSONData()));
+		_factory.addSkeletonData(skeletonData, "knightSkeleton");
+		
+		var textureAtlas:StarlingTextureAtlas = new StarlingTextureAtlas(
+			Texture.fromBitmapData(new TextureData().bitmapData, false, false, 1), 
+			JSON.parse(new TextureJSONData())
+		);
+		_factory.addTextureAtlas(textureAtlas, "knightSkeleton");
+		
+		this.addEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
 	}
-
-	private function textureCompleteHandler(e:Event):void 
+	
+	private function addToStageHandler(e:Event):void
 	{
 		_armature = _factory.buildArmature("knight");
 		_armatureDisplay = _armature.display as Sprite;
