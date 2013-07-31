@@ -5,10 +5,10 @@
 	import starling.core.Starling;
 
     [SWF(width="800", height="600", frameRate="60", backgroundColor="#cccccc")]
-	public class Example_Cyborg_Animation extends flash.display.Sprite 
+	public class Example_Cyborg_AnimationMixing extends flash.display.Sprite 
 	{
 
-		public function Example_Cyborg_Animation() 
+		public function Example_Cyborg_AnimationMixing() 
 		{
 			starlingInit();
 		}
@@ -40,7 +40,7 @@ import dragonBones.events.AnimationEvent;
 
 class StarlingGame extends Sprite 
 {
-	[Embed(source = "../assets/Cyborg.dbswf", mimeType = "application/octet-stream")]
+	[Embed(source = "../assets/Cyborg_AnimationMixing.dbswf", mimeType = "application/octet-stream")]
 	private static const ResourcesData:Class;
 	
 	private static const WEAPON_ANIMATION_GROUP:String = "weaponAnimationGroup";
