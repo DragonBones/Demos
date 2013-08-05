@@ -55,6 +55,7 @@ class StarlingGame extends Sprite
 	private var _head:Bone;
 	private var _armR:Bone;
 	private var _armL:Bone;
+	private var _weapon:Bone;
 
 	private var _left:Boolean;
 	private var _right:Boolean;
@@ -86,9 +87,7 @@ class StarlingGame extends Sprite
 		_head = _armature.getBone("head");
 		_armR = _armature.getBone("upperarmR");
 		_armL = _armature.getBone("upperarmL");
-		
-		//Weapon's display change only controled by those animation which is in weapon group.
-		_armature.getBone("weapon").displayControlGroup = WEAPON_ANIMATION_GROUP;
+		_weapon = _armature.getBone("weapon");
 		
 		_armatureDisplay = _armature.display as Sprite;
 		_armatureDisplay.x = 400;
@@ -229,7 +228,9 @@ class StarlingGame extends Sprite
 		var animationName:String = "weapon" + (_weaponID + 1);
 		
 		//Animation Mixing
-		_armature.animation.gotoAndPlay(animationName, -1, -1, NaN, 0, WEAPON_ANIMATION_GROUP);
+		_armature.animation.gotoAndPlay(animationName, -1, -1, NaN, 0, WEAPON_ANIMATION_GROUP, "sameGroup");
+		
+		_weapon.displayController = animationName;
 	}
 
 	private function updateMovement():void 
