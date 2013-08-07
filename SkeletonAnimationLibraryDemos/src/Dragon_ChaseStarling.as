@@ -97,11 +97,16 @@
 		
 		private function onMouseMoveHandler(_e:TouchEvent):void
 		{
-			var _p:Point = _e.getTouch(stage).getLocation(stage);
-			mouseX = _p.x;
-			mouseY = _p.y;
-			starlingBird.x=mouseX-73;
-			starlingBird.y=mouseY-73;
+			try
+			{
+				var _p:Point = _e.getTouch(stage).getLocation(stage);
+				mouseX = _p.x;
+				mouseY = _p.y;
+				starlingBird.x=mouseX-73;
+				starlingBird.y=mouseY-73;
+			}
+			catch(e:Error)
+			{}
 		}
 		private function updateBehavior(dir:int):void 
 		{

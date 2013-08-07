@@ -4,7 +4,7 @@
 
 	import dragonBones.Armature;
 	import dragonBones.animation.WorldClock;
-	import dragonBones.factorys.BaseFactory;
+	import dragonBones.factorys.NativeFactory;
 
 	import starling.core.Starling;
 
@@ -21,11 +21,11 @@
 			starlingInit();
 		}
 		
-		private var factory:BaseFactory;
+		private var factory:NativeFactory;
 		private var knight:Armature;
 		private var cyborg:Armature;
 		private function baseInit():void {
-			factory = new BaseFactory();
+			factory = new NativeFactory();
 			factory.addEventListener(Event.COMPLETE, textureCompleteHandler);
 			
 			factory.parseData(new KnightData());

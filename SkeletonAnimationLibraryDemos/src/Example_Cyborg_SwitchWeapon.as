@@ -119,9 +119,14 @@ class StarlingGame extends Sprite {
 	}
 
 	private function onMouseMoveHandler(_e:TouchEvent):void {
-		var _p:Point = _e.getTouch(stage).getLocation(stage);
-		mouseX = _p.x;
-		mouseY = _p.y;
+		try
+		{
+			var _p:Point = _e.getTouch(stage).getLocation(stage);
+			mouseX = _p.x;
+			mouseY = _p.y;
+		}
+		catch(e:Error)
+		{}
 	}
 
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {
@@ -247,8 +252,8 @@ class StarlingGame extends Sprite {
 
 	private function updateWeapon():void {
 		face = mouseX > armatureClip.x?1: -1;
-		if (armatureClip.scaleX != face) {
-			armatureClip.scaleX = face;
+		if (armatureClip.scaleX * face < 0) {
+			armatureClip.scaleX *= -1;
 			updateMovement();
 		}
 
