@@ -152,7 +152,7 @@ class StarlingGame extends Sprite {
 		//
 		var armature:Armature;
 		
-		armature = factory.buildArmature("warrior", null, null, "warrior", "warriorHD");
+		armature = factory.buildArmature("warrior", null, "warrior", "warriorHD");
 		armature.display.x = 150;
 		armature.display.y = 300;
 		//armature.display.scaleX = armature.display.scaleY = 0.3;
@@ -160,7 +160,7 @@ class StarlingGame extends Sprite {
 		WorldClock.clock.add(armature);
 		armatures.push(armature);
 		
-		armature = factory.buildArmature("warrior", null, null, "warrior", "warriorSD");
+		armature = factory.buildArmature("warrior", null, "warrior", "warriorSD");
 		armature.display.x = 300;
 		armature.display.y = 300;
 		//armature.display.scaleX = armature.display.scaleY = 0.3;
@@ -168,7 +168,7 @@ class StarlingGame extends Sprite {
 		WorldClock.clock.add(armature);
 		armatures.push(armature);
 		
-		armature = factory.buildArmature("warrior", null, null, "warrior", "warriorSD1");
+		armature = factory.buildArmature("warrior", null, "warrior", "warriorSD1");
 		armature.display.x = 450;
 		armature.display.y = 300;
 		//armature.display.scaleX = armature.display.scaleY = 0.5;
@@ -176,7 +176,7 @@ class StarlingGame extends Sprite {
 		WorldClock.clock.add(armature);
 		armatures.push(armature);
 		
-		armature = factory.buildArmature("warrior", null, null, "warrior", "warriorSD2");
+		armature = factory.buildArmature("warrior", null, "warrior", "warriorSD2");
 		armature.display.x = 600;
 		armature.display.y = 300;
 		addChild(armature.display as Sprite);
