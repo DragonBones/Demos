@@ -5,9 +5,9 @@
 	import starling.core.Starling;
 
     [SWF(width="800", height="600", frameRate="30", backgroundColor="#cccccc")]
-	public class Example_Robot_ChangeSpeed extends flash.display.Sprite {
+	public class Example_Robot_ChangeSpeed_BoneScale extends flash.display.Sprite {
 
-		public function Example_Robot_ChangeSpeed() {
+		public function Example_Robot_ChangeSpeed_BoneScale() {
 			starlingInit();
 			stage.addEventListener(MouseEvent.MOUSE_WHEEL, mouseHandler);
 		}
@@ -117,21 +117,17 @@ class StarlingGame extends Sprite {
 		
 		var _bones:Vector.<Bone> = armature.getBones();
 		var _i:uint = 1;
-		for each(var _bone:Bone in _bones)
-		{
-			var _slider:Slider = new Slider();
-			_slider.minimum = 0.5;
-			_slider.maximum = 2;
-			_slider.step = 0.1;
-			_slider.value = 1;
-			_slider.liveDragging = true;
-			_slider.addEventListener(starling.events.Event.CHANGE, sliderChangeHandler);
-			_slider.x = 20;
-			_slider.y = (_i ++) * 30;
-			this.addChild(_slider);
-			_slidersDic[_slider] = _bone;
-		}
 		
+		
+		this.addChild(createTextField((_bones[6] as Bone).name));
+		this.addChild(createSlider((_bones[6] as Bone).name));
+		_i++;
+		this.addChild(createTextField((_bones[11] as Bone).name));
+		this.addChild(createSlider((_bones[11] as Bone).name));
+		_i++;
+		this.addChild(createTextField((_bones[14] as Bone).name));
+		this.addChild(createSlider((_bones[14] as Bone).name));
+		_i++;
 		var _button:Button = new Button();
 		_button.x = 20;
 		_button.y = _i * 30;
@@ -140,8 +136,30 @@ class StarlingGame extends Sprite {
 		
 		_button.addEventListener(starling.events.Event.TRIGGERED, buttonTriggeredHandler);
 		
+		
+		function createTextField(text:String):TextField
+		{
+			var textField:TextField = new TextField(70, 30, text, "Verdana", 10, 0, true);
+			textField.x = 10;
+			textField.y = _i*30;
+			return textField;
+		}
 	
-	
+		function createSlider(name:String):Slider
+		{
+			var _slider:Slider = new Slider();
+			_slider.minimum = 0.5;
+			_slider.maximum = 2;
+			_slider.step = 0.1;
+			_slider.value = 1;
+			_slider.liveDragging = true;
+			_slider.addEventListener(starling.events.Event.CHANGE, sliderChangeHandler);
+			_slider.x = 80;
+			_slider.y = _i * 30 + 15;
+			_slidersDic[_slider] = armature.getBone(name);
+			return _slider;
+		}
+		
 		function sliderChangeHandler(_e:starling.events.Event):void
 		{
 			var _slider:Slider = _e.target as Slider;
@@ -154,7 +172,7 @@ class StarlingGame extends Sprite {
 			changeMovement();
 		}
 	}
-
+	
 	private function onEnterFrameHandler(_e:EnterFrameEvent):void {
 		WorldClock.clock.advanceTime(-1);
 	}
