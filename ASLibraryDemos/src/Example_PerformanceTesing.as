@@ -8,6 +8,8 @@
 	
 	import starling.core.Starling;
 	import flash.text.TextFormat;
+	import flash.events.Event;
+	import flash.geom.Rectangle;
 	
     [SWF(width="800", height="600", frameRate="60", backgroundColor="#cccccc")]
 	public class Example_PerformanceTesing extends flash.display.Sprite {
@@ -15,6 +17,7 @@
 		public static var changeHandler:Function;
 		
 		private var input:TextField;
+		private var _starling:Starling;
 		
 		public function Example_PerformanceTesing() {
 			starlingInit();
@@ -22,12 +25,22 @@
 		}
 		
 		private function starlingInit():void {
-			var _starling:Starling = new Starling(StarlingGame, stage);
+			Starling.handleLostContext = true;
+			_starling = new Starling(StarlingGame, stage);
 			//_starling.antiAliasing = 1;
 			_starling.showStats = true;
 			_starling.start();
 			
 			stage.addEventListener(KeyboardEvent.KEY_UP, stage_onKeyUp);
+			
+			stage.addEventListener(Event.RESIZE, stateResizeHandler);
+		}
+		
+		private function stateResizeHandler(e:Event):void
+		{
+			_starling.viewPort = new Rectangle(0,0,stage.stageWidth, stage.stageHeight);
+			_starling.stage.stageWidth = stage.stageWidth;
+			_starling.stage.stageHeight = stage.stageHeight;
 		}
 		
 		private function addInputText():void

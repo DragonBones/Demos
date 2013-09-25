@@ -1,7 +1,7 @@
 ﻿package  {
 	import flash.display.Sprite;
 	import flash.events.Event;
-
+	
 	import dragonBones.Armature;
 	import dragonBones.animation.WorldClock;
 	import dragonBones.factorys.NativeFactory;
@@ -31,15 +31,15 @@
 			factory.parseData(new KnightData());
 			factory.parseData(new CyborgData());
 		}
-
+		
 		private function textureCompleteHandler(e:Event):void {
 			knight = factory.buildArmature("knight");
 			knight.display.x = 250;
 			knight.display.y = 200;
 			knight.animation.gotoAndPlay("run");
-			addChild(knight.display as Sprite);
+			addChild(knight.display as Sprite);			
 
-			cyborg = factory.buildArmature("cyborg");
+		    cyborg = factory.buildArmature("cyborg");
 			cyborg.display.x = 550;
 			cyborg.display.y = 200;
 			cyborg.animation.gotoAndPlay("run");
@@ -47,16 +47,25 @@
 			
 			WorldClock.clock.add(knight);
 			WorldClock.clock.add(cyborg);
+			addEventListener(Event.ENTER_FRAME, onEnterFrameHandler2);
+			
+		}
+		
+		private function onEnterFrameHandler2(_e:Event):void {
+			WorldClock.clock.advanceTime(-1);
 		}
 
+		
 		private function starlingInit():void {
 			var _starling:Starling = new Starling(StarlingGame, stage);
 			//_starling.antiAliasing = 1;
 			_starling.showStats = true;
 			_starling.start();
 		}
+		
 	}
 }
+
 import flash.events.Event;
 
 import starling.display.Sprite;

@@ -47,6 +47,7 @@ import dragonBones.Armature;
 import dragonBones.Bone;
 import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
+import dragonBones.events.AnimationEvent;
 
 class StarlingGame extends Sprite {
 	[Embed(source = "../assets/Robot_output.swf", mimeType = "application/octet-stream")]
@@ -79,6 +80,7 @@ class StarlingGame extends Sprite {
 		addChild(_display);
 		armature.animation.gotoAndPlay("stop");
 		WorldClock.clock.add(armature);
+		
 		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 		
 		textField = new TextField(700, 30, "Scroll mouse wheel to change speed.", "Verdana", 16, 0, true);

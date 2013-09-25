@@ -227,10 +227,10 @@ class StarlingGame extends Sprite
 		
 		var animationName:String = "weapon" + (_weaponID + 1);
 		
-		//Animation Mixing
-		_armature.animation.gotoAndPlay(animationName, -1, -1, NaN, 0, WEAPON_ANIMATION_GROUP, "sameGroup");
 		
 		_weapon.displayController = animationName;
+		//Animation Mixing
+		_armature.animation.gotoAndPlay(animationName, -1, -1, NaN, 0, WEAPON_ANIMATION_GROUP, "sameGroup");
 	}
 
 	private function updateMovement():void 
