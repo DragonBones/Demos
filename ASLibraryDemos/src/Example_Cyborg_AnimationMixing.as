@@ -82,6 +82,7 @@ class StarlingGame extends Sprite
 	private function textureCompleteHandler(e:Event):void 
 	{
 		_armature = _factory.buildArmature("cyborg");
+		_armature.alwaysUpdate = true;
 		_body = _armature.getBone("body");
 		_chest = _armature.getBone("chest");
 		_head = _armature.getBone("head");
