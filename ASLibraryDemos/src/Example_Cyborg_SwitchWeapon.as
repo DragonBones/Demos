@@ -288,5 +288,6 @@ class StarlingGame extends Sprite {
 		}else{
 			_armL.node.rotation = _r * 0.6;
 		}
+		armature.invalidUpdate();
 	}
 }
