@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>demo</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/createjs.js"></script>
+    <script src="js/dragonBones.js"></script>
+    <script src="js/dragonBonesCreateJS.js"></script>
+</head>
+<body onLoad="init();">
+    <div id="canvasHolder">
+        <canvas id="canvas" width="800" height="600"></canvas>
+    </div>
+	
+	<script type='text/javascript'>
+		function init()
+		{
+			createJSInit();
+		}
+		
+		var canvas;
+		var stage;
+		
+		var texture;
+		var textureData;
+		var skeletonData;
+		
+		function createJSInit()
+		{
+			canvas = document.getElementById("canvas");
+			stage = new createjs.Stage(canvas);
+			
+			texture = new Image();
+			texture.onload = function()
+			{
+				$.getJSON(
+					"assets/motorcycle/texture.json",
+					function(data)
+					{
+						textureData = data;
+						$.getJSON(
+							"assets/motorcycle/skeleton.json",
+							function(data)
+							{
+								skeletonData = data;
+								dragonBonesInit();
+							}
+						)
+					}
+				);
+			}
+			texture.src = "assets/motorcycle/texture.png";
+		}
+		
+		var factory;
+		var armature;
+		
+		function dragonBonesInit()
+		{
+			factory = new dragonBones.factorys.CreateJSFactory();
+			factory.addSkeletonData(dragonBones.objects.DataParser.parseSkeletonData(skeletonData));
+			factory.addTextureAtlas(new dragonBones.textures.CreateJSTextureAtlas(texture, textureData));
+			
+			armature = factory.buildArmature("motorcycleMan");
+			armature.getDisplay().x = 400;
+			armature.getDisplay().y = 400;
+			
+			updateAnimation();
+			dragonBones.animation.WorldClock.clock.add(armature);
+			
+			stage.addChild(armature.getDisplay());
+			createjs.Ticker.setFPS(60);
+			createjs.Ticker.addEventListener("tick", update);
+			
+			document.onkeydown = keyHandler;
+			document.onkeyup = keyHandler;
+		}
+		
+		function update() 
+		{
+			dragonBones.animation.WorldClock.clock.advanceTime(1/60);
+			stage.update();
+		}
+		
+		var _left;
+		var _right;
+		
+		function keyHandler(e)
+		{
+			e = e || window.event;
+			var currKey = e.keyCode || e.which || e.charCode;
+			var isDown = e.type == "keydown";
+			switch (currKey) 
+			{
+				case 37 :
+				case 65 :
+					_left = isDown;
+					updateMove(-1);
+					break;
+				case 39 :
+				case 68 :
+					_right = isDown;
+					updateMove(1);
+					break;
+			}
+		}
+		
+		function updateMove(dir)
+		{
+			if (_left && _right) 
+			{
+				move(dir);
+			}
+			else if (_left)
+			{
+				move(-1);
+			}
+			else if (_right)
+			{
+				move(1);
+			}
+			else 
+			{
+				move(0);
+			}
+		}
+		
+		var _moveDir = 0;
+		
+		function move(dir)
+		{
+			if (_moveDir == dir) 
+			{
+				return;
+			}
+			_moveDir = dir;
+			updateAnimation();
+		}
+		
+		function updateAnimation()
+		{
+			if (_moveDir == 0) 
+			{
+				armature.animation.gotoAndPlay("stay");
+			}
+			else 
+			{
+				if (_moveDir > 0) 
+				{
+					armature.animation.gotoAndPlay("right");
+				}
+				else 
+				{
+					armature.animation.gotoAndPlay("left");
+				}
+			}
+		}
+
+	</script>
+</body>
+</html>
