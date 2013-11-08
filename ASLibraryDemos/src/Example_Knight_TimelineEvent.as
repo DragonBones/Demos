@@ -15,8 +15,6 @@ package
 		private function starlingInit():void 
 		{
 			var myStarling:Starling = new Starling(StarlingGame, stage);
-			myStarling.viewPort.width = 300;
-			myStarling.stage.stageWidth = 300;
 			myStarling.showStats = true;
 			myStarling.start();
 		}
