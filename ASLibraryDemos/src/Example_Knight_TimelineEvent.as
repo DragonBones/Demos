@@ -1,4 +1,4 @@
-﻿package  
+package  
 {
 	import flash.display.Sprite;
 
@@ -14,9 +14,11 @@
 
 		private function starlingInit():void 
 		{
-			var starling:Starling = new Starling(StarlingGame, stage);
-			starling.showStats = true;
-			starling.start();
+			var myStarling:Starling = new Starling(StarlingGame, stage);
+			myStarling.viewPort.width = 300;
+			myStarling.stage.stageWidth = 300;
+			myStarling.showStats = true;
+			myStarling.start();
 		}
 	}
 }
@@ -285,6 +287,8 @@ class StarlingGame extends Sprite
 				
 				weapon.display.dispose();
 				weapon.display = _factory.getTextureDisplay("knightFolder/" + weaponName + "_" + (weaponLevel + 1)) as Image;
+				
+				_arm.childArmature.invalidUpdate();
 				break;
 			case BOW:
 				var bow:Bone = _arm.childArmature.getBone("bow");
@@ -302,8 +306,11 @@ class StarlingGame extends Sprite
 				bowBB.display = _factory.getTextureDisplay("knightFolder/" + weaponName + "_" + (weaponLevel + 1)) as Image;
 				bowArrow.display = _factory.getTextureDisplay("knightFolder/arrow_" + (weaponLevel + 1)) as Image;
 				bowArrowB.display = _factory.getTextureDisplay("knightFolder/arrow_" + (weaponLevel + 1)) as Image;
+				
+				bow.childArmature.invalidUpdate();
 				break;
 		}
+		
 	}
 
 	private var _isAttacking:Boolean;
