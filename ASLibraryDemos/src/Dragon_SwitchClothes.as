@@ -1,4 +1,5 @@
-﻿package {
+﻿package
+{
 	import dragonBones.Armature;
 	import dragonBones.Bone;
 	import dragonBones.animation.WorldClock;
@@ -13,154 +14,206 @@
 	import starling.text.TextField;
 	import starling.display.Image;
 
-	public class Dragon_SwitchClothes extends starling.display.Sprite {
-		[Embed(source = "../assets/DragonWithClothes.png",mimeType = "application/octet-stream")]
-		public static const ResourcesData:Class;
+	public class Dragon_SwitchClothes extends starling.display.Sprite
+	{
+		[Embed(source = "../assets/DragonWithClothes.png", mimeType = "application/octet-stream")]
+		public static const ResourcesData: Class;
 
-		private var factory:StarlingFactory;
-		private var armature:Armature;
-		private var armatureClip:Sprite;
+		private static const CLOTHE_TEXTURES: Array = ["parts/clothes1", "parts/clothes2", "parts/clothes3", "parts/clothes4"];
 
-		private var isLeft:Boolean;
-		private var isRight:Boolean;
-		private var isJumping:Boolean;
-		private var moveDir:int = 0;
-		private var speedX:Number = 0;
-		private var speedY:Number = 0;
-		private var textField:TextField;
-		private var textures:Array = ["parts/clothes1","parts/clothes2","parts/clothes3","parts/clothes4"];
-		private var textureIndex:int = 0;
+		private var _factory: StarlingFactory;
+		private var _armature: Armature;
+		private var _armatureDisplay: Sprite;
+
+		private var _isLeft: Boolean;
+		private var _isRight: Boolean;
+		private var _isJumping: Boolean;
+		private var _moveDir: int = 0;
+		private var _speedX: Number = 0;
+		private var _speedY: Number = 0;
+		private var _textField: TextField;
+		private var _textureIndex: int = 0;
 
 
-		public function Dragon_SwitchClothes() {
-			factory = new StarlingFactory();
-			factory.addEventListener(Event.COMPLETE, textureCompleteHandler);
-			factory.parseData(new ResourcesData());
+		public function Dragon_SwitchClothes()
+		{
+			_factory = new StarlingFactory();
+			_factory.addEventListener(Event.COMPLETE, textureCompleteHandler);
+			_factory.parseData(new ResourcesData());
 		}
 
-		private function textureCompleteHandler(e:Event):void {
-			armature = factory.buildArmature("Dragon");
-			armatureClip = armature.display as Sprite;
-			armatureClip.x = 400;
-			armatureClip.y = 550;
-			addChild(armatureClip);
-			WorldClock.clock.add(armature);
+		private function textureCompleteHandler(e: Event): void
+		{
+			_armature = _factory.buildArmature("Dragon");
+			_armatureDisplay = _armature.display as Sprite;
+			_armatureDisplay.x = 400;
+			_armatureDisplay.y = 550;
+
+			WorldClock.clock.add(_armature);
 			updateBehavior();
-			addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
 
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyEventHandler);
-			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyEventHandler);
+			this.addChild(_armatureDisplay);
+			this.addEventListener(EnterFrameEvent.ENTER_FRAME, enterFrameHandler);
 
-			textField = new TextField(600,26,"C-change clothes;A-move left;D-move right;W-jump","Verdana",16,0,true);
-			textField.x = 60;
-			textField.y = 2;
-			addChild(textField);
+			this.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyHandler);
+			this.stage.addEventListener(KeyboardEvent.KEY_UP, keyHandler);
+
+			_textField = new TextField(600, 26, "C-change clothes;A-move left;D-move right;W-jump", "Verdana", 16, 0, true);
+			_textField.x = 60;
+			_textField.y = 2;
+			this.addChild(_textField);
 		}
 
-		private function onKeyEventHandler(e:KeyboardEvent):void {
-			switch (e.keyCode) {
-				case Keyboard.A :
-				case Keyboard.LEFT :
-					isLeft = e.type == KeyboardEvent.KEY_DOWN;
+		private function keyHandler(e: KeyboardEvent): void
+		{
+			switch(e.keyCode)
+			{
+				case Keyboard.A:
+				case Keyboard.LEFT:
+					_isLeft = e.type == KeyboardEvent.KEY_DOWN;
 					break;
-				case Keyboard.D :
-				case Keyboard.RIGHT :
-					isRight = e.type == KeyboardEvent.KEY_DOWN;
+
+				case Keyboard.D:
+				case Keyboard.RIGHT:
+					_isRight = e.type == KeyboardEvent.KEY_DOWN;
 					break;
-				case Keyboard.W :
-				case Keyboard.UP :
+
+				case Keyboard.W:
+				case Keyboard.UP:
 					jump();
 					break;
-				case Keyboard.C :
-					if (e.type == KeyboardEvent.KEY_UP) {
+
+				case Keyboard.C:
+					if(e.type == KeyboardEvent.KEY_UP)
+					{
 						changeClothes();
 					}
 					break;
 			}
-			var dir:int;
-			if (isLeft && isRight) {
-				dir = moveDir;
+
+			var dir: int;
+			if(_isLeft && _isRight)
+			{
+				dir = _moveDir;
 				return;
-			} else if (isLeft) {
+			}
+			else if(_isLeft)
+			{
 				dir = -1;
-			} else if (isRight) {
+			}
+			else if(_isRight)
+			{
 				dir = 1;
-			} else {
+			}
+			else
+			{
 				dir = 0;
 			}
-			if (dir==moveDir) {
+
+			if(dir == _moveDir)
+			{
 				return;
-			} else {
-				moveDir = dir;
 			}
+			else
+			{
+				_moveDir = dir;
+			}
+
 			updateBehavior();
 		}
 
-		private function changeClothes():void {
-			//Switch textures
-			textureIndex++;
-			if (textureIndex >= textures.length) {
-				textureIndex = textureIndex - textures.length;
+		private function changeClothes(): void
+		{
+			//Switch clothe texture
+			_textureIndex++;
+			if(_textureIndex >= CLOTHE_TEXTURES.length)
+			{
+				_textureIndex = _textureIndex - CLOTHE_TEXTURES.length;
 			}
 			//Get image instance from texture data.
-			var _textureName:String = textures[textureIndex];
-			var _image:Image = factory.getTextureDisplay(_textureName) as Image;
+			var textureName: String = CLOTHE_TEXTURES[_textureIndex];
+			var image: Image = _factory.getTextureDisplay(textureName) as Image;
 			//Replace bone.display by the new texture. Don't forget to dispose.
-			var _bone:Bone = armature.getBone("clothes");
-			_bone.display.dispose();
-			_bone.display = _image;
+			var bone: Bone = _armature.getBone("clothes");
+			bone.display.dispose();
+			bone.display = image;
+			bone.invalidUpdate();
+			//
+			_armature.invalidUpdate();
 		}
 
-		private function onEnterFrameHandler(_e:EnterFrameEvent):void {
+		private function enterFrameHandler(_e: EnterFrameEvent): void
+		{
 			updateMove();
 			WorldClock.clock.advanceTime(-1);
 		}
 
-		private function updateBehavior():void {
-			if (isJumping) {
+		private function updateBehavior(): void
+		{
+			if(_isJumping)
+			{
 				return;
 			}
-			if (moveDir == 0) {
-				speedX = 0;
-				armature.animation.gotoAndPlay("stand");
-			} else {
-				speedX = 6 * moveDir;
-				armatureClip.scaleX =  -  moveDir;
-				armature.animation.gotoAndPlay("walk");
+
+			if(_moveDir == 0)
+			{
+				_speedX = 0;
+				_armature.animation.gotoAndPlay("stand");
+			}
+			else
+			{
+				_speedX = 6 * _moveDir;
+				_armatureDisplay.scaleX = -_moveDir;
+				_armature.animation.gotoAndPlay("walk");
 			}
 		}
-		private function updateMove():void {
-			if (speedX != 0) {
-				armatureClip.x +=  speedX;
-				if (armatureClip.x < 0) {
-					armatureClip.x = 0;
-				} else if (armatureClip.x > 800) {
-					armatureClip.x = 800;
+
+		private function updateMove(): void
+		{
+			if(_speedX != 0)
+			{
+				_armatureDisplay.x += _speedX;
+				if(_armatureDisplay.x < 0)
+				{
+					_armatureDisplay.x = 0;
+				}
+				else if(_armatureDisplay.x > 800)
+				{
+					_armatureDisplay.x = 800;
 				}
 			}
-			if (isJumping) {
-				if (speedY <= 0 && speedY + 1 > 0 ) {
-					armature.animation.gotoAndPlay("fall");
+
+			if(_isJumping)
+			{
+				if(_speedY <= 0 && _speedY + 1 > 0)
+				{
+					_armature.animation.gotoAndPlay("fall");
 				}
-				speedY +=  1;
+				_speedY += 1;
 			}
-			if (speedY != 0) {
-				armatureClip.y +=  speedY;
-				if (armatureClip.y > 540) {
-					armatureClip.y = 550;
-					isJumping = false;
-					speedY = 0;
+
+			if(_speedY != 0)
+			{
+				_armatureDisplay.y += _speedY;
+				if(_armatureDisplay.y > 540)
+				{
+					_armatureDisplay.y = 550;
+					_isJumping = false;
+					_speedY = 0;
 					updateBehavior();
 				}
 			}
 		}
-		private function jump():void {
-			if (isJumping) {
+
+		private function jump(): void
+		{
+			if(_isJumping)
+			{
 				return;
 			}
-			speedY = -17;
-			isJumping = true;
-			armature.animation.gotoAndPlay("jump");
+			_speedY = -17;
+			_isJumping = true;
+			_armature.animation.gotoAndPlay("jump");
 		}
 	}
 }

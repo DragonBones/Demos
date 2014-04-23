@@ -1,10 +1,10 @@
-package  
+﻿package  
 {
 	import flash.display.Sprite;
 
 	import starling.core.Starling;
 
-    [SWF(width="800", height="600", frameRate="30", backgroundColor="#cccccc")]
+    [SWF(width="800", height="600", frameRate="60", backgroundColor="#cccccc")]
 	public class Example_Robot_AnimationMixing extends flash.display.Sprite 
 	{
 		public function Example_Robot_AnimationMixing() 
@@ -14,7 +14,6 @@ package
 
 		private function starlingInit():void 
 		{
-			Starling.handleLostContext = true;
 			var starling:Starling = new Starling(StarlingGame, stage);
 			starling.showStats = true;
 			starling.start();
@@ -36,7 +35,7 @@ import dragonBones.factorys.StarlingFactory;
 
 class StarlingGame extends Sprite 
 {
-	[Embed(source = "../assets/Robot_output.swf", mimeType = "application/octet-stream")]
+	[Embed(source = "../assets/Robot.dbswf", mimeType = "application/octet-stream")]
 	private static const ResourcesData:Class;
 	
 	private var _factory:StarlingFactory;
@@ -55,9 +54,9 @@ class StarlingGame extends Sprite
 	{
 		_armature = _factory.buildArmature("robot");
 		_armature.animation.gotoAndPlay("stop");
-		var animationState:AnimationState = _armature.animation.gotoAndPlay("run2", -1, -1, NaN, 1);
-		animationState.addMixingTransform("innerarm_upper");
-		animationState.addMixingTransform("outerarm_upper");
+		_armature.animation.gotoAndPlay("run2", -1, -1, NaN, 1)
+			.addMixingTransform("innerarm_upper")
+			.addMixingTransform("outerarm_upper");
 		
 		WorldClock.clock.add(_armature);
 		

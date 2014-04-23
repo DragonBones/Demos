@@ -235,7 +235,7 @@ class StarlingGame extends Sprite {
 				speedY = 0;
 				speedX = 0;
 				armature.animation.gotoAndPlay("fallEnd");
-				armature.addEventListener(AnimationEvent.MOVEMENT_CHANGE, armatureMovementChangeHandler);
+				armature.addEventListener(AnimationEvent.FADE_IN, armatureMovementChangeHandler);
 			}
 		}
 	}
@@ -244,7 +244,7 @@ class StarlingGame extends Sprite {
 	{
 		switch(e.movementID) {
 			case "stand":
-				armature.removeEventListener(AnimationEvent.MOVEMENT_CHANGE, armatureMovementChangeHandler);
+				armature.removeEventListener(AnimationEvent.FADE_IN, armatureMovementChangeHandler);
 				updateMovement();
 				break;
 		}
@@ -268,26 +268,27 @@ class StarlingGame extends Sprite {
 		}
 
 		var _body:Bone = armature.getBone("body");
-		_body.node.rotation = _r * 0.25;
+		_body.offset.rotation = _r * 0.25;
 
 		var _chest:Bone = armature.getBone("chest");
-		_chest.node.rotation = _r * 0.25;
+		_chest.offset.rotation = _r * 0.25;
 
 		var _head:Bone = armature.getBone("head");
 		if (_r > 0) {
-			_head.node.rotation = _r * 0.2;
+			_head.offset.rotation = _r * 0.2;
 		}else{
-			_head.node.rotation = _r * 0.4;
+			_head.offset.rotation = _r * 0.4;
 		}
 
 		var _armR:Bone = armature.getBone("armOutside");
 		var _armL:Bone = armature.getBone("armInside");
-		_armR.node.rotation = _r * 0.5;
+		_armR.offset.rotation = _r * 0.5;
 		if (_r > 0) {
-			_armL.node.rotation = _r * 0.8;
+			_armL.offset.rotation = _r * 0.8;
 		}else{
-			_armL.node.rotation = _r * 0.6;
+			_armL.offset.rotation = _r * 0.6;
 		}
-		armature.invalidUpdate();
+		
+		_body.invalidUpdate();
 	}
 }
