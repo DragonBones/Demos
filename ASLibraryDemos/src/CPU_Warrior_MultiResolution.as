@@ -53,7 +53,7 @@
 
 		private var factory:NativeFactory;
 		private var armatures:Vector.<Armature>;
-		private var currentMovementIndex:int = 0;
+		private var currentAnimationIndex:int = 0;
 		private var textField:TextField;
 
 		public function CPU_Warrior_MultiResolution()
@@ -160,7 +160,7 @@
 			WorldClock.clock.add(armature);
 			armatures.push(armature);
 
-			changeMovement();
+			changeAnimation();
 
 			addEventListener(Event.ENTER_FRAME, onEnterFrameHandler);
 
@@ -173,15 +173,15 @@
 			addChild(textField);
 		}
 
-		public function changeMovement():void
+		public function changeAnimation():void
 		{
 			var armature:Armature = armatures[0];
-			var _movement:String = armature.animation.movementList[currentMovementIndex % armature.animation.movementList.length];
+			var _animationName:String = armature.animation.animationList[currentAnimationIndex % armature.animation.animationList.length];
 			for each (armature in armatures)
 			{
-				armature.animation.gotoAndPlay(_movement);
+				armature.animation.gotoAndPlay(_animationName);
 			}
-			currentMovementIndex++;
+			currentAnimationIndex++;
 		}
 
 		private function onEnterFrameHandler(_e:Event):void
@@ -192,7 +192,7 @@
 		
 		private function onStageClick(event:MouseEvent):void
 		{
-			changeMovement();
+			changeAnimation();
 		}
 	}
 }

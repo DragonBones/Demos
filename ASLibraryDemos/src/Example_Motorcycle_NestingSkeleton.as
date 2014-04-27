@@ -15,9 +15,9 @@
 
 		private function starlingInit():void 
 		{
-			var _starling:Starling = new Starling(StarlingGame, stage);
-			_starling.showStats = true;
-			_starling.start();
+			var starling:Starling = new Starling(StarlingGame, stage);
+			starling.showStats = true;
+			starling.start();
 		}
 	}
 }
@@ -59,7 +59,7 @@ class StarlingGame extends Sprite
 		_armatureDisplay.x = 400;
 		_armatureDisplay.y = 400;
 		
-		updateMovement();
+		updateAnimation();
 		
 		WorldClock.clock.add(_armature);
 		
@@ -101,11 +101,11 @@ class StarlingGame extends Sprite
 	private var _left:Boolean;
 	private var _right:Boolean;
 	
-	private function updateMove(_dir:int):void 
+	private function updateMove(dir:int):void 
 	{
 		if (_left && _right) 
 		{
-			move(_dir);
+			move(dir);
 		}
 		else if (_left)
 		{
@@ -122,17 +122,17 @@ class StarlingGame extends Sprite
 	}
 	
 	private var _moveDir:int;
-	private function move(_dir:int):void 
+	private function move(dir:int):void 
 	{
-		if (_moveDir == _dir) 
+		if (_moveDir == dir) 
 		{
 			return;
 		}
-		_moveDir = _dir;
-		updateMovement();
+		_moveDir = dir;
+		updateAnimation();
 	}
 
-	private function updateMovement():void 
+	private function updateAnimation():void 
 	{
 		if (_moveDir == 0) 
 		{

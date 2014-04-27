@@ -15,7 +15,7 @@
 
 		private function starlingInit():void 
 		{
-			var starling:Starling = new Starling(StarlingGame, stage);
+			var starling:Starling = new Starling(StarlingGame, this.stage);
 			starling.showStats = true;
 			starling.start();
 		}
@@ -53,12 +53,6 @@ class StarlingGame extends Sprite
 
 	private var _armatureDisplay:Sprite;
 	private var _armature:Armature;
-	private var _body:Bone;
-	private var _chest:Bone;
-	private var _head:Bone;
-	private var _armR:Bone;
-	private var _armL:Bone;
-	private var _weapon:Bone;
 	private var _aimState:AnimationState;
 	
 	private var _mousePoint:Point;
@@ -87,12 +81,6 @@ class StarlingGame extends Sprite
 	private function textureCompleteHandler(e:Event):void 
 	{
 		_armature = _factory.buildArmature("cyborg");
-		_body = _armature.getBone("body");
-		_chest = _armature.getBone("chest");
-		_head = _armature.getBone("head");
-		_armR = _armature.getBone("upperarmR");
-		_armL = _armature.getBone("upperarmL");
-		_weapon = _armature.getBone("weapon");
 		
 		_armatureDisplay = _armature.display as Sprite;
 		_armatureDisplay.x = 400;
@@ -110,12 +98,12 @@ class StarlingGame extends Sprite
 		this.addChild(_armatureDisplay);
 		this.addChild(_textField);
 		this.addEventListener(EnterFrameEvent.ENTER_FRAME, enterFrameHandler);
-		this.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyEventHandler);
-		this.stage.addEventListener(KeyboardEvent.KEY_UP, keyEventHandler);
+		this.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyHandler);
+		this.stage.addEventListener(KeyboardEvent.KEY_UP, keyHandler);
 		this.stage.addEventListener(TouchEvent.TOUCH, mouseHandler);
 	}
 
-	private function keyEventHandler(e:KeyboardEvent):void 
+	private function keyHandler(e:KeyboardEvent):void 
 	{
 		switch (e.keyCode) 
 		{
@@ -232,8 +220,7 @@ class StarlingGame extends Sprite
 		
 		var animationName:String = "weapon" + (_weaponID + 1);
 		
-		
-		_weapon.displayController = animationName;
+		_armature.getBone("weapon").displayController = animationName;
 		//Animation Mixing
 		_armature.animation.gotoAndPlay(
 			animationName, 
@@ -335,6 +322,8 @@ class StarlingGame extends Sprite
 		if(_armature.display.scaleX * _faceDir < 0) 
 		{
 			_armature.display.scaleX *= -1;
+			
+			updateAnimation();
 		}
 
 		var r:Number;
@@ -380,6 +369,6 @@ class StarlingGame extends Sprite
 		
 		_aimState.weight = Math.abs(r / Math.PI * 2);
 		
-		_body.invalidUpdate();
+		_armature.invalidUpdate();
 	}
 }

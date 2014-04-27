@@ -23,7 +23,7 @@
 			switch(e.type)
 			{
 				case MouseEvent.CLICK:
-					StarlingGame.instance.changeMovement();
+					StarlingGame.instance.changeAnimation();
 					break;
 			}
 		}
@@ -185,7 +185,7 @@ class StarlingGame extends Sprite
 		WorldClock.clock.add(armature);
 		_armatures.push(armature);
 
-		changeMovement();
+		changeAnimation();
 
 		this.addEventListener(EnterFrameEvent.ENTER_FRAME, enterFrameHandler);
 
@@ -195,10 +195,10 @@ class StarlingGame extends Sprite
 		this.addChild(_textField);
 	}
 
-	public function changeMovement(): void
+	public function changeAnimation(): void
 	{
 		var armature: Armature = _armatures[0];
-		var animationName: String = armature.animation.movementList[_currentAnimationIndex % armature.animation.movementList.length];
+		var animationName: String = armature.animation.animationList[_currentAnimationIndex % armature.animation.animationList.length];
 		for each(armature in _armatures)
 		{
 			armature.animation.gotoAndPlay(animationName);

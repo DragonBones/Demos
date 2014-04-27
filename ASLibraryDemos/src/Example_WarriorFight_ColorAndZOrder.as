@@ -74,9 +74,9 @@ class StarlingGame extends Sprite
 		_armature2.animation.gotoAndPlay("ready");
 
 		_armature1.addEventListener(AnimationEvent.LOOP_COMPLETE, animationEventHandler);
-		_armature1.addEventListener(FrameEvent.MOVEMENT_FRAME_EVENT, frameEventHandler);
+		_armature1.addEventListener(FrameEvent.ANIMATION_FRAME_EVENT, frameEventHandler);
 		_armature2.addEventListener(AnimationEvent.LOOP_COMPLETE, animationEventHandler);
-		_armature2.addEventListener(FrameEvent.MOVEMENT_FRAME_EVENT, frameEventHandler);
+		_armature2.addEventListener(FrameEvent.ANIMATION_FRAME_EVENT, frameEventHandler);
 
 		var display: Sprite;
 		display = _armature1.display as Sprite;

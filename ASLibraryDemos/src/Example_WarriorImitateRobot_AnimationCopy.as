@@ -130,11 +130,11 @@ class StarlingGame extends Sprite
 
 	public function changeAnimation(): void
 	{
-		var movement: String = _armatureRobot.animation.movementList[_currentAnimationIndex % _armatureRobot.animation.movementList.length];
+		var animationName: String = _armatureRobot.animation.animationList[_currentAnimationIndex % _armatureRobot.animation.animationList.length];
 		_currentAnimationIndex++;
 
-		_armatureRobot.animation.gotoAndPlay(movement);
-		_armatureWarriorWithRobotAnimation.animation.gotoAndPlay(movement);
+		_armatureRobot.animation.gotoAndPlay(animationName);
+		_armatureWarriorWithRobotAnimation.animation.gotoAndPlay(animationName);
 	}
 
 	private function enterFrameHandler(e: EnterFrameEvent): void

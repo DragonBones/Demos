@@ -105,7 +105,7 @@ class StarlingGame extends Sprite
 		_arm = _armature.getBone("armOutside");
 		_arm.childArmature.addEventListener(AnimationEvent.FADE_IN, armAnimationHandler);
 		_arm.childArmature.addEventListener(AnimationEvent.COMPLETE, armAnimationHandler);
-		_arm.childArmature.addEventListener(FrameEvent.MOVEMENT_FRAME_EVENT, armFrameHandler);
+		_arm.childArmature.addEventListener(FrameEvent.ANIMATION_FRAME_EVENT, armFrameHandler);
 
 		initParticles();
 
