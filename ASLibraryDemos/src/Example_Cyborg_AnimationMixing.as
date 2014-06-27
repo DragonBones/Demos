@@ -15,7 +15,7 @@
 
 		private function starlingInit():void 
 		{
-			var starling:Starling = new Starling(StarlingGame, stage);
+			var starling:Starling = new Starling(StarlingGame, this.stage);
 			starling.showStats = true;
 			starling.start();
 		}
@@ -33,6 +33,8 @@ import starling.text.TextField;
 
 import dragonBones.Armature;
 import dragonBones.Bone;
+import dragonBones.animation.Animation;
+import dragonBones.animation.AnimationState;
 import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
 
@@ -44,33 +46,30 @@ class StarlingGame extends Sprite
 	private static const ResourcesData:Class;
 	
 	private static const WEAPON_ANIMATION_GROUP:String = "weaponAnimationGroup";
+	private static const AIM_ANIMATION_GROUP:String = "aimAnimationGroup";
 
 	private var _textField:TextField;
 	private var _factory:StarlingFactory;
-	private var _armature:Armature;
-	private var _armatureDisplay:Sprite;
 
-	private var _body:Bone;
-	private var _chest:Bone;
-	private var _head:Bone;
-	private var _armR:Bone;
-	private var _armL:Bone;
-	private var _weapon:Bone;
+	private var _armatureDisplay:Sprite;
+	private var _armature:Armature;
+	private var _aimState:AnimationState;
+	
+	private var _mousePoint:Point;
+	private var _aimDir:int = 0;
+	private var _moveDir:int;
+	private var _faceDir:int;
 
 	private var _left:Boolean;
 	private var _right:Boolean;
-
-	private var _mouseX:Number = 0;
-	private var _mouseY:Number = 0;
-	private var _isJumping:Boolean;
-	private var _isSquat:Boolean;
-	private var _moveDir:int;
-	private var _face:int;
-
-	private var _weaponID:int = -1;
-
+	
 	private var _speedX:Number = 0;
 	private var _speedY:Number = 0;
+
+	private var _isJumping:Boolean;
+	private var _isSquat:Boolean;
+
+	private var _weaponID:int = -1;
 
 	public function StarlingGame() 
 	{
@@ -82,12 +81,6 @@ class StarlingGame extends Sprite
 	private function textureCompleteHandler(e:Event):void 
 	{
 		_armature = _factory.buildArmature("cyborg");
-		_body = _armature.getBone("body");
-		_chest = _armature.getBone("chest");
-		_head = _armature.getBone("head");
-		_armR = _armature.getBone("upperarmR");
-		_armL = _armature.getBone("upperarmL");
-		_weapon = _armature.getBone("weapon");
 		
 		_armatureDisplay = _armature.display as Sprite;
 		_armatureDisplay.x = 400;
@@ -95,6 +88,7 @@ class StarlingGame extends Sprite
 		
 		WorldClock.clock.add(_armature);
 		
+		updateAnimation();
 		changeWeapon();
 		
 		_textField = new TextField(700, 30, "Press W/A/S/D to move. Press SPACE to switch weapens. Move mouse to aim.", "Verdana", 16, 0, true)
@@ -103,12 +97,13 @@ class StarlingGame extends Sprite
 		
 		this.addChild(_armatureDisplay);
 		this.addChild(_textField);
-		this.addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
-		this.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyEventHandler);
-		this.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyEventHandler);
+		this.addEventListener(EnterFrameEvent.ENTER_FRAME, enterFrameHandler);
+		this.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyHandler);
+		this.stage.addEventListener(KeyboardEvent.KEY_UP, keyHandler);
+		this.stage.addEventListener(TouchEvent.TOUCH, mouseHandler);
 	}
 
-	private function onKeyEventHandler(e:KeyboardEvent):void 
+	private function keyHandler(e:KeyboardEvent):void 
 	{
 		switch (e.keyCode) 
 		{
@@ -117,11 +112,13 @@ class StarlingGame extends Sprite
 				_left = e.type == KeyboardEvent.KEY_DOWN;
 				updateMove(-1);
 				break;
+			
 			case 39 :
 			case 68 :
 				_right = e.type == KeyboardEvent.KEY_DOWN;
 				updateMove(1);
 				break;
+			
 			case 38 :
 			case 87 :
 				if(e.type == KeyboardEvent.KEY_DOWN) 
@@ -129,10 +126,12 @@ class StarlingGame extends Sprite
 					jump();
 				}
 				break;
+				
 			case 83 :
 			case 40 :
 				squat(e.type == KeyboardEvent.KEY_DOWN);
 				break;
+			
 			case 32 :
 				if(e.type == KeyboardEvent.KEY_UP) 
 				{
@@ -162,25 +161,19 @@ class StarlingGame extends Sprite
 		}
 	}
 
-	private function onMouseMoveHandler(e:TouchEvent):void 
+	private function mouseHandler(e:TouchEvent):void 
 	{
 		try
 		{
-			var p:Point = e.getTouch(stage).getLocation(stage);
-			_mouseX = p.x;
-			_mouseY = p.y;
+			_mousePoint = e.getTouch(stage).getLocation(stage);
 		}
-		catch(e:Error)
+		catch(err:Error)
 		{
 		}
 	}
 
-	private function onEnterFrameHandler(e:EnterFrameEvent):void 
+	private function enterFrameHandler(e:EnterFrameEvent):void 
 	{
-		if(stage && !stage.hasEventListener(TouchEvent.TOUCH)) 
-		{
-			stage.addEventListener(TouchEvent.TOUCH, onMouseMoveHandler);
-		}
 		updateSpeed();
 		updateWeapon();
 		WorldClock.clock.advanceTime(-1);
@@ -193,7 +186,7 @@ class StarlingGame extends Sprite
 			return;
 		}
 		_moveDir = dir;
-		updateMovement();
+		updateAnimation();
 	}
 
 	private function jump():void 
@@ -214,7 +207,7 @@ class StarlingGame extends Sprite
 			return;
 		}
 		_isSquat = isDown;
-		updateMovement();
+		updateAnimation();
 	}
 
 	private function changeWeapon():void 
@@ -227,13 +220,16 @@ class StarlingGame extends Sprite
 		
 		var animationName:String = "weapon" + (_weaponID + 1);
 		
-		
-		_weapon.displayController = animationName;
+		_armature.getBone("weapon").displayController = animationName;
 		//Animation Mixing
-		_armature.animation.gotoAndPlay(animationName, -1, -1, NaN, 0, WEAPON_ANIMATION_GROUP, "sameGroup");
+		_armature.animation.gotoAndPlay(
+			animationName, 
+			-1, -1, NaN, 0, 
+			WEAPON_ANIMATION_GROUP, Animation.SAME_GROUP
+		);
 	}
 
-	private function updateMovement():void 
+	private function updateAnimation():void 
 	{
 		if(_isJumping) 
 		{
@@ -254,14 +250,14 @@ class StarlingGame extends Sprite
 		}
 		else 
 		{
-			if(_moveDir * _face > 0) 
+			if(_moveDir * _faceDir > 0) 
 			{
-				_speedX = 4* _face;
+				_speedX = 4* _faceDir;
 				_armature.animation.gotoAndPlay("run");
 			}
 			else 
 			{
-				_speedX = -3 * _face;
+				_speedX = -3 * _faceDir;
 				_armature.animation.gotoAndPlay("runBack");
 			}
 		}
@@ -299,65 +295,79 @@ class StarlingGame extends Sprite
 				_speedY = 0;
 				_speedX = 0;
 				_armature.animation.gotoAndPlay("fallEnd");
-				_armature.addEventListener(AnimationEvent.MOVEMENT_CHANGE, armatureMovementChangeHandler);
+				_armature.addEventListener(AnimationEvent.FADE_IN, armatureAnimationChangeHandler);
 			}
 		}
 	}
 
-	private function armatureMovementChangeHandler(e:AnimationEvent):void 
+	private function armatureAnimationChangeHandler(e:AnimationEvent):void 
 	{
-		switch(e.movementID) 
+		switch(e.animationName) 
 		{
 			case "stand":
-				_armature.removeEventListener(AnimationEvent.MOVEMENT_CHANGE, armatureMovementChangeHandler);
-				updateMovement();
+				_armature.removeEventListener(AnimationEvent.FADE_IN, armatureAnimationChangeHandler);
+				updateAnimation();
 				break;
 		}
 	}
 
 	private function updateWeapon():void 
 	{
-		_face = _mouseX > _armatureDisplay.x?1: -1;
-		if(_armatureDisplay.scaleX * _face < 0) 
+		if(!_mousePoint)
 		{
-			_armatureDisplay.scaleX *= -1;
-			updateMovement();
+			return;
+		}
+		
+		_faceDir = _mousePoint.x > _armature.display.x?1: -1;
+		if(_armature.display.scaleX * _faceDir < 0) 
+		{
+			_armature.display.scaleX *= -1;
+			
+			updateAnimation();
 		}
 
 		var r:Number;
-		if(_face>0)
+		if(_faceDir > 0)
 		{
-			r = Math.atan2(_mouseY - _armatureDisplay.y, _mouseX - _armatureDisplay.x);
+			r = Math.atan2(_mousePoint.y - _armature.display.y, _mousePoint.x - _armature.display.x);
 		}
 		else
 		{
-			r = Math.PI - Math.atan2(_mouseY - _armatureDisplay.y, _mouseX - _armatureDisplay.x);
+			r = Math.PI - Math.atan2(_mousePoint.y - _armature.display.y, _mousePoint.x - _armature.display.x);
 			if(r > Math.PI) 
 			{
 				r -= Math.PI * 2;
 			}
 		}
 		
-		_body.node.rotation = r * 0.25;
-		_chest.node.rotation = r * 0.25;
+		var aimDir:int;
 		if(r > 0) 
 		{
-			_head.node.rotation = r * 0.2;
+			aimDir = -1;
 		}
 		else
 		{
-			_head.node.rotation = r * 0.4;
+			aimDir = 1;
 		}
-
-		_armR.node.rotation = r * 0.5;
-		if(r > 0) 
+		
+		if(aimDir != _aimDir)
 		{
-			_armL.node.rotation = r * 0.8;
+			_aimDir = aimDir;
+			
+			//Animation Mixing
+			if(_aimDir > 0)
+			{
+				_aimState = _armature.animation.gotoAndPlay("aimUp", 0, 0, 1, 0, AIM_ANIMATION_GROUP);
+			}
+			else
+			{
+				_aimState = _armature.animation.gotoAndPlay("aimDown", 0, 0, 1, 0, AIM_ANIMATION_GROUP);
+			}
+			//_aimState中，只有body以及其子骨骼有瞄准姿势的改变，过滤掉其他的无关的骨骼混合有利于性能
+			_aimState.addMixingTransform("body");
 		}
-		else
-		{
-			_armL.node.rotation = r * 0.6;
-		}
+		
+		_aimState.weight = Math.abs(r / Math.PI * 2);
 		
 		_armature.invalidUpdate();
 	}

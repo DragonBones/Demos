@@ -1,13 +1,12 @@
 ﻿package
 {
 	import flash.display.Sprite;
-
 	import starling.core.Starling;
 
 	[SWF(width = "800", height = "600", frameRate = "60", backgroundColor = "#cccccc")]
-	public class Example_Knight_TimelineEvent extends flash.display.Sprite
+	public class Example_Knight_DelayParseAnimation extends flash.display.Sprite
 	{
-		public function Example_Knight_TimelineEvent()
+		public function Example_Knight_DelayParseAnimation()
 		{
 			starlingInit();
 		}
@@ -21,35 +20,34 @@
 	}
 }
 
-import flash.geom.Point;
-
-import starling.core.Starling;
-import starling.textures.Texture;
-import starling.display.Image;
-import starling.display.Sprite;
-import starling.events.EnterFrameEvent;
-import starling.events.KeyboardEvent;
-import starling.events.TouchEvent;
-import starling.events.Touch;
-import starling.events.TouchPhase;
-import starling.events.Event;
-
-import starling.text.TextField;
-
-import starling.extensions.PDParticleSystem;
-
 import dragonBones.Armature;
 import dragonBones.Bone;
 import dragonBones.Slot;
 import dragonBones.animation.WorldClock;
+import dragonBones.display.StarlingSlot;
+import dragonBones.events.AnimationEvent;
+import dragonBones.events.FrameEvent;
 import dragonBones.factorys.StarlingFactory;
+import dragonBones.objects.AnimationData;
 import dragonBones.objects.DataParser;
 import dragonBones.objects.SkeletonData;
 import dragonBones.textures.StarlingTextureAtlas;
 
-import dragonBones.events.AnimationEvent;
-import dragonBones.events.FrameEvent;
-import dragonBones.display.StarlingSlot;
+import flash.geom.Point;
+import flash.utils.Dictionary;
+
+import starling.core.Starling;
+import starling.display.Image;
+import starling.display.Sprite;
+import starling.events.EnterFrameEvent;
+import starling.events.Event;
+import starling.events.KeyboardEvent;
+import starling.events.Touch;
+import starling.events.TouchEvent;
+import starling.events.TouchPhase;
+import starling.extensions.PDParticleSystem;
+import starling.text.TextField;
+import starling.textures.Texture;
 
 class StarlingGame extends Sprite
 {
@@ -75,12 +73,19 @@ class StarlingGame extends Sprite
 	private var _arm: Bone;
 
 	private var _textField: TextField;
-
+	
+	private var _animationDictionary:Dictionary = new Dictionary();
+	private var _fateRate:uint;
 	public function StarlingGame()
 	{
 		_factory = new StarlingFactory();
-
-		var skeletonData: SkeletonData = DataParser.parseData(JSON.parse(new SkeletonJSONData()));
+		
+		var rawData:Object = JSON.parse(new SkeletonJSONData());
+		
+		var skeletonData: SkeletonData = DataParser.parseData(rawData, true);
+		DataParser.parseAnimationRawDataDictionary(rawData, _animationDictionary);
+		_fateRate = DataParser.parseFrameRate(rawData);
+		
 		_factory.addSkeletonData(skeletonData, "knightSkeleton");
 
 		var textureAtlas: StarlingTextureAtlas = new StarlingTextureAtlas(
@@ -91,14 +96,15 @@ class StarlingGame extends Sprite
 
 		this.addEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
 	}
-
+	
 	private function addToStageHandler(e: Event): void
 	{
 		_armature = _factory.buildArmature("knight");
+		
 		_armatureDisplay = _armature.display as Sprite;
 		_armatureDisplay.x = 400;
 		_armatureDisplay.y = 400;
-
+		
 		WorldClock.clock.add(_armature);
 		updateAnimation();
 
@@ -115,7 +121,9 @@ class StarlingGame extends Sprite
 		this.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyHandler);
 		this.stage.addEventListener(KeyboardEvent.KEY_UP, keyHandler);
 		this.stage.addEventListener(TouchEvent.TOUCH, touchHandler);
-
+		
+		playAnimation(_arm.childArmature, "ready_sword");
+		
 		_textField = new TextField(700, 30, "Press W/A/D to move. Press S to upgrade weapon.\nPress SPACE to switch weapens. Click mouse to attack.", "Verdana", 16, 0, true)
 		_textField.height = 40;
 		_textField.x = 60;
@@ -240,7 +248,8 @@ class StarlingGame extends Sprite
 		}
 		_speedY = -15;
 		_isJumping = true;
-		_armature.animation.gotoAndPlay("jump");
+		
+		playAnimation(_armature, "jump");
 	}
 
 	private const SWORD: String = "sword";
@@ -259,8 +268,8 @@ class StarlingGame extends Sprite
 
 		var weaponName: String = WEAPON_NAMES[_weaponID];
 		var animationName: String = "ready_" + weaponName;
-
-		_arm.childArmature.animation.gotoAndPlay(animationName);
+		
+		playAnimation(_arm.childArmature, animationName);
 	}
 
 	private var _weaponLevels: Vector.<int> = new <int>[0, 0, 0, 0];
@@ -323,8 +332,8 @@ class StarlingGame extends Sprite
 		_isAttacking = true;
 		var weaponName: String = WEAPON_NAMES[_weaponID];
 		var animationName: String = "attack_" + weaponName + "_" + _hitCount;
-
-		_arm.childArmature.animation.gotoAndPlay(animationName);
+		
+		playAnimation(_arm.childArmature, animationName);
 	}
 
 	private function armAnimationHandler(e: AnimationEvent): void
@@ -340,7 +349,8 @@ class StarlingGame extends Sprite
 				{
 					var weaponName: String = WEAPON_NAMES[_weaponID];
 					var animationName: String = "ready_" + weaponName;
-					_arm.childArmature.animation.gotoAndPlay(animationName);
+					
+					playAnimation(_arm.childArmature, animationName);
 				}
 				else
 				{
@@ -441,6 +451,7 @@ class StarlingGame extends Sprite
 
 	private function updateAnimation(): void
 	{
+		var animationName:String;
 		if(_isJumping)
 		{
 			return;
@@ -449,12 +460,17 @@ class StarlingGame extends Sprite
 		if(_moveDir == 0)
 		{
 			_speedX = 0;
-			_armature.animation.gotoAndPlay("stand");
+			
+			animationName = "stand";
+			playAnimation(_armature, "stand");
 		}
 		else
 		{
 			_speedX = _moveDir * 4;
-			_armature.animation.gotoAndPlay("run");
+			
+			animationName = "run";
+			
+			playAnimation(_armature, "run");
 			_armatureDisplay.scaleX = _moveDir;
 		}
 	}
@@ -492,5 +508,16 @@ class StarlingGame extends Sprite
 				updateAnimation();
 			}
 		}
+	}
+	
+	private function playAnimation(armature:Armature, animationName:String):void
+	{
+		if(_animationDictionary[animationName] != null)
+		{
+			_factory.addAnimationToArmature(_animationDictionary[animationName], armature, _fateRate);
+			_animationDictionary[animationName] = null;
+		}
+		
+		armature.animation.gotoAndPlay(animationName);
 	}
 }

@@ -1,31 +1,35 @@
-﻿package  {
+﻿package
+{
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 
 	import starling.core.Starling;
 
-    [SWF(width="800", height="600", frameRate="60", backgroundColor="#cccccc")]
-	public class Example_WarriorImitateRobot_AnimationCopy extends flash.display.Sprite {
+	[SWF(width = "800", height = "600", frameRate = "60", backgroundColor = "#cccccc")]
+	public class Example_WarriorImitateRobot_AnimationCopy extends flash.display.Sprite
+	{
 
-		public function Example_WarriorImitateRobot_AnimationCopy() {
+		public function Example_WarriorImitateRobot_AnimationCopy()
+		{
 			starlingInit();
 			stage.addEventListener(MouseEvent.CLICK, mouseHandler);
 		}
 
-		private function mouseHandler(e:MouseEvent):void 
+		private function mouseHandler(e: MouseEvent): void
 		{
-			switch(e.type) {
+			switch(e.type)
+			{
 				case MouseEvent.CLICK:
-					StarlingGame.instance.changeMovement();
+					StarlingGame.instance.changeAnimation();
 					break;
 			}
 		}
 
-		private function starlingInit():void {
-			var _starling:Starling = new Starling(StarlingGame, stage);
-			//_starling.antiAliasing = 1;
-			_starling.showStats = true;
-			_starling.start();
+		private function starlingInit(): void
+		{
+			var starling: Starling = new Starling(StarlingGame, stage);
+			starling.showStats = true;
+			starling.start();
 		}
 	}
 }
@@ -46,92 +50,94 @@ import dragonBones.objects.XMLDataParser;
 import dragonBones.objects.SkeletonData;
 import dragonBones.textures.StarlingTextureAtlas;
 
-class StarlingGame extends Sprite {
+class StarlingGame extends Sprite
+{
 	[Embed(source = "../assets/Warrior_output/skeleton.xml", mimeType = "application/octet-stream")]
-	public static const WarriorSkeletonXMLData:Class;
-	
+	public static const WarriorSkeletonXMLData: Class;
+
 	[Embed(source = "../assets/Warrior_output/texture.xml", mimeType = "application/octet-stream")]
-	public static const WarriorTextureXMLData:Class;
-	
+	public static const WarriorTextureXMLData: Class;
+
 	[Embed(source = "../assets/Warrior_output/texture@0.5x.png")]
-	public static const WarriorTextureData:Class;
-	
-	[Embed(source = "../assets/Robot_output.swf", mimeType = "application/octet-stream")]
-	public static const RobotData:Class;
+	public static const WarriorTextureData: Class;
 
-	public static var instance:StarlingGame;
+	[Embed(source = "../assets/Robot.dbswf", mimeType = "application/octet-stream")]
+	public static const RobotData: Class;
 
-	private var factory:StarlingFactory;
-	
-	private var armatureRobot:Armature;
-	private var armatureWarriorWithRobotAnimation:Armature;
-	private var currentMovementIndex:int = 0;
-	private var textField:TextField;
-	
-	public function StarlingGame() {
+	public static var instance: StarlingGame;
+
+	private var _factory: StarlingFactory;
+
+	private var _armatureRobot: Armature;
+	private var _armatureWarriorWithRobotAnimation: Armature;
+	private var _currentAnimationIndex: int = 0;
+	private var _textField: TextField;
+
+	public function StarlingGame()
+	{
 		instance = this;
-		
-		factory = new StarlingFactory();
+
+		_factory = new StarlingFactory();
 
 		//skeletonData
-		var skeletonData:SkeletonData = XMLDataParser.parseSkeletonData(XML(new WarriorSkeletonXMLData()));
-		factory.addSkeletonData(skeletonData, "warriorData");
-		
-		var textureAtlas:StarlingTextureAtlas = new StarlingTextureAtlas(
-			Texture.fromBitmapData(new WarriorTextureData().bitmapData, true, false, 0.5), 
+		var skeletonData: SkeletonData = XMLDataParser.parseSkeletonData(XML(new WarriorSkeletonXMLData()));
+		_factory.addSkeletonData(skeletonData, "warriorData");
+
+		var textureAtlas: StarlingTextureAtlas = new StarlingTextureAtlas(
+			Texture.fromBitmapData(new WarriorTextureData().bitmapData, true, false, 0.5),
 			XML(new WarriorTextureXMLData()),
 			false
 		);
-		factory.addTextureAtlas(textureAtlas, "warriorData");
-		
-		factory.parseData(new RobotData());
-		factory.addEventListener(Event.COMPLETE, textureCompleteHandler);
-	}
-	
-	private function textureCompleteHandler(e:Event):void
-	{
-		textField = new TextField(700, 30, "The Warrior will imitate the Robot. Click mouse to switch animation.", "Verdana", 16, 0, true);
-		textField.x = 75;
-		textField.y = 5;
-		addChild(textField);
-		
-		var armatureWarriorName:String = "warrior";
-		var armatureRobotName:String = "robot";
-		
-		armatureRobot = factory.buildArmature(armatureRobotName);
-		armatureWarriorWithRobotAnimation = factory.buildArmature(armatureWarriorName, armatureRobotName);
-		
-		var _display:Sprite;
-		_display = armatureWarriorWithRobotAnimation.display as Sprite;
-		_display.scaleX = _display.scaleY = 0.5;
-		_display.x = 600;
-		_display.y = 370;
-		addChild(_display);
-		
-		_display = armatureRobot.display as Sprite;
-		//_display.scaleX = _display.scaleY = 0.7;
-		_display.x = 220;
-		_display.y = 300;
-		addChild(_display);
-		
-		WorldClock.clock.add(armatureRobot);
-		WorldClock.clock.add(armatureWarriorWithRobotAnimation);
-		
-		changeMovement();
-		
-		addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrameHandler);
+		_factory.addTextureAtlas(textureAtlas, "warriorData");
+
+		_factory.parseData(new RobotData());
+		_factory.addEventListener(Event.COMPLETE, textureCompleteHandler);
 	}
 
-	public function changeMovement():void 
+	private function textureCompleteHandler(e: Event): void
 	{
-		var movement:String = armatureRobot.animation.movementList[currentMovementIndex % armatureRobot.animation.movementList.length];
-		currentMovementIndex++;
-		
-		armatureRobot.animation.gotoAndPlay(movement);
-		armatureWarriorWithRobotAnimation.animation.gotoAndPlay(movement);
+		_textField = new TextField(700, 30, "The Warrior will imitate the Robot. Click mouse to switch animation.", "Verdana", 16, 0, true);
+		_textField.x = 75;
+		_textField.y = 5;
+		this.addChild(_textField);
+
+		var armatureWarriorName: String = "warrior";
+		var armatureRobotName: String = "robot";
+
+		_armatureRobot = _factory.buildArmature(armatureRobotName);
+		_armatureWarriorWithRobotAnimation = _factory.buildArmature(armatureWarriorName, armatureRobotName);
+
+		var display: Sprite;
+		display = _armatureWarriorWithRobotAnimation.display as Sprite;
+		display.scaleX = display.scaleY = 0.5;
+		display.x = 600;
+		display.y = 370;
+		this.addChild(display);
+
+		display = _armatureRobot.display as Sprite;
+		//display.scaleX = display.scaleY = 0.7;
+		display.x = 220;
+		display.y = 300;
+		this.addChild(display);
+
+		WorldClock.clock.add(_armatureRobot);
+		WorldClock.clock.add(_armatureWarriorWithRobotAnimation);
+
+		changeAnimation();
+
+		this.addEventListener(EnterFrameEvent.ENTER_FRAME, enterFrameHandler);
 	}
 
-	private function onEnterFrameHandler(_e:EnterFrameEvent):void 
+	public function changeAnimation(): void
+	{
+		var animationName: String = _armatureRobot.animation.animationList[_currentAnimationIndex % _armatureRobot.animation.animationList.length];
+		_currentAnimationIndex++;
+
+		_armatureRobot.animation.gotoAndPlay(animationName);
+		_armatureWarriorWithRobotAnimation.animation.gotoAndPlay(animationName);
+	}
+
+	private function enterFrameHandler(e: EnterFrameEvent): void
 	{
 		WorldClock.clock.advanceTime(-1);
 	}

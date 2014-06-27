@@ -89,12 +89,13 @@ class StarlingGame extends Sprite {
 		createUI();
 	}
 
-	public function changeMovement():void 
+	public function changeAnimation():void 
 	{
 		do{
-			var _movement:String = armature.animation.movementList[int(Math.random() * armature.animation.movementList.length)];
-		}while (_movement == armature.animation.movementID);
-		armature.animation.gotoAndPlay(_movement);
+			var animationName:String = armature.animation.animationList[int(Math.random() * armature.animation.animationList.length)];
+		}
+		while (animationName == armature.animation.lastAnimationName);
+		armature.animation.gotoAndPlay(animationName);
 	}
 
 	public function changeAnimationScale(_dir:int):void 
@@ -169,7 +170,7 @@ class StarlingGame extends Sprite {
 		
 		function buttonTriggeredHandler(_e:starling.events.Event):void
 		{
-			changeMovement();
+			changeAnimation();
 		}
 	}
 	
