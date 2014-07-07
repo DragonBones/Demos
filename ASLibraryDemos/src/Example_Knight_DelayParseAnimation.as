@@ -75,16 +75,13 @@ class StarlingGame extends Sprite
 	private var _textField: TextField;
 	
 	private var _animationDictionary:Dictionary = new Dictionary();
-	private var _fateRate:uint;
 	public function StarlingGame()
 	{
 		_factory = new StarlingFactory();
 		
 		var rawData:Object = JSON.parse(new SkeletonJSONData());
 		
-		var skeletonData: SkeletonData = DataParser.parseData(rawData, true);
-		DataParser.parseAnimationRawDataDictionary(rawData, _animationDictionary);
-		_fateRate = DataParser.parseFrameRate(rawData);
+		var skeletonData: SkeletonData = DataParser.parseData(rawData, true, _animationDictionary);
 		
 		_factory.addSkeletonData(skeletonData, "knightSkeleton");
 
@@ -512,10 +509,10 @@ class StarlingGame extends Sprite
 	
 	private function playAnimation(armature:Armature, animationName:String):void
 	{
-		if(_animationDictionary[animationName] != null)
+		if(_animationDictionary[armature.armatureData.name][animationName] != null)
 		{
-			_factory.addAnimationToArmature(_animationDictionary[animationName], armature, _fateRate);
-			_animationDictionary[animationName] = null;
+			_factory.addAnimationToArmature(_animationDictionary[armature.armatureData.name][animationName], armature);
+			_animationDictionary[armature.armatureData.name][animationName] = null;
 		}
 		
 		armature.animation.gotoAndPlay(animationName);
