@@ -39,17 +39,13 @@ import starling.events.Event;
 import starling.events.EnterFrameEvent;
 import starling.text.TextField;
 
-import feathers.controls.Slider;
-import feathers.controls.Button;
-import feathers.themes.AeonDesktopTheme;
-
 import dragonBones.Armature;
 import dragonBones.Bone;
 import dragonBones.animation.WorldClock;
 import dragonBones.factorys.StarlingFactory;
 
 class StarlingGame extends Sprite {
-	[Embed(source = "../assets/Robot_output.swf", mimeType = "application/octet-stream")]
+	[Embed(source = "../assets/Robot.dbswf", mimeType = "application/octet-stream")]
 	private static const ResourcesData:Class;
 
 	public static var instance:StarlingGame;
@@ -86,7 +82,10 @@ class StarlingGame extends Sprite {
 		textField.y = 5;
 		addChild(textField);
 		
-		createUI();
+		changeAnimation();
+		
+		armature.getBone("upperbody").offset.scaleX = 2;
+		armature.getBone("upperbody").offset.scaleY = 2;
 	}
 
 	public function changeAnimation():void 
@@ -108,69 +107,6 @@ class StarlingGame extends Sprite {
 			if (armature.animation.timeScale > 0.2) {
 				armature.animation.timeScale -= 0.1;
 			}
-		}
-	}
-	
-	private function createUI():void
-	{
-		var _slidersDic:Dictionary = new Dictionary();
-		var _theme:AeonDesktopTheme = new AeonDesktopTheme(this.stage);
-		
-		var _bones:Vector.<Bone> = armature.getBones();
-		var _i:uint = 1;
-		
-		
-		this.addChild(createTextField((_bones[6] as Bone).name));
-		this.addChild(createSlider((_bones[6] as Bone).name));
-		_i++;
-		this.addChild(createTextField((_bones[11] as Bone).name));
-		this.addChild(createSlider((_bones[11] as Bone).name));
-		_i++;
-		this.addChild(createTextField((_bones[14] as Bone).name));
-		this.addChild(createSlider((_bones[14] as Bone).name));
-		_i++;
-		var _button:Button = new Button();
-		_button.x = 20;
-		_button.y = _i * 30;
-		_button.label = "Switch postures";
-		this.addChild(_button);
-		
-		_button.addEventListener(starling.events.Event.TRIGGERED, buttonTriggeredHandler);
-		
-		
-		function createTextField(text:String):TextField
-		{
-			var textField:TextField = new TextField(70, 30, text, "Verdana", 10, 0, true);
-			textField.x = 10;
-			textField.y = _i*30;
-			return textField;
-		}
-	
-		function createSlider(name:String):Slider
-		{
-			var _slider:Slider = new Slider();
-			_slider.minimum = 0.5;
-			_slider.maximum = 2;
-			_slider.step = 0.1;
-			_slider.value = 1;
-			_slider.liveDragging = true;
-			_slider.addEventListener(starling.events.Event.CHANGE, sliderChangeHandler);
-			_slider.x = 80;
-			_slider.y = _i * 30 + 15;
-			_slidersDic[_slider] = armature.getBone(name);
-			return _slider;
-		}
-		
-		function sliderChangeHandler(_e:starling.events.Event):void
-		{
-			var _slider:Slider = _e.target as Slider;
-			var _bone:Bone = _slidersDic[_slider];
-			_bone.node.scaleX = _bone.node.scaleY = _slider.value;
-		}
-		
-		function buttonTriggeredHandler(_e:starling.events.Event):void
-		{
-			changeAnimation();
 		}
 	}
 	
