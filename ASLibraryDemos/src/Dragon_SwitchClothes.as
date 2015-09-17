@@ -1,18 +1,18 @@
 ﻿package
 {
+	import flash.events.Event;
+	import flash.ui.Keyboard;
+	
 	import dragonBones.Armature;
 	import dragonBones.Bone;
 	import dragonBones.animation.WorldClock;
-	import dragonBones.factorys.StarlingFactory;
-
-	import flash.ui.Keyboard;
-	import flash.events.Event;
-
+	import dragonBones.factories.StarlingFactory;
+	
+	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.EnterFrameEvent;
 	import starling.events.KeyboardEvent;
 	import starling.text.TextField;
-	import starling.display.Image;
 
 	public class Dragon_SwitchClothes extends starling.display.Sprite
 	{

@@ -1,7 +1,7 @@
 ﻿package
 {
 	import flash.display.Sprite;
-
+	
 	import starling.core.Starling;
 
     [SWF(width="800", height="600", frameRate="60", backgroundColor="#cccccc")]
@@ -22,23 +22,21 @@
 	}
 }
 
-import flash.geom.Point;
 import flash.events.Event;
-
-import starling.display.Sprite;
-import starling.events.EnterFrameEvent;
-import starling.events.TouchEvent;
-import starling.events.KeyboardEvent;
-import starling.text.TextField;
+import flash.geom.Point;
 
 import dragonBones.Armature;
-import dragonBones.Bone;
 import dragonBones.animation.Animation;
 import dragonBones.animation.AnimationState;
 import dragonBones.animation.WorldClock;
-import dragonBones.factorys.StarlingFactory;
-
 import dragonBones.events.AnimationEvent;
+import dragonBones.factories.StarlingFactory;
+
+import starling.display.Sprite;
+import starling.events.EnterFrameEvent;
+import starling.events.KeyboardEvent;
+import starling.events.TouchEvent;
+import starling.text.TextField;
 
 class StarlingGame extends Sprite 
 {
@@ -364,7 +362,7 @@ class StarlingGame extends Sprite
 				_aimState = _armature.animation.gotoAndPlay("aimDown", 0, 0, 1, 0, AIM_ANIMATION_GROUP);
 			}
 			//_aimState中，只有body以及其子骨骼有瞄准姿势的改变，过滤掉其他的无关的骨骼混合有利于性能
-			_aimState.addMixingTransform("body");
+			_aimState.addBoneMask("body");
 		}
 		
 		_aimState.weight = Math.abs(r / Math.PI * 2);

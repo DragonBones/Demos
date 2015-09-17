@@ -1,7 +1,7 @@
 ﻿package
 {
 	import flash.display.Sprite;
-
+	
 	import starling.core.Starling;
 
 	[SWF(width = "800", height = "600", frameRate = "60", backgroundColor = "#cccccc")]
@@ -23,33 +23,30 @@
 
 import flash.geom.Point;
 
-import starling.core.Starling;
-import starling.textures.Texture;
-import starling.display.Image;
-import starling.display.Sprite;
-import starling.events.EnterFrameEvent;
-import starling.events.KeyboardEvent;
-import starling.events.TouchEvent;
-import starling.events.Touch;
-import starling.events.TouchPhase;
-import starling.events.Event;
-
-import starling.text.TextField;
-
-import starling.extensions.PDParticleSystem;
-
 import dragonBones.Armature;
 import dragonBones.Bone;
 import dragonBones.Slot;
 import dragonBones.animation.WorldClock;
-import dragonBones.factorys.StarlingFactory;
-import dragonBones.objects.DataParser;
-import dragonBones.objects.SkeletonData;
-import dragonBones.textures.StarlingTextureAtlas;
-
+import dragonBones.display.StarlingSlot;
 import dragonBones.events.AnimationEvent;
 import dragonBones.events.FrameEvent;
-import dragonBones.display.StarlingSlot;
+import dragonBones.factories.StarlingFactory;
+import dragonBones.objects.DataParser;
+import dragonBones.objects.DragonBonesData;
+import dragonBones.textures.StarlingTextureAtlas;
+
+import starling.core.Starling;
+import starling.display.Image;
+import starling.display.Sprite;
+import starling.events.EnterFrameEvent;
+import starling.events.Event;
+import starling.events.KeyboardEvent;
+import starling.events.Touch;
+import starling.events.TouchEvent;
+import starling.events.TouchPhase;
+import starling.extensions.PDParticleSystem;
+import starling.text.TextField;
+import starling.textures.Texture;
 
 class StarlingGame extends Sprite
 {
@@ -80,7 +77,7 @@ class StarlingGame extends Sprite
 	{
 		_factory = new StarlingFactory();
 
-		var skeletonData: SkeletonData = DataParser.parseData(JSON.parse(new SkeletonJSONData()));
+		var skeletonData:DragonBonesData = DataParser.parseData(JSON.parse(new SkeletonJSONData()));
 		_factory.addSkeletonData(skeletonData, "knightSkeleton");
 
 		var textureAtlas: StarlingTextureAtlas = new StarlingTextureAtlas(
@@ -137,8 +134,7 @@ class StarlingGame extends Sprite
 		particle.origin.y = horseEye.global.y;
 
 		particle.zOrder = 100;
-
-		horseHead.addChild(particle);
+		horseHead.addSlot(particle);
 		exhaust.start();
 		Starling.juggler.add(exhaust);
 	}

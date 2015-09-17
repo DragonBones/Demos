@@ -22,28 +22,17 @@
 }
 
 import flash.events.Event;
-import flash.geom.Point;
 
 import dragonBones.Armature;
 import dragonBones.Bone;
 import dragonBones.animation.AnimationState;
 import dragonBones.animation.WorldClock;
-import dragonBones.display.StarlingDisplayBridge;
-import dragonBones.events.AnimationEvent;
-import dragonBones.events.FrameEvent;
-import dragonBones.factorys.StarlingFactory;
+import dragonBones.factories.StarlingFactory;
 
-import starling.core.Starling;
-import starling.display.Image;
 import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
 import starling.events.KeyboardEvent;
-import starling.events.Touch;
-import starling.events.TouchEvent;
-import starling.events.TouchPhase;
-import starling.extensions.PDParticleSystem;
 import starling.text.TextField;
-import starling.textures.Texture;
 import starling.utils.HAlign;
 
 class StarlingGame extends Sprite 

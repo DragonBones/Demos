@@ -1,14 +1,14 @@
 ﻿package
 {
+	import flash.events.Event;
+	import flash.geom.Point;
+	import flash.ui.Mouse;
+	
 	import dragonBones.Armature;
 	import dragonBones.Bone;
 	import dragonBones.animation.WorldClock;
-	import dragonBones.factorys.StarlingFactory;
-
-	import flash.geom.Point;
-	import flash.ui.Mouse;
-	import flash.events.Event;
-
+	import dragonBones.factories.StarlingFactory;
+	
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.EnterFrameEvent;

@@ -1,7 +1,7 @@
 ﻿package  
 {
 	import flash.display.Sprite;
-
+	
 	import starling.core.Starling;
 
     [SWF(width="800", height="600", frameRate="60", backgroundColor="#cccccc")]
@@ -23,15 +23,12 @@
 
 import flash.events.Event;
 
-import starling.display.Sprite;
-import starling.events.Event;
-import starling.events.EnterFrameEvent;
-
 import dragonBones.Armature;
-import dragonBones.Bone;
-import dragonBones.animation.AnimationState;
 import dragonBones.animation.WorldClock;
-import dragonBones.factorys.StarlingFactory;
+import dragonBones.factories.StarlingFactory;
+
+import starling.display.Sprite;
+import starling.events.EnterFrameEvent;
 
 class StarlingGame extends Sprite 
 {
@@ -55,8 +52,8 @@ class StarlingGame extends Sprite
 		_armature = _factory.buildArmature("robot");
 		_armature.animation.gotoAndPlay("stop");
 		_armature.animation.gotoAndPlay("run2", -1, -1, NaN, 1)
-			.addMixingTransform("innerarm_upper")
-			.addMixingTransform("outerarm_upper");
+			.addBoneMask("innerarm_upper")
+			.addBoneMask("outerarm_upper");
 		
 		WorldClock.clock.add(_armature);
 		

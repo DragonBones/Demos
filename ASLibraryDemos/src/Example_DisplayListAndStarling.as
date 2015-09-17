@@ -4,8 +4,8 @@
 	
 	import dragonBones.Armature;
 	import dragonBones.animation.WorldClock;
-	import dragonBones.factorys.NativeFactory;
-
+	import dragonBones.factories.NativeFactory;
+	
 	import starling.core.Starling;
 
     [SWF(width="800", height="600", frameRate="30", backgroundColor="#cccccc")]
@@ -68,12 +68,12 @@
 
 import flash.events.Event;
 
-import starling.display.Sprite;
-import starling.events.EnterFrameEvent;
-
 import dragonBones.Armature;
 import dragonBones.animation.WorldClock;
-import dragonBones.factorys.StarlingFactory;
+import dragonBones.factories.StarlingFactory;
+
+import starling.display.Sprite;
+import starling.events.EnterFrameEvent;
 
 class StarlingGame extends Sprite {
 	

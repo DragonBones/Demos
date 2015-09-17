@@ -1,7 +1,7 @@
 ﻿package  {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
-
+	
 	import starling.core.Starling;
 
     [SWF(width="800", height="600", frameRate="30", backgroundColor="#cccccc")]
@@ -32,17 +32,14 @@
 }
 
 import flash.events.Event;
-import flash.utils.Dictionary;
-
-import starling.display.Sprite;
-import starling.events.Event;
-import starling.events.EnterFrameEvent;
-import starling.text.TextField;
 
 import dragonBones.Armature;
-import dragonBones.Bone;
 import dragonBones.animation.WorldClock;
-import dragonBones.factorys.StarlingFactory;
+import dragonBones.factories.StarlingFactory;
+
+import starling.display.Sprite;
+import starling.events.EnterFrameEvent;
+import starling.text.TextField;
 
 class StarlingGame extends Sprite {
 	[Embed(source = "../assets/Robot.dbswf", mimeType = "application/octet-stream")]

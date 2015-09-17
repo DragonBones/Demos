@@ -1,16 +1,15 @@
 ﻿package
 {
 	import flash.display.Sprite;
-	import flash.events.KeyboardEvent;
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.TextFieldType;
-	import flash.ui.Keyboard;
-
-	import starling.core.Starling;
-	import flash.text.TextFormat;
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
 	import flash.geom.Rectangle;
+	import flash.text.TextField;
+	import flash.text.TextFieldType;
+	import flash.text.TextFormat;
+	import flash.ui.Keyboard;
+	
+	import starling.core.Starling;
 
 	[SWF(width = "800", height = "600", frameRate = "60", backgroundColor = "#cccccc")]
 	public class Example_PerformanceTesing extends flash.display.Sprite
@@ -85,18 +84,15 @@
 	}
 }
 
-import flash.geom.Point;
 import flash.events.Event;
-import starling.display.Sprite;
-import starling.events.EnterFrameEvent;
-import starling.events.Touch;
-import starling.events.TouchPhase;
-import starling.events.TouchEvent;
-import starling.text.TextField;
 
 import dragonBones.Armature;
 import dragonBones.animation.WorldClock;
-import dragonBones.factorys.StarlingFactory;
+import dragonBones.factories.StarlingFactory;
+
+import starling.display.Sprite;
+import starling.events.EnterFrameEvent;
+import starling.text.TextField;
 
 class StarlingGame extends Sprite
 {

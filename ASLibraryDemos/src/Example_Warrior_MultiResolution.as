@@ -1,11 +1,9 @@
 ﻿package
 {
-	import flash.display.Stage;
 	import flash.display.Sprite;
-	import flash.geom.Rectangle;
-
+	import flash.display.Stage;
 	import flash.events.MouseEvent;
-
+	
 	import starling.core.Starling;
 
 	[SWF(width = "800", height = "600", frameRate = "60", backgroundColor = "#cccccc")]
@@ -37,20 +35,18 @@
 	}
 }
 
-import flash.geom.Point;
+import dragonBones.Armature;
+import dragonBones.animation.WorldClock;
+import dragonBones.factories.StarlingFactory;
+import dragonBones.objects.DragonBonesData;
+import dragonBones.objects.XMLDataParser;
+import dragonBones.textures.StarlingTextureAtlas;
 
 import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
+import starling.text.TextField;
 import starling.textures.Texture;
 import starling.textures.TextureAtlas;
-import starling.text.TextField;
-
-import dragonBones.Armature;
-import dragonBones.animation.WorldClock;
-import dragonBones.factorys.StarlingFactory;
-import dragonBones.objects.XMLDataParser;
-import dragonBones.objects.SkeletonData;
-import dragonBones.textures.StarlingTextureAtlas;
 
 class StarlingGame extends Sprite
 {
@@ -94,7 +90,7 @@ class StarlingGame extends Sprite
 		_factory = new StarlingFactory();
 
 		//skeletonData
-		var skeletonData: SkeletonData = XMLDataParser.parseSkeletonData(XML(new WarriorSkeletonXMLData()));
+		var skeletonData:DragonBonesData = XMLDataParser.parseDragonBonesData(XML(new WarriorSkeletonXMLData()));
 		_factory.addSkeletonData(skeletonData, "warrior");
 
 		var textureAtlas: TextureAtlas;

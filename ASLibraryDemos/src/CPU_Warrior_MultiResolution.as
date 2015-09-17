@@ -9,12 +9,10 @@
 	
 	import dragonBones.Armature;
 	import dragonBones.animation.WorldClock;
-	import dragonBones.factorys.NativeFactory;
-	import dragonBones.factorys.StarlingFactory;
-	import dragonBones.objects.SkeletonData;
+	import dragonBones.factories.NativeFactory;
+	import dragonBones.objects.DragonBonesData;
 	import dragonBones.objects.XMLDataParser;
 	import dragonBones.textures.NativeTextureAtlas;
-	import dragonBones.textures.StarlingTextureAtlas;
 
 	/**
 	 * 模块功能：
@@ -79,7 +77,7 @@
 			factory.fillBitmapSmooth = true;
 
 			//skeletonData
-			var skeletonData:SkeletonData = XMLDataParser.parseSkeletonData(XML(new WarriorSkeletonXMLData()));
+			var skeletonData:DragonBonesData = XMLDataParser.parseDragonBonesData(XML(new WarriorSkeletonXMLData()));
 			factory.addSkeletonData(skeletonData, "warrior");
 
 //			var textureAtlas:TextureAtlas;

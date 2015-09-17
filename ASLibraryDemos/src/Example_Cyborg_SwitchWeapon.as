@@ -1,7 +1,7 @@
 ﻿package
 {
 	import flash.display.Sprite;
-
+	
 	import starling.core.Starling;
 
 	[SWF(width = "800", height = "600", frameRate = "60", backgroundColor = "#cccccc")]
@@ -22,21 +22,20 @@
 	}
 }
 
-import flash.geom.Point;
 import flash.events.Event;
+import flash.geom.Point;
+
+import dragonBones.Armature;
+import dragonBones.Bone;
+import dragonBones.animation.WorldClock;
+import dragonBones.events.AnimationEvent;
+import dragonBones.factories.StarlingFactory;
 
 import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
 import starling.events.KeyboardEvent;
 import starling.events.TouchEvent;
 import starling.text.TextField;
-
-import dragonBones.Armature;
-import dragonBones.Bone;
-import dragonBones.animation.WorldClock;
-import dragonBones.factorys.StarlingFactory;
-
-import dragonBones.events.AnimationEvent;
 
 class StarlingGame extends Sprite
 {
