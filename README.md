@@ -14,7 +14,7 @@ Following steps show you how to use DesignPanelDemos:
 6. Edit and review characters.  
 7. Export it as png/swf for developers.  
 
-**LibraryDemos** is for developers. It shows how to use [SeletonAnimationLibrary](https://github.com/DragonBones/SkeletonAnimationLibrary) load assets exported from design panel, put charactors on stage and control them.  
+**LibraryDemos** is for developers. It shows how to use [SeletonAnimationLibrary](https://github.com/DragonBones/SkeletonAnimationLibrary) load assets exported from design panel, put characters on stage and control them.  
 Following steps show you how to use LibraryDemos:  
 1. Make sure you have installed Flash Pro CS 5.5 or later version.  
 2. Make sure you have got [SeletonAnimationLibrary](https://github.com/DragonBones/SkeletonAnimationLibrary) project.  
